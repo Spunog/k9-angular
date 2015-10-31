@@ -1,0 +1,100 @@
+<ul class="nav nav-tabs">
+  <li role="presentation"><a ui-sref='dogs'>Dogs</a></li>
+  <li role="presentation" class="active"><a href="#">Clients</a></li>
+  <li role="presentation"><a ui-sref='users'>Users</a></li>
+</ul>
+
+<label>Search:
+  <input ng-model="clientSearchText">
+</label>
+
+<button type="button" class='btn btn-default btn-sm' name="create" ng-click='client.startCreating()'>Create</button>
+
+<div class="row">
+  <div class="col-md-6">
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="person in client.clients | filter:clientSearchText">
+        {{ person.first_name }} {{ person.last_name }}
+
+        <div class="btn-group pull-right" role="group" aria-label="...">
+          <button type="button"
+                  class='btn btn-default btn-sm'
+                  name="edit"
+                  ng-click='client.startEditing(person)'>Edit</button>
+          <button type="button"
+                  class='btn btn-default btn-sm'
+                  name="delete" ng-click='client.deleteClient(person)'>Delete</button>
+        </div>
+
+        <ul ng-repeat="dog in person.dogs">
+          <li>{{ dog.name }}</li>
+        </ul>
+      </li>
+    </ul>
+  </div><!--end left col-->
+  <div class="col-md-6">
+
+    <div ng-show='client.shouldShowEditing()'>
+      <div class="panel panel-info">
+        <div class="panel-heading">Edit Client</div>
+        <div class="panel-body">
+
+          <form role="form" name='update-client-form' ng-submit='client.updateClient(client.currentClient)'>
+
+            <!-- First Name -->
+            <div class="form-group">
+              <label class="control-label" for="clientFirstName">First Name</label>
+              <input ng-model='client.currentClient.first_name' type="text" class="form-control" id="clientFirstName" placeholder="Enter first name" value="{{ client.currentClient.first_name }}">
+              <p class="help-block">Persons first name</p>
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group">
+              <label class="control-label" for="clientLastName">Last Name</label>
+              <input ng-model='client.currentClient.last_name' type="text" class="form-control" id="clientLastName" placeholder="Enter Last name" {{ client.currentClient.last_name }}>
+              <p class="help-block">Persons Last name</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="button"
+                    class='btn btn-default'
+                    name="cancelClientUpdate" ng-click='client.cancelEditing()'>Cancel</button>
+          </form>
+
+        </div> <!-- end panel body -->
+      </div> <!-- end panel -->
+
+    </div>
+
+    <div ng-show='client.shouldShowCreating()'>
+
+      <div class="panel panel-info">
+        <div class="panel-heading">Create Client</div>
+        <div class="panel-body">
+
+          <form role="form" name='add-client-form' ng-submit='client.createClient(newClient)'>
+
+            <!-- First Name -->
+            <div class="form-group">
+              <label class="control-label" for="clientFirstName">First Name</label>
+              <input ng-model='newClient.firstname' type="text" class="form-control" id="clientFirstName" placeholder="Enter first name">
+              <p class="help-block">Persons first name</p>
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group">
+              <label class="control-label" for="clientLastName">Last Name</label>
+              <input ng-model='newClient.lastname' type="text" class="form-control" id="clientLastName" placeholder="Enter Last name">
+              <p class="help-block">Persons Last name</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Client</button>
+            <button type="button" class='btn btn-default' name="create" ng-click='client.cancelCreating()'>Cancel</button>
+          </form>
+
+        </div> <!-- end panel body -->
+      </div> <!-- end panel -->
+
+    </div>
+  </div>
+</div> <!-- end row -->

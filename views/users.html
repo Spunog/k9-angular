@@ -1,0 +1,23 @@
+<ul class="nav nav-tabs">
+  <li role="presentation"><a ui-sref='dogs'>Dogs</a></li>
+  <li role="presentation"><a ui-sref='clients'>Clients</a></li>
+  <li role="presentation" class="active"><a href="#">Users</a></li>
+</ul>
+
+<label>Search: <input ng-model="userSearchText"></label>
+
+<table class='table table-striped table-hover'>
+  <thead>
+    <tr><th>ID</th><th>Name</th></tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in user.users | filter:userSearchText">
+      <td>
+        {{ user.id }}
+      </td>
+      <td>
+        {{ user.email }}
+      </td>
+    </tr>
+  </tbody>
+</table>
