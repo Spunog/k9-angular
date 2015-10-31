@@ -4,6 +4,14 @@ Front end using AngularJS and Bootstrap for K9 Restful API app - https://github.
 
 * Angular Version : 1.4.7
 
+## Simple HTTP Server For Development
+A simple zero-configuration command-line http server.
+Doesn't do much but serve HTML pages.
+
+Install Instructions: https://www.npmjs.com/package/http-server
+
+To start server from within project folder: 'http-server .'
+
 ## Some Features + Technologies Used
 * AngularJS - https://angularjs.org/
 * Angular UI Router - https://github.com/angular-ui/ui-router
