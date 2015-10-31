@@ -1,14 +1,14 @@
 
-= K9 - Dog Grooming Management App - Angular Frontend Client
+# K9 - Dog Grooming Management App - Angular Frontend Client
 Front end using AngularJS and Bootstrap for K9 Restful API app - https://github.com/Spunog/k9
 
 * Angular Version : 1.4.7
 
-== Some Features + Technologies Used
+## Some Features + Technologies Used
 * AngularJS - https://angularjs.org/
 * Angular UI Router - https://github.com/angular-ui/ui-router
 
-== Guides & Docs Used in creation of this app:
+## Guides & Docs Used in creation of this app:
 
 * PluralSight - AngularJS: Get Started - by Scott Allen
   * Found this to be the easiest to follow when first learning
@@ -35,4 +35,6 @@ Front end using AngularJS and Bootstrap for K9 Restful API app - https://github.
   * https://scotch.io/tutorials/single-page-apps-with-angularjs-routing-and-templating
   * Site also has other nice tutorials such as animation but did not yet delve into these
 
+* jsonapi : A specification for building APIs in JSON.
+  * Conventions for creating JSON resources: http://jsonapi.org/
 
