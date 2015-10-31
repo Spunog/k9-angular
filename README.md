@@ -1,5 +1,6 @@
 
-# K9 - Dog Grooming Management App - Angular Frontend Client
+# K9 - Angular Frontend Client
+Dog Grooming Management App
 Front end using AngularJS and Bootstrap for K9 Restful API app - https://github.com/Spunog/k9
 
 * Angular Version : 1.4.7
