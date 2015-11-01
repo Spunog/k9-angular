@@ -13,6 +13,7 @@
       <div class="page-header">
         <h1>Dogzie</h1>
       </div>
+      <div ui-view='nav'></div>
       <div ui-view='main'></div>
     </div>
   </body>
@@ -21,9 +22,21 @@
 
   <script src="/assets/vendor/javascripts/angular-ui-router.min.js" charset="utf-8"></script>
 
+  <!-- Site -->
   <script src="app/login/login.js" charset="utf-8"></script>
+
+  <!-- Nav -->
+  <script src="app/nav/nav.js" charset="utf-8"></script>
+  <script src="app/common/models/nav-model.js" charset="utf-8"></script>
+
+  <!-- Dashboard -->
+  <script src="app/dashboard/dashboard.js" charset="utf-8"></script>
+
+  <!-- Clients -->
   <script src="app/common/models/clients-model.js" charset="utf-8"></script>
   <script src="app/clients/clients.js" charset="utf-8"></script>
+
+  <!-- App -->
   <script src="app.js" charset="utf-8"></script>
 
 </html>

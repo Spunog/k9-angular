@@ -2,6 +2,8 @@ angular.module("k9",[
   'ui.router',
   'login',
   'clients',
+  'nav',
+  'dashboard',
   'k9.models.clients'
 ])
 

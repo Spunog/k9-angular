@@ -1,0 +1,8 @@
+<!-- Primary Navigation -->
+<ul class="nav nav-pills">
+  <li role="presentation"
+      ng-repeat='menuItem in navCtrl.menuItems'
+      ng-class="{active: navCtrl.isSelected(menuItem)}">
+    <a ui-sref="{{ menuItem.sref }}">{{ menuItem.title }}</a>
+  </li>
+</ul>
