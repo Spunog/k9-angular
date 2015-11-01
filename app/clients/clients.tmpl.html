@@ -1,100 +1,58 @@
-<h2>Clients</h2>
+<!-- Clients -->
 
 <label>Search:
   <input ng-model="clientSearchText">
 </label>
 
 <div class="row">
-  <div class="col-md-6">
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="client in clientCtrl.clients | filter:clientSearchText">
-        {{ client.first_name }} {{ client.last_name }}
+  <div class="col-sm-6">
 
-        <div class="btn-group pull-right" role="group" aria-label="...">
-          <button type="button"
-                  class='btn btn-default btn-sm'
-                  name="edit"
-                  ng-click='clientCtrl.startEditing(client)'>Edit</button>
-          <button type="button"
-                  class='btn btn-default btn-sm'
-                  name="delete" ng-click='clientCtrl.deleteClient(client)'>Delete</button>
-        </div>
-
-        <ul ng-repeat="dog in client.dogs">
-          <li>{{ dog.name }}</li>
-        </ul>
-      </li>
-    </ul>
-  </div><!--end left col-->
-  <div class="col-md-6">
-
-    <div ng-show='clientCtrl.shouldShowEditing()'>
-      <div class="panel panel-info">
-        <div class="panel-heading">Edit Client</div>
-        <div class="panel-body">
-
-          <form role="form" name='update-client-form' ng-submit='clientCtrl.updateClient(clientCtrl.currentClient)'>
-
-            <!-- First Name -->
-            <div class="form-group">
-              <label class="control-label" for="clientFirstName">First Name</label>
-              <input ng-model='clientCtrl.currentClient.first_name' type="text" class="form-control" id="clientFirstName" placeholder="Enter first name" value="{{ clientCtrl.currentClient.first_name }}">
-              <p class="help-block">Client's first name</p>
-            </div>
-
-            <!-- Last Name -->
-            <div class="form-group">
-              <label class="control-label" for="clientLastName">Last Name</label>
-              <input ng-model='clientCtrl.currentClient.last_name' type="text" class="form-control" id="clientLastName" placeholder="Enter Last name" {{ clientCtrl.currentClient.last_name }}>
-              <p class="help-block">Client's Last name</p>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Update</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Pets</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="client in clientCtrl.clients | filter:clientSearchText">
+          <td>
+            {{ client.first_name }}
+          </td>
+          <td>
+            {{ client.last_name }}
+          </td>
+          <td>
+            {{ client.dogs.length }}
+          </td>
+          <td>
             <button type="button"
-                    class='btn btn-default'
-                    name="cancelClientUpdate" ng-click='clientCtrl.cancelEditing()'>Cancel</button>
-          </form>
+                    class='btn btn-default btn-sm'
+                    name="edit"
+                    ng-click='clientCtrl.startEditing(client)'>Edit</button>
+          </td>
+          <td>
+            <button type="button"
+                    class='btn btn-default btn-sm'
+                    name="delete" ng-click='clientCtrl.deleteClient(client)'>Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-        </div> <!-- end panel body -->
-      </div> <!-- end panel -->
+    <!-- Add New Button -->
+    <button type="button"
+            class='btn btn-primary'
+            name="create"
+            ng-show='!clientCtrl.shouldShowCreating()'
+            ui-sref='k9.clients.create'
+            >Add Client</button>
+  </div><!--end left col-->
 
-    </div>
+  <!-- Rigth Side -->
+  <div class="col-sm-6" ui-view></div>
 
-    <div ng-show='clientCtrl.shouldShowCreating()'>
-
-      <div class="panel panel-info">
-        <div class="panel-heading">New Client Details</div>
-        <div class="panel-body">
-
-          <form role="form" name='add-client-form' ng-submit='clientCtrl.createClient(newClient)'>
-
-            <!-- First Name -->
-            <div class="form-group">
-              <label class="control-label" for="clientFirstName">First Name</label>
-              <input ng-model='newClient.firstname' type="text" class="form-control" id="clientFirstName" placeholder="Client First Name">
-            </div>
-
-            <!-- Last Name -->
-            <div class="form-group">
-              <label class="control-label" for="clientLastName">Last Name</label>
-              <input ng-model='newClient.lastname' type="text" class="form-control" id="clientLastName" placeholder="Client Last Name">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Save Client</button>
-            <button type="button" class='btn btn-default' name="create" ng-click='clientCtrl.cancelCreating()'>Cancel</button>
-          </form>
-
-        </div> <!-- end panel body -->
-      </div> <!-- end panel -->
-
-    </div>
-  </div>
 </div> <!-- end row -->
-
-
-<button type="button"
-        class='btn btn-primary'
-        name="create"
-        ng-click='clientCtrl.startCreating()'
-        ng-show='!clientCtrl.shouldShowCreating()'
-        >Add Client</button>

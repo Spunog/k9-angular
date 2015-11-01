@@ -1,10 +1,11 @@
 angular.module("k9",[
   'ui.router',
-  'login',
-  'clients',
   'nav',
-  'dashboard',
-  'k9.models.clients'
+  'login',
+  'k9.models.clients',
+  'clients',
+  'clients.create',
+  'dashboard'
 ])
 
 .constant('appConfig', {

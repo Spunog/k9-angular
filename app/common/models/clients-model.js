@@ -19,9 +19,35 @@ angular.module("k9.models.clients",[])
   }
 
   self.getClients = function getClients(){
-    return (clients) ? $q.when(clients) : $http.get(URLS.FETCH).then(cacheClients);
-    // promise code here just for learning, prob dont' want it for this though
-    // will always want to get the newest list of clients
+    return $http.get(URLS.FETCH).then(cacheClients);
+  };
+
+  self.setCurrentClient = function setCurrentClient(client){
+    currentClient = client;
+  };
+
+  self.getCurrentClient = function getCurrentClient(client){
+    return currentClient;
+  };
+
+  self.createClient = function createClient(client){
+
+    $http({
+      method  : 'POST',
+      url     : appConfig.API.baseURL +'clients',
+      data    : {
+                  client: {
+                    first_name  : client.firstname,
+                    last_name   : client.lastname
+                  }
+                }
+
+    }).then(function successCallback(response) {
+      // self.getClients();
+    }, function errorCallback(response) {
+        alert('failed');
+    });
+
   };
 
 });

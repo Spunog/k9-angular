@@ -1,0 +1,33 @@
+<div class="panel panel-info">
+  <div class="panel-heading">Create New Client</div>
+  <div class="panel-body">
+
+    <form role="form"
+          name='add-client-form'
+          ng-submit='createClientCtrl.createClient(newClient)'>
+
+      <!-- First Name -->
+      <div class="form-group">
+        <label class="control-label" for="clientFirstName">First Name</label>
+        <input ng-model='newClient.firstname' type="text" class="form-control" id="clientFirstName" placeholder="Client First Name">
+      </div>
+
+      <!-- Last Name -->
+      <div class="form-group">
+        <label class="control-label" for="clientLastName">Last Name</label>
+        <input ng-model='newClient.lastname' type="text" class="form-control" id="clientLastName" placeholder="Client Last Name">
+      </div>
+
+      <!-- Save -->
+      <button type="submit" class="btn btn-primary">Save Client</button>
+
+      <!-- Cancel -->
+      <button type="button"
+              class='btn btn-default'
+              name="create"
+              ng-click='createClientCtrl.cancel()'>Cancel</button>
+
+    </form>
+
+  </div> <!-- end panel body -->
+</div> <!-- end panel -->
