@@ -30,11 +30,11 @@ angular.module("k9",[
 
     if(!auth.isLoggedIn()){
 
-      var onLoginPage = toState.name === "login";
+      var onLoginPage = toState.name === "k9.login";
 
       if(!onLoginPage){
         event.preventDefault(); // stop current execution
-        $state.go('login');     // go to login
+        $state.go('k9.login');     // go to login
       }
 
     }
