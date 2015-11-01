@@ -1,11 +1,14 @@
-angular.module('clients',['ui.router'])
+angular.module('clients',[
+  'ui.router',
+  'k9.models.clients'
+])
 
 .config(function config($stateProvider,$httpProvider,$urlRouterProvider){
 
   //State Providers
   $stateProvider.state('clients',{
     url: '/clients',
-    controller: 'ClientCtrl as client',
+    controller: 'ClientCtrl as clientCtrl',
     templateUrl: 'app/clients/clients.tmpl.html'
   });
 
@@ -16,18 +19,6 @@ angular.module('clients',['ui.router'])
   var self = this;
   self.clients = [];
   self.currentClient = {};
-
-  self.logout = function logout(){
-    var promise = auth.logout();
-    localStorage.removeItem('auth_token');
-    localStorage.removeItem('auth_email');
-    $state.go('login'); // go to login
-    // promise.then(function(){
-    //   localStorage.removeItem('auth_token');
-    //   localStorage.removeItem('auth_email');
-    //   $state.go('login'); // go to login
-    // });
-  };
 
   //States
   var _isEditing = false;
@@ -139,6 +130,18 @@ angular.module('clients',['ui.router'])
     }, function errorCallback(response) {
         alert('failed');
     });
+  };
+
+  self.logout = function logout(){
+    var promise = auth.logout();
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('auth_email');
+    $state.go('login'); // go to login
+    // promise.then(function(){
+    //   localStorage.removeItem('auth_token');
+    //   localStorage.removeItem('auth_email');
+    //   $state.go('login'); // go to login
+    // });
   };
 
   //On Load

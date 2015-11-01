@@ -1,4 +1,9 @@
-angular.module("k9",['ui.router','login','clients'])
+angular.module("k9",[
+  'ui.router',
+  'login',
+  'clients',
+  'k9.models.clients'
+])
 
 .constant('appConfig', {
   'API' : {
