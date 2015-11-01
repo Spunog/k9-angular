@@ -2,10 +2,15 @@ angular.module('login',['ui.router'])
 
   .config(function config($stateProvider){
 
-    $stateProvider.state('login',{
+    $stateProvider.state('k9.login',{
       url: '/login',
-      controller: 'LoginCtrl as login',
-      templateUrl: 'app/login/login.tmpl.html'
+      views: {
+                'main@' : {
+                            controller: 'LoginCtrl as login',
+                            templateUrl: 'app/login/login.tmpl.html'
+                          }
+             }
+
     });
 
   })

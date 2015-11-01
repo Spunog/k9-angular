@@ -13,6 +13,11 @@ angular.module("k9",[
 
 .config(function config($stateProvider,$httpProvider,$urlRouterProvider){
   //State Provider
+  //abstract state serves as a PLACEHOLDER or NAMESPACE for application states
+  $stateProvider.state('k9', {
+     url: '',
+     abstract: true
+  });
   $urlRouterProvider.otherwise("/login");
 })
 
