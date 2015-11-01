@@ -1,12 +1,8 @@
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Clients</a></li>
-</ul>
+<h2>Clients</h2>
 
 <label>Search:
   <input ng-model="clientSearchText">
 </label>
-
-<button type="button" class='btn btn-default btn-sm' name="create" ng-click='client.startCreating()'>Create</button>
 
 <div class="row">
   <div class="col-md-6">
@@ -67,7 +63,7 @@
     <div ng-show='client.shouldShowCreating()'>
 
       <div class="panel panel-info">
-        <div class="panel-heading">Create Client</div>
+        <div class="panel-heading">New Client Details</div>
         <div class="panel-body">
 
           <form role="form" name='add-client-form' ng-submit='client.createClient(newClient)'>
@@ -75,18 +71,16 @@
             <!-- First Name -->
             <div class="form-group">
               <label class="control-label" for="clientFirstName">First Name</label>
-              <input ng-model='newClient.firstname' type="text" class="form-control" id="clientFirstName" placeholder="Enter first name">
-              <p class="help-block">Persons first name</p>
+              <input ng-model='newClient.firstname' type="text" class="form-control" id="clientFirstName" placeholder="Client First Name">
             </div>
 
             <!-- Last Name -->
             <div class="form-group">
               <label class="control-label" for="clientLastName">Last Name</label>
-              <input ng-model='newClient.lastname' type="text" class="form-control" id="clientLastName" placeholder="Enter Last name">
-              <p class="help-block">Persons Last name</p>
+              <input ng-model='newClient.lastname' type="text" class="form-control" id="clientLastName" placeholder="Client Last Name">
             </div>
 
-            <button type="submit" class="btn btn-primary">Create Client</button>
+            <button type="submit" class="btn btn-primary">Save Client</button>
             <button type="button" class='btn btn-default' name="create" ng-click='client.cancelCreating()'>Cancel</button>
           </form>
 
@@ -96,3 +90,11 @@
     </div>
   </div>
 </div> <!-- end row -->
+
+
+<button type="button"
+        class='btn btn-primary'
+        name="create"
+        ng-click='client.startCreating()'
+        ng-show='!client.shouldShowCreating()'
+        >Add Client</button>
