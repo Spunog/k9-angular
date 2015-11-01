@@ -18,10 +18,11 @@ angular.module('clients',[
 
 })
 
-.controller("ClientCtrl",function ClientCtrl($http, appConfig,ClientsModel){
+.controller("ClientCtrl",function ClientCtrl(ClientsModel){
 
   var self = this;
 
+  //Index
   ClientsModel.getClients()
               .then(function (data) {
                 self.clients = data.clients;
