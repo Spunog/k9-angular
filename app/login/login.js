@@ -26,7 +26,7 @@ angular.module('login',['ui.router'])
     self.success = function loginSuccess(response){
       localStorage.setItem('auth_token',response.data.token);
       localStorage.setItem('auth_email',response.data.email);
-      $state.go('k9.clients');
+      $state.go('k9.dashboard');
     };
 
     self.error = function loginSuccess(response){

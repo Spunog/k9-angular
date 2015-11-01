@@ -2,7 +2,7 @@ angular.module('nav',[
   'k9.models.nav'
 ])
 
-  .controller("NavCtrl",function NavCtrl(NavModel){
+  .controller("NavCtrl",function NavCtrl(NavModel,auth,$state){
     var self = this;
 
     self.menuItems = NavModel.getMenuItems();
@@ -13,6 +13,18 @@ angular.module('nav',[
 
     self.setCurrentItem = function setCurrentItem(menuItem){
       NavModel.setCurrentItem(menuItem);
+    };
+
+    self.logout = function logout(){
+      var promise = auth.logout();
+      localStorage.removeItem('auth_token');
+      localStorage.removeItem('auth_email');
+      $state.go('k9.login'); // go to login
+      // promise.then(function(){
+      //   localStorage.removeItem('auth_token');
+      //   localStorage.removeItem('auth_email');
+      //   $state.go('k9.login'); // go to login
+      // });
     };
 
   });

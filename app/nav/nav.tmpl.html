@@ -5,4 +5,7 @@
       ng-class="{active: navCtrl.isSelected(menuItem)}">
     <a ui-sref="{{ menuItem.sref }}">{{ menuItem.title }}</a>
   </li>
+  <li role="presentation" class="pull-right">
+    <a href='#' ng-click='navCtrl.logout()'>Sign Out</a>
+  </li>
 </ul>
