@@ -19,7 +19,7 @@
         <input ng-model="clientSearchText">
       </label>
 
-      <table class="table">
+      <table class="table table-striped table-hover">
         <thead>
           <tr>
             <th>First Name</th>
@@ -30,7 +30,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="client in clientCtrl.clients | filter:clientSearchText">
+          <tr ng-repeat="client in clientCtrl.clients | filter:clientSearchText"
+              ui-sref='k9.clients.edit({ clientID:client.id})'>
             <td>
               {{ client.first_name }}
             </td>
