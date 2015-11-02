@@ -5,6 +5,7 @@ angular.module("k9",[
   'k9.models.clients',
   'clients',
   'clients.create',
+  'clients.edit',
   'dashboard'
 ])
 

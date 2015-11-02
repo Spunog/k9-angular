@@ -24,8 +24,10 @@ angular.module('clients.create', [
     }
 
     function createClient(client){
-      ClientsModel.createClient(client);
-      returnToClients(true);
+      ClientsModel.createClient(client)
+                  .then(function (clients) {
+                    returnToClients(true);
+                  });
     }
 
     function resetForm(){

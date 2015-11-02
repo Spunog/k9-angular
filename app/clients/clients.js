@@ -2,7 +2,8 @@ angular.module('clients',[
   'ui.router',
   'k9.models.clients',
   'k9.models.nav',
-  'clients.create'
+  'clients.create',
+  'clients.edit'
 ])
 
   .config(function config($stateProvider,$httpProvider,$urlRouterProvider){
@@ -34,9 +35,27 @@ angular.module('clients',[
         sref: 'k9.clients'
     });
 
-    //Index
-    ClientsModel.getClients()
-                .then(function (data) {
-                  self.clients = data.clients;
-                });
+    // Index
+    var getClients = function getClients(){
+      ClientsModel.getClients()
+                  .then(function (clients) {
+                    self.clients = clients;
+                  });
+    };
+
+    // Delete
+    self.deleteClient = function deleteClient(client){
+      ClientsModel.deleteClient(client)
+                  .then(function successCallback(response) {
+                    _.remove(self.clients, function (c) {
+                                    return c.id == client.id;
+                                });
+                  }, function errorCallback(response) {
+                      alert('Unable to delete client record at this time.');
+                  });
+    };
+
+    // On Load
+    getClients();
+
   });
