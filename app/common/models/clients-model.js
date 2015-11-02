@@ -1,97 +1,102 @@
-angular.module("k9.models.clients",[])
+(function () {
+   'use strict';
 
-.service('ClientsModel', function(appConfig, $http, $q){
+    angular.module("k9.models.clients",[])
 
-  var self = this,
-      URLS = {
-        FETCH : appConfig.API.baseURL + 'clients'
-      },
-      clients,
-      currentClient;
+    .service('ClientsModel', function(appConfig, $http, $q){
 
-  function extract(result){
-    return result.data.clients;
-  }
+      var self = this,
+          URLS = {
+            FETCH : appConfig.API.baseURL + 'clients'
+          },
+          clients,
+          currentClient;
 
-  function cacheClients(result){
-    clients = extract(result);
-    return clients;
-  }
+      function extract(result){
+        return result.data.clients;
+      }
 
-  self.getClients = function getClients(){
-    return $http.get(URLS.FETCH).then(cacheClients);
-  };
+      function cacheClients(result){
+        clients = extract(result);
+        return clients;
+      }
 
-  self.setCurrentClient = function setCurrentClient(client){
-    currentClient = client;
-  };
+      self.getClients = function getClients(){
+        return $http.get(URLS.FETCH).then(cacheClients);
+      };
 
-  self.getCurrentClient = function getCurrentClient(client){
-    return currentClient;
-  };
+      self.setCurrentClient = function setCurrentClient(client){
+        currentClient = client;
+      };
 
-  function findClient(clientID) {
+      self.getCurrentClient = function getCurrentClient(client){
+        return currentClient;
+      };
 
-    var result = _.find(clients, function (c) {
-        return c.id == parseInt(clientID, 10);
-    });
-    return result;
-  }
+      function findClient(clientID) {
 
-  // Create
-  self.createClient = function createClient(client){
-
-    return $http({
-      method  : 'POST',
-      url     : appConfig.API.baseURL +'clients',
-      data    : {
-                  client: {
-                    first_name  : client.firstname,
-                    last_name   : client.lastname
-                  }
-                }
-    });
-
-  };
-
-  // Read
-  self.getClientById = function getClientById(clientID){
-    var deferred = $q.defer();
-
-    if (clients) {
-        deferred.resolve(findClient(clientID));
-    } else {
-        self.getClients().then(function () {
-            deferred.resolve(findClient(clientID));
+        var result = _.find(clients, function (c) {
+            return c.id == parseInt(clientID, 10);
         });
-    }
-    return deferred.promise;
-  };
+        return result;
+      }
 
-  // Update
-  self.updateClient = function updateClient(client){
-    return $http({
-                    method  : 'PATCH', //patch over put for update - https://goo.gl/JRPN2o
-                    url     : appConfig.API.baseURL + 'clients/' + client.id,
-                    data    : {
-                                client: {
-                                  first_name  : client.first_name,
-                                  last_name   : client.last_name
-                                }
-                              }
+      // Create
+      self.createClient = function createClient(client){
 
-                  });
-  };
+        return $http({
+          method  : 'POST',
+          url     : appConfig.API.baseURL +'clients',
+          data    : {
+                      client: {
+                        first_name  : client.firstname,
+                        last_name   : client.lastname
+                      }
+                    }
+        });
+
+      };
+
+      // Read
+      self.getClientById = function getClientById(clientID){
+        var deferred = $q.defer();
+
+        if (clients) {
+            deferred.resolve(findClient(clientID));
+        } else {
+            self.getClients().then(function () {
+                deferred.resolve(findClient(clientID));
+            });
+        }
+        return deferred.promise;
+      };
+
+      // Update
+      self.updateClient = function updateClient(client){
+        return $http({
+                        method  : 'PATCH', //patch over put for update - https://goo.gl/JRPN2o
+                        url     : appConfig.API.baseURL + 'clients/' + client.id,
+                        data    : {
+                                    client: {
+                                      first_name  : client.first_name,
+                                      last_name   : client.last_name
+                                    }
+                                  }
+
+                      });
+      };
 
 
-  // Delete
-  self.deleteClient = function deleteClient(client){
+      // Delete
+      self.deleteClient = function deleteClient(client){
 
-    return $http({
-      method  : 'DELETE', //patch over put for update - https://goo.gl/JRPN2o
-      url     :  appConfig.API.baseURL + 'clients/' + client.id
-    });
+        return $http({
+          method  : 'DELETE', //patch over put for update - https://goo.gl/JRPN2o
+          url     :  appConfig.API.baseURL + 'clients/' + client.id
+        });
 
-  };
+      };
 
-});
+    }); //end service client model
+
+}()); //end use strict

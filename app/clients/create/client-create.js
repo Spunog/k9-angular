@@ -1,7 +1,10 @@
-angular.module('clients.create', [
-  'ui.router',
-  'k9.models.clients'
-])
+(function () {
+  'use strict';
+
+  angular.module('clients.create', [
+    'ui.router',
+    'k9.models.clients'
+  ])
   .config(function ($stateProvider) {
       $stateProvider.state('k9.clients.create', {
         url: '/create',
@@ -44,4 +47,6 @@ angular.module('clients.create', [
     // On Load
     resetForm();
 
-  });
+  }); // end create client ctrl
+
+}()); // end use strict

@@ -1,30 +1,35 @@
-angular.module('nav',[
-  'k9.models.nav'
-])
+(function () {
+   'use strict';
 
-  .controller("NavCtrl",function NavCtrl(NavModel,auth,$state){
-    var self = this;
+   angular.module('nav',[
+     'k9.models.nav'
+   ])
 
-    self.menuItems = NavModel.getMenuItems();
+     .controller("NavCtrl",function NavCtrl(NavModel,auth,$state){
+       var self = this;
 
-    self.isSelected = function isSelected(menuItem){
-      return NavModel.menuIsSelected(menuItem);
-    };
+       self.menuItems = NavModel.getMenuItems();
 
-    self.setCurrentItem = function setCurrentItem(menuItem){
-      NavModel.setCurrentItem(menuItem);
-    };
+       self.isSelected = function isSelected(menuItem){
+         return NavModel.menuIsSelected(menuItem);
+       };
 
-    self.logout = function logout(){
-      var promise = auth.logout();
-      localStorage.removeItem('auth_token');
-      localStorage.removeItem('auth_email');
-      $state.go('k9.login'); // go to login
-      // promise.then(function(){
-      //   localStorage.removeItem('auth_token');
-      //   localStorage.removeItem('auth_email');
-      //   $state.go('k9.login'); // go to login
-      // });
-    };
+       self.setCurrentItem = function setCurrentItem(menuItem){
+         NavModel.setCurrentItem(menuItem);
+       };
 
-  });
+       self.logout = function logout(){
+         var promise = auth.logout();
+         localStorage.removeItem('auth_token');
+         localStorage.removeItem('auth_email');
+         $state.go('k9.login'); // go to login
+         // promise.then(function(){
+         //   localStorage.removeItem('auth_token');
+         //   localStorage.removeItem('auth_email');
+         //   $state.go('k9.login'); // go to login
+         // });
+       };
+
+     });
+
+}()); // end use strict

@@ -1,7 +1,10 @@
-angular.module('clients.edit', [
-  'ui.router',
-  'k9.models.clients'
-])
+(function () {
+  'use strict';
+
+  angular.module('clients.edit', [
+    'ui.router',
+    'k9.models.clients'
+  ])
 
   .config(function ($stateProvider) {
       $stateProvider.state('k9.clients.edit', {
@@ -45,4 +48,7 @@ angular.module('clients.edit', [
 
       self.cancelEditing = cancelEditing;
       self.updateClient = updateClient;
-  });
+
+  }); // end edit client ctrl
+
+}()); // end use strict

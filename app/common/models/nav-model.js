@@ -1,8 +1,12 @@
-angular.module("k9.models.nav",[])
+(function () {
+   'use strict';
+
+   angular.module("k9.models.nav",[])
 
   .service('NavModel', function(){
 
     var self = this;
+    var currentItem;
 
     var menuItem = function menuItem(title,sref){
       // must be a nicer way to do this, feels wrong but not found it yet
@@ -39,4 +43,6 @@ angular.module("k9.models.nav",[])
       currentItem = menuItem;
     };
 
-  });
+  }); //end nav model
+
+}()); //end use strict
