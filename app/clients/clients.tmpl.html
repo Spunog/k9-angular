@@ -30,8 +30,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="client in clientCtrl.clients | filter:clientSearchText"
-              ui-sref='k9.clients.edit({ clientID:client.id})'>
+          <tr ng-repeat="client in clientCtrl.clients | filter:clientSearchText">
             <td>
               {{ client.first_name }}
             </td>
