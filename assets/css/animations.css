@@ -1,5 +1,4 @@
-[ui-view].ng-enter, [ui-view].ng-leave{
-  /*position:absolute;*/
+/*[ui-view].ng-enter, [ui-view].ng-leave{
   -webkit-transition: all .5s ease-in-out;
   transition: all .5s ease-in-out;
 }
@@ -18,4 +17,4 @@
 
 [ui-view].ng-leave-active{
   opacity: 0;
-}
+}*/
