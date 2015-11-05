@@ -18,7 +18,7 @@
   .controller('EditClientCtrl', function ($state, $stateParams, ClientsModel) {
       var self = this;
 
-      self.testID = $stateParams.clientID;
+      self.editedClient = ClientsModel.getCurrentClient();
 
       function returnToClients(reload) {
           $state.go('k9.clients', {}, { reload: reload });
@@ -28,6 +28,7 @@
           self.client = angular.copy(self.editedClient);
           ClientsModel.updateClient(self.editedClient)
                       .then(function (clients) {
+                        ClientsModel.resetCurrentClient();
                         returnToClients(true);
                       });
       }
@@ -39,8 +40,7 @@
       ClientsModel.getClientById($stateParams.clientID)
           .then(function (client) {
               if (client) {
-                  self.client = client;
-                  self.editedClient = angular.copy(self.client);
+                  ClientsModel.setCurrentClient(client);
               } else {
                   returnToClients(true);
               }

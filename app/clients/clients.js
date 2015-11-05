@@ -38,6 +38,8 @@
            sref: 'k9.clients'
        });
 
+       self.currentClient = ClientsModel.getCurrentClient();
+
        // Index
        var getClients = function getClients(){
          ClientsModel.getClients()
@@ -58,7 +60,7 @@
                      });
        };
 
-       // On Load
+       // On Controller Load
        getClients();
 
      }); //end client ctrl

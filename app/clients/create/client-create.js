@@ -27,9 +27,11 @@
     }
 
     function createClient(client){
+
       ClientsModel.createClient(client)
                   .then(function (clients) {
-                    returnToClients(true);
+                    ClientsModel.addClient(clients.data.client);
+                    returnToClients(false);
                   });
     }
 

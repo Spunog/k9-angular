@@ -5,12 +5,17 @@
 
     .service('ClientsModel', function(appConfig, $http, $q){
 
+      // Private
       var self = this,
           URLS = {
-            FETCH : appConfig.API.baseURL + 'clients'
+            INDEX : appConfig.API.baseURL + 'clients'
           },
-          clients,
-          currentClient;
+          clients;
+
+      var currentClient = {
+        first_name: '',
+        last_name: ''
+      };
 
       function extract(result){
         return result.data.clients;
@@ -21,18 +26,6 @@
         return clients;
       }
 
-      self.getClients = function getClients(){
-        return $http.get(URLS.FETCH).then(cacheClients);
-      };
-
-      self.setCurrentClient = function setCurrentClient(client){
-        currentClient = client;
-      };
-
-      self.getCurrentClient = function getCurrentClient(client){
-        return currentClient;
-      };
-
       function findClient(clientID) {
 
         var result = _.find(clients, function (c) {
@@ -40,6 +33,30 @@
         });
         return result;
       }
+
+      // Public
+      self.getCurrentClient = function getCurrentClient(client){
+        return currentClient;
+      };
+
+      self.setCurrentClient = function setCurrentClient(client){
+        currentClient.id = client.id;
+        currentClient.first_name = client.first_name;
+        currentClient.last_name = client.last_name;
+      };
+
+      self.resetCurrentClient = function resetCurrentClient(){
+        currentClient.first_name = '';
+        currentClient.last_name = '';
+      };
+
+      self.getClients = function getClients(){
+        return (clients) ? $q.when(clients) : $http.get(URLS.INDEX).then(cacheClients);
+      };
+
+      self.addClient = function addClient(client){
+        clients.unshift(client);
+      };
 
       // Create
       self.createClient = function createClient(client){
