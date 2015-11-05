@@ -27,11 +27,10 @@
     }
 
     function createClient(client){
-
       ClientsModel.createClient(client)
                   .then(function (clients) {
                     ClientsModel.addClient(clients.data.client);
-                    returnToClients(false);
+                    $state.go('k9.clients.edit', {clientID: clients.data.client.id}, { reload: true });
                   });
     }
 

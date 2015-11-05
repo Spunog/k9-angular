@@ -28,7 +28,6 @@
           self.client = angular.copy(self.editedClient);
           ClientsModel.updateClient(self.editedClient)
                       .then(function (clients) {
-                        ClientsModel.resetCurrentClient();
                         returnToClients(true);
                       });
       }

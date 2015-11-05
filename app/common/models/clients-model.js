@@ -100,6 +100,13 @@
                                     }
                                   }
 
+                      }).then(function (response) {
+                        var client = response.data.client;
+                        var matchedClient = _.find(clients, function (c) {
+                            return c.id == parseInt(client.id, 10);
+                        });
+                        matchedClient.first_name = client.first_name;
+                        matchedClient.last_name  = client.last_name;
                       });
       };
 

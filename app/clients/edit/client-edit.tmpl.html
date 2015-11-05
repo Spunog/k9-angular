@@ -9,14 +9,12 @@
       <div class="form-group">
         <label class="control-label" for="clientFirstName">First Name</label>
         <input ng-model='editClientCtrl.editedClient.first_name' type="text" class="form-control" id="clientFirstName" placeholder="Enter first name" value="{{ editClientCtrl.editedClient.first_name }}">
-        <p class="help-block">Client's first name</p>
       </div>
 
       <!-- Last Name -->
       <div class="form-group">
         <label class="control-label" for="clientLastName">Last Name</label>
         <input ng-model='editClientCtrl.editedClient.last_name' type="text" class="form-control" id="clientLastName" placeholder="Enter Last name" {{ editClientCtrl.editedClient.last_name }}>
-        <p class="help-block">Client's Last name</p>
       </div>
 
       <button type="submit" class="btn btn-primary">Update</button>
