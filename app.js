@@ -8,9 +8,9 @@
       'k9.login',
       'k9.dashboard',
       'k9.models.clients',
-      'clients',
-      'clients.create',
-      'clients.edit'
+      'k9.clients',
+      'k9.clients.create',
+      'k9.clients.edit'
     ])
 
       .constant('appConfig', {

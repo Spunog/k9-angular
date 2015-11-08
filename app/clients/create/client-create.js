@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('clients.create', [
+  angular.module('k9.clients.create', [
     'ui.router',
     'k9.models.clients'
   ])
@@ -10,11 +10,11 @@
         url: '/create',
         //target the un-named 'ui-view' in PARENT states template
         templateUrl: 'app/clients/create/client-create.tmpl.html',
-        controller: 'CreateClientCtrl as createClientCtrl'
+        controller: 'CreateClientController as createClientCtrl'
       });
   })
 
-  .controller('CreateClientCtrl', function($state, $stateParams, ClientsModel) {
+  .controller('CreateClientController', function($state, $stateParams, ClientsModel) {
     var self = this;
 
     // Private

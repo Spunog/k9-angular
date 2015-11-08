@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('clients.edit', [
+  angular.module('k9.clients.edit', [
     'ui.router',
     'k9.models.clients'
   ])
@@ -11,11 +11,11 @@
         url: '/clients/:clientID/edit',
         //target the un-named 'ui-view' in PARENT states template
         templateUrl: 'app/clients/edit/client-edit.tmpl.html',
-        controller: 'EditClientCtrl as editClientCtrl'
+        controller: 'EditClientController as editClientCtrl'
       });
   })
 
-  .controller('EditClientCtrl', function ($state, $stateParams, ClientsModel) {
+  .controller('EditClientController', function ($state, $stateParams, ClientsModel) {
       var self = this;
 
       self.editedClient = ClientsModel.getCurrentClient();

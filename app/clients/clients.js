@@ -1,12 +1,12 @@
 (function () {
    'use strict';
 
-   angular.module('clients',[
+   angular.module('k9.clients',[
      'ui.router',
      'k9.models.clients',
      'k9.models.nav',
-     'clients.create',
-     'clients.edit'
+     'k9.clients.create',
+     'k9.clients.edit'
    ])
 
      .config(function config($stateProvider,$httpProvider,$urlRouterProvider){
@@ -16,7 +16,7 @@
          url: '/clients',
          views: {
                    'main@' : {
-                               controller: 'ClientCtrl as clientCtrl',
+                               controller: 'ClientController as clientCtrl',
                                templateUrl: 'app/clients/clients.tmpl.html'
                              },
                    'nav@' : {
@@ -28,7 +28,7 @@
 
      })
 
-     .controller("ClientCtrl",function ClientCtrl(ClientsModel,NavModel){
+     .controller("ClientController",function ClientCtrl(ClientsModel,NavModel){
 
        var self = this;
 
