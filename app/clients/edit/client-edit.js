@@ -8,7 +8,7 @@
 
   .config(function ($stateProvider) {
       $stateProvider.state('k9.clients.edit', {
-        url: '/clients/:clientID/edit',
+        url: '/client/:clientID/edit',
         //target the un-named 'ui-view' in PARENT states template
         templateUrl: 'app/clients/edit/client-edit.tmpl.html',
         controller: 'EditClientController as editClientCtrl'

@@ -19,7 +19,7 @@
                 }
       })
 
-      .config(function config($stateProvider,$httpProvider,$urlRouterProvider){
+      .config(function config($stateProvider,$httpProvider,$urlRouterProvider, $locationProvider){
         //State Provider
         //abstract state serves as a PLACEHOLDER or NAMESPACE for application states
         $stateProvider.state('k9', {
@@ -27,6 +27,9 @@
            abstract: true
         });
         $urlRouterProvider.otherwise("/login");
+
+        $locationProvider.html5Mode(true); //removes the hash url in supported browsers
+
       })
 
       // Common directive for Focus
