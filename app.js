@@ -4,7 +4,7 @@
     angular.module("k9",[
       'ngAnimate',
       'ui.router',
-      'nav',
+      'k9.navigation',
       'k9.login',
       'k9.dashboard',
       'k9.models.clients',

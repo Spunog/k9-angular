@@ -1,11 +1,11 @@
 (function () {
    'use strict';
 
-   angular.module('nav',[
+   angular.module('k9.navigation',[
      'k9.models.nav'
    ])
 
-     .controller("NavCtrl",function NavCtrl(NavModel,auth,$state){
+     .controller("NavigationController",function NavigationController(NavModel,auth,$state){
        var self = this;
 
        self.menuItems = NavModel.getMenuItems();

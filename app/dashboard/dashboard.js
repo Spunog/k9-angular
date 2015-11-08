@@ -17,7 +17,7 @@
                               templateUrl: 'app/dashboard/dashboard.tmpl.html'
                             },
                   'nav@' : {
-                              controller: 'NavCtrl as navCtrl',
+                              controller: 'NavigationController as navCtrl',
                               templateUrl: 'app/nav/nav.tmpl.html'
                             }
                }

@@ -20,7 +20,7 @@
                                templateUrl: 'app/clients/clients.tmpl.html'
                              },
                    'nav@' : {
-                               controller: 'NavCtrl as navCtrl',
+                               controller: 'NavigationController as navCtrl',
                                templateUrl: 'app/nav/nav.tmpl.html'
                              }
                 }
