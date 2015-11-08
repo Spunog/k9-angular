@@ -1,5 +1,4 @@
 <!-- Clients -->
-
 <div ng-show='clientCtrl.clients.length < 1'
      class="alert alert-info text-center"
      role="alert">
@@ -11,12 +10,12 @@
 
 <div class="row">
 
-  <div class="col-sm-7">
+  <div ng-class='clientCtrl.isEditing()'>
 
     <div ng-hide='clientCtrl.clients.length < 1'>
 
       <label>Search:
-        <input ng-model="clientSearchText">
+        <input ng-model="clientSearchText" focus="true">
       </label>
 
       <table class="table table-striped table-hover">

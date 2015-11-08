@@ -38,6 +38,14 @@
            sref: 'k9.clients'
        });
 
+       self.isEditing = function isEditing(){
+         if(self.currentClient.first_name.length > 0){
+           return 'col-md-7';
+         }else{
+           return 'col-md-12';
+         }
+       };
+
        self.currentClient = ClientsModel.getCurrentClient();
 
        // Index

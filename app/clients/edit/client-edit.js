@@ -21,7 +21,8 @@
       self.editedClient = ClientsModel.getCurrentClient();
 
       function returnToClients(reload) {
-          $state.go('k9.clients', {}, { reload: reload });
+        ClientsModel.resetCurrentClient();
+        $state.go('k9.clients', {}, { reload: reload });
       }
 
       function updateClient() {
@@ -35,6 +36,17 @@
       function cancelEditing() {
           returnToClients(false);
       }
+
+      self.pickClient = function(){
+
+        alert('hi');
+
+        // ClientsModel.setCurrentClient = {
+        //   id:22,
+        //   first_name: 'Alan',
+        //   last_name: 'Rice'
+        // };
+      };
 
       ClientsModel.getClientById($stateParams.clientID)
           .then(function (client) {
