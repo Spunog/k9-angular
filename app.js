@@ -5,7 +5,7 @@
       'ngAnimate',
       'ui.router',
       'nav',
-      'login',
+      'k9.login',
       'k9.models.clients',
       'clients',
       'clients.create',

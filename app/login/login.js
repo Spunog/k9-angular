@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('login',['ui.router'])
+  angular.module('k9.login',['ui.router'])
 
     .config(function config($stateProvider){
 
@@ -9,7 +9,7 @@
         url: '/login',
         views: {
                   'main@' : {
-                              controller: 'LoginCtrl as login',
+                              controller: 'LoginController as loginCtrl',
                               templateUrl: 'app/login/login.tmpl.html'
                             }
                }
@@ -18,7 +18,7 @@
 
     })
 
-    .controller("LoginCtrl",function LoginCtrl(auth,$state){
+    .controller("LoginController",function LoginCtrl(auth,$state){
       var self = this,
           isSigningIn;
 
