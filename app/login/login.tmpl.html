@@ -19,6 +19,8 @@
   </div>
 
   <div class="form-group">
-    <button class="btn btn-primary" ng-disabled="loginForm.$invalid" type="submit">Sign In</button>
+    <button class="btn btn-primary"
+            ng-disabled="loginForm.$invalid || login.isSigningIn()"
+            type="submit">{{ login.getSubmitMessage() }}</button>
   </div>
 </form>

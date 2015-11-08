@@ -19,21 +19,33 @@
     })
 
     .controller("LoginCtrl",function LoginCtrl(auth,$state){
-      var self = this;
+      var self = this,
+          isSigningIn;
 
       self.login = function login(user){
         var promise = auth.login(user);
+        isSigningIn = true;
         promise.then(self.success, self.error);
       };
 
       self.success = function loginSuccess(response){
         localStorage.setItem('auth_token',response.data.token);
         localStorage.setItem('auth_email',response.data.email);
+        isSigningIn = false;
         $state.go('k9.dashboard');
       };
 
       self.error = function loginSuccess(response){
+        isSigningIn = false;
         self.wrongCredentials = true;
+      };
+
+      self.isSigningIn = function getSubmitMessage(){
+        return isSigningIn;
+      };
+
+      self.getSubmitMessage = function getSubmitMessage(){
+        return (isSigningIn) ? ' Signing In. Please wait...' : 'Sign In' ;
       };
 
     })
