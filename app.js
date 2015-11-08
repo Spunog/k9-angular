@@ -6,11 +6,11 @@
       'ui.router',
       'nav',
       'k9.login',
+      'k9.dashboard',
       'k9.models.clients',
       'clients',
       'clients.create',
-      'clients.edit',
-      'dashboard'
+      'clients.edit'
     ])
 
       .constant('appConfig', {

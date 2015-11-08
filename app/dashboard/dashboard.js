@@ -1,7 +1,7 @@
 (function () {
    'use strict';
 
-    angular.module('dashboard',[
+    angular.module('k9.dashboard',[
       'ui.router',
       'k9.models.nav',
     ])
@@ -13,7 +13,7 @@
         url: '/dashboard',
         views: {
                   'main@' : {
-                              controller: 'DashboardCtrl as dashboardCtrl',
+                              controller: 'DashboardController as dashboardCtrl',
                               templateUrl: 'app/dashboard/dashboard.tmpl.html'
                             },
                   'nav@' : {
@@ -25,7 +25,7 @@
 
     })
 
-    .controller("DashboardCtrl",function DashboardCtrl(NavModel){
+    .controller("DashboardController",function DashboardCtrl(NavModel){
 
       var self = this;
 
