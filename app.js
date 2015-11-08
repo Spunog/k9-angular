@@ -29,6 +29,26 @@
         $urlRouterProvider.otherwise("/login");
       })
 
+      // Common directive for Focus
+      .directive('focus',
+      	function($timeout) {
+      		return {
+      			scope : {
+      				trigger : '@focus'
+      			},
+      			link : function(scope, element) {
+      				scope.$watch('trigger', function(value) {
+      					if (value === "true") {
+      						$timeout(function() {
+      							element[0].focus();
+      						});
+      					}
+      				});
+      			}
+      		};
+      	}
+      )
+
       .run(function ($rootScope, $state, $location, auth) {
 
         // http://stackoverflow.com/a/27215254
