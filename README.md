@@ -5,6 +5,13 @@ Front end using AngularJS and Bootstrap for K9 Restful API app - https://github.
 
 * Angular Version : 1.4.7
 
+## Setup
+After cloning:
+* bower install - will download dependancies
+* npm Install
+* gulp - process scss and js
+* gulp serve - will start webserver
+
 ## Simple HTTP Server For Development
 A simple zero-configuration command-line http server.
 Doesn't do much but serve HTML pages.
@@ -46,4 +53,3 @@ To start server from within project folder: 'http-server .'
 
 * jsonapi : A specification for building APIs in JSON.
   * Conventions for creating JSON resources: http://jsonapi.org/
-
