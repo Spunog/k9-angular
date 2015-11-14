@@ -8,20 +8,20 @@
     var self = this;
     var currentItem;
 
-    var menuItem = function menuItem(title,sref){
+    var menuItem = function menuItem(title,sref,avatar){
       // must be a nicer way to do this, feels wrong but not found it yet
       // only purpose is to make creating new object shorter later
       return {
         title : title,
         sref : sref,
-        avatar : 'svg-1'
+        avatar : avatar
       };
     };
 
     //Default values
     var menuItems = [
-      menuItem('Dashboard','k9.dashboard'),
-      menuItem('Clients','k9.clients')
+      menuItem('Dashboard','k9.dashboard','home'),
+      menuItem('Clients','k9.clients','face')
     ];
 
     self.menuItem = function menuItem(title,sref){

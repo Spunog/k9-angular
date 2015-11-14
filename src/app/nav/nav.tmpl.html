@@ -6,13 +6,14 @@
 <md-list>
   <md-list-item ng-repeat="menuItem in navCtrl.menuItems">
       <md-button ui-sref="{{ menuItem.sref }}" ng-class="{'selected' : navCtrl.isSelected(menuItem) }">
-        <md-icon md-svg-icon="{{menuItem.avatar}}" class="avatar"></md-icon>
+        <!-- <md-icon md-svg-icon="{{menuItem.avatar}}" class="avatar"></md-icon> -->
+        <i class="material-icons md-48">{{ menuItem.avatar }}</i>
         {{ menuItem.title }}
       </md-button>
   </md-list-item>
   <md-list-item>
       <md-button ng-click='navCtrl.logout()'>
-        <md-icon class="avatar"></md-icon>
+        <i class="material-icons md-48">exit_to_app</i>
         Sign Out
       </md-button>
   </md-list-item>
