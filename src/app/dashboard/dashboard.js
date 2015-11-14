@@ -25,9 +25,7 @@
 
     })
 
-    .controller("DashboardController",function DashboardCtrl(NavModel){
-
-      var self = this;
+    .controller("DashboardController",function DashboardCtrl(NavModel,$scope){
 
       //Update Navigation State
       NavModel.setCurrentItem({

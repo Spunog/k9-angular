@@ -11,7 +11,7 @@
       'ngAria',
       'ngResource',
       'ui.router',
-      'ui.bootstrap',
+      'ngMaterial',
       'toastr',
       'k9.navigation',
       'k9.login',
