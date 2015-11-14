@@ -15,6 +15,10 @@
                   'main@' : {
                               controller: 'DashboardController as dashboardCtrl',
                               templateUrl: 'app/dashboard/dashboard.tmpl.html'
+                            },
+                  'nav@' : {
+                              controller: 'NavigationController as navCtrl',
+                              templateUrl: 'app/nav/nav.tmpl.html'
                             }
                }
       });
