@@ -1,11 +1,19 @@
 <!-- Primary Navigation -->
-<ul class="nav nav-pills" style='margin-bottom:1em;'>
-  <li role="presentation"
-      ng-repeat='menuItem in navCtrl.menuItems'
-      ng-class="{active: navCtrl.isSelected(menuItem)}">
-    <a ui-sref="{{ menuItem.sref }}">{{ menuItem.title }}</a>
-  </li>
-  <li role="presentation" class="pull-right">
-    <a href='#' ng-click='navCtrl.logout()'>Sign Out</a>
-  </li>
-</ul>
+<md-toolbar class="md-whiteframe-z1">
+  <h1>Menu</h1>
+</md-toolbar>
+
+<md-list>
+  <md-list-item ng-repeat="menuItem in navCtrl.menuItems">
+      <md-button ui-sref="{{ menuItem.sref }}" ng-class="{'selected' : navCtrl.isSelected(menuItem) }">
+        <md-icon md-svg-icon="{{menuItem.avatar}}" class="avatar"></md-icon>
+        {{ menuItem.title }}
+      </md-button>
+  </md-list-item>
+  <md-list-item>
+      <md-button ng-click='navCtrl.logout()'>
+        <md-icon class="avatar"></md-icon>
+        Sign Out
+      </md-button>
+  </md-list-item>
+</md-list>

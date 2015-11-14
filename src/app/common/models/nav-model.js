@@ -13,7 +13,8 @@
       // only purpose is to make creating new object shorter later
       return {
         title : title,
-        sref : sref
+        sref : sref,
+        avatar : 'svg-1'
       };
     };
 
