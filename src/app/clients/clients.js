@@ -23,7 +23,11 @@
                                controller: 'NavigationController as navCtrl',
                                templateUrl: 'app/nav/nav.tmpl.html'
                              }
-                }
+                },
+          resolve: {
+            // Page Title
+            $title: function() { return 'Clients'; }
+          }
        });
 
      })

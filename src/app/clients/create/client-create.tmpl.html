@@ -33,11 +33,14 @@
     </md-input-container>
   </div>
 
-  <!-- Save -->
-  <md-button ng-click='add-client-form.submit()'
-             md-no-ink class="md-primary">Save Client</md-button>
+  <!-- Actions -->
+  <md-card-actions layout="row" layout-align="center center">
+    <!-- Save -->
+    <md-button ng-click='add-client-form.submit()'
+               md-no-ink class="md-primary">Save Client</md-button>
 
-  <!-- Cancel -->
-  <md-button ng-click='createClientCtrl.cancel()'>Cancel</md-button>
+    <!-- Cancel -->
+    <md-button ng-click='createClientCtrl.cancel()'>Cancel</md-button>
+  </md-card-actions>
 
 </form>

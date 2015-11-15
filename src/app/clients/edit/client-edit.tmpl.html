@@ -35,11 +35,15 @@
     </md-input-container>
   </div>
 
-  <!-- Save -->
-  <md-button ng-click='update-client-form.submit()'
-             md-no-ink class="md-primary">Update</md-button>
+  <!-- Actions -->
+  <md-card-actions layout="row" layout-align="center center">
+    <!-- Save -->
+    <md-button ng-click='update-client-form.submit()'
+               md-no-ink class="md-primary">Update</md-button>
 
-  <!-- Cancel -->
-  <md-button ng-click='editClientCtrl.cancelEditing()'>Cancel</md-button>
+    <!-- Cancel -->
+    <md-button ng-click='editClientCtrl.cancelEditing()'>Cancel</md-button>
+  </md-card-actions>
+
 
 </form>

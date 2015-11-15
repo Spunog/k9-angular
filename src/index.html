@@ -2,7 +2,7 @@
 <html ng-app="k9">
   <head>
     <meta charset="utf-8">
-    <title>k9</title>
+    <title ng-bind="($title || 'Home') + ' - Dogzie'">Dogzie</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -32,24 +32,28 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+    <!-- Left Side Navigation -->
     <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
                 md-component-id="left"
                 md-is-locked-open="$mdMedia('gt-sm')">
       <div ui-view='nav'></div>
     </md-sidenav>
 
+    <!-- Right Side Content -->
     <div flex layout="column"
          tabIndex="-1"
          role="main"
          class="md-whiteframe-z2">
 
+      <!-- Header Section -->
       <md-toolbar layout="row" class="md-whiteframe-z1">
         <md-button class="menu" hide-gt-sm ng-click="ul.toggleList()" aria-label="Show User List">
           <md-icon md-svg-icon="menu" ></md-icon>
         </md-button>
-        <h1>K9 - Dog Groomer App</h1>
+        <h1>{{ $title || 'Dogzie' }}</h1>
       </md-toolbar>
 
+      <!-- Main Page Content -->
       <md-content flex id="content">
         <div ui-view='main'></div>
       </md-content>

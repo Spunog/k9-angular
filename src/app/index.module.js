@@ -19,7 +19,9 @@
       'k9.models.clients',
       'k9.clients',
       'k9.clients.create',
-      'k9.clients.edit'
+      'k9.clients.edit',
+      'ui.calendar',
+      'ui.router.title'
     ]);
 
 })();
