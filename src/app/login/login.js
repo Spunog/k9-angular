@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('k9.login',['ui.router'])
+  angular.module('k9.login',['ui.router','ngMessages'])
 
     .config(function config($stateProvider){
 

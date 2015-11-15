@@ -16,6 +16,8 @@
     $mdIconProvider
         .defaultIconSet("./assets/svg/avatars.svg"          , 128)
         .icon("menu"       , "./assets/svg/menu.svg"        , 24)
+        .icon("email"      , "./assets/svg/email.svg"       , 24)
+        .icon("key"        , "./assets/svg/key.svg"         , 24)
         .icon("share"      , "./assets/svg/share.svg"       , 24)
         .icon("google_plus", "./assets/svg/google_plus.svg" , 512)
         .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
@@ -25,7 +27,7 @@
         $mdThemingProvider.theme('default')
             .primaryPalette('brown')
             .accentPalette('red')
-            .warnPalette('blue');
+            .warnPalette('orange');
 
   });
 
