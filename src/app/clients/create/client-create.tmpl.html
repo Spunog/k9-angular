@@ -1,34 +1,43 @@
 <!-- Client Create -->
-<div class="panel panel-info">
-  <div class="panel-heading">Create New Client</div>
-  <div class="panel-body">
+<h1 class="md-display-1">Add Client</h1>
 
-    <form role="form"
-          name='add-client-form'
-          ng-submit='createClientCtrl.createClient(newClient)'>
+<form role="form"
+      name='add-client-form'
+      ng-submit='createClientCtrl.createClient(newClient)'>
 
-      <!-- First Name -->
-      <div class="form-group">
-        <label class="control-label" for="clientFirstName">First Name</label>
-        <input ng-model='newClient.firstname' type="text" class="form-control" id="clientFirstName" placeholder="Client First Name">
+  <!-- First Name and Last Name -->
+  <div layout layout-sm="column">
+    <md-input-container flex>
+      <label>First name</label>
+      <input ng-model='newClient.firstname'
+             ng-required="true"
+             rm-focus>
+      <div ng-show="add-client-form.firstName.$dirty"
+           ng-messages="add-client-form.firstName.$error">
+        <div ng-message="required">
+          A first name must be entered
+        </div>
       </div>
-
-      <!-- Last Name -->
-      <div class="form-group">
-        <label class="control-label" for="clientLastName">Last Name</label>
-        <input ng-model='newClient.lastname' type="text" class="form-control" id="clientLastName" placeholder="Client Last Name">
+    </md-input-container>
+    <md-input-container flex>
+      <label>Last name</label>
+      <input ng-model='newClient.lastname'
+             ng-required="true"
+             rm-focus>
+      <div ng-show="add-client-form.lastName.$dirty"
+           ng-messages="add-client-form.lastName.$error">
+        <div ng-message="required">
+          A last name must be entered
+        </div>
       </div>
+    </md-input-container>
+  </div>
 
-      <!-- Save -->
-      <button type="submit" class="btn btn-primary">Save Client</button>
+  <!-- Save -->
+  <md-button ng-click='add-client-form.submit()'
+             md-no-ink class="md-primary">Save Client</md-button>
 
-      <!-- Cancel -->
-      <button type="button"
-              class='btn btn-default'
-              name="create"
-              ng-click='createClientCtrl.cancel()'>Cancel</button>
+  <!-- Cancel -->
+  <md-button ng-click='createClientCtrl.cancel()'>Cancel</md-button>
 
-    </form>
-
-  </div> <!-- end panel body -->
-</div> <!-- end panel -->
+</form>

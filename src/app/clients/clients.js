@@ -28,7 +28,7 @@
 
      })
 
-     .controller("ClientController",function ClientCtrl(ClientsModel,NavModel){
+     .controller("ClientController",function ClientCtrl(ClientsModel,NavModel,$state){
 
        var self = this;
 
@@ -54,6 +54,11 @@
                      .then(function (clients) {
                        self.clients = clients;
                      });
+       };
+
+       // Go to edit
+       self.editClient = function editClient(client){
+         $state.go('k9.clients.edit', { clientID:client.id} );
        };
 
        // Delete

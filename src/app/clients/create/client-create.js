@@ -6,12 +6,18 @@
     'k9.models.clients'
   ])
   .config(function ($stateProvider) {
-      $stateProvider.state('k9.clients.create', {
-        url: '/create',
-        //target the un-named 'ui-view' in PARENT states template
-        templateUrl: 'app/clients/create/client-create.tmpl.html',
-        controller: 'CreateClientController as createClientCtrl'
-      });
+
+    //State Providers
+    $stateProvider.state('k9.clients.create',{
+      url: '/client/create',
+      views: {
+                'main@' : {
+                            controller: 'CreateClientController as createClientCtrl',
+                            templateUrl: 'app/clients/create/client-create.tmpl.html'
+                          }
+             }
+    });
+
   })
 
   .controller('CreateClientController', function($state, $stateParams, ClientsModel) {
@@ -30,7 +36,7 @@
       ClientsModel.createClient(client)
                   .then(function (clients) {
                     ClientsModel.addClient(clients.data.client);
-                    $state.go('k9.clients.edit', {clientID: clients.data.client.id}, { reload: true });
+                    $state.go('k9.clients', {clientID: clients.data.client.id}, { reload: true });
                   });
     }
 

@@ -19,6 +19,7 @@
         .icon("email"      , "./assets/svg/email.svg"       , 24)
         .icon("key"        , "./assets/svg/key.svg"         , 24)
         .icon("share"      , "./assets/svg/share.svg"       , 24)
+        .icon("add"        , "./assets/svg/add.svg"       , 24)
         .icon("google_plus", "./assets/svg/google_plus.svg" , 512)
         .icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
         .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)

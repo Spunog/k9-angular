@@ -1,27 +1,45 @@
 <!-- Client Edit -->
-<div class="panel panel-info">
-  <div class="panel-heading">Edit Client</div>
-  <div class="panel-body">
+<md-button ui-sref='k9.clients'><i class="material-icons">keyboard_arrow_left</i></md-button>
+<h1 class="md-display-1">
+  Edit Client
+</h1>
 
-    <form role="form" name='update-client-form' ng-submit='editClientCtrl.updateClient(editClientCtrl.editedClient)'>
+<form role="form"
+      name='update-client-form' ng-submit='editClientCtrl.updateClient(editClientCtrl.editedClient)'>
 
-      <!-- First Name -->
-      <div class="form-group">
-        <label class="control-label" for="clientFirstName">First Name</label>
-        <input focus="true" ng-model='editClientCtrl.editedClient.first_name' type="text" class="form-control" id="clientFirstName" placeholder="Enter first name" value="{{ editClientCtrl.editedClient.first_name }}">
+  <!-- First Name and Last Name -->
+  <div layout layout-sm="column">
+    <md-input-container flex>
+      <label>First name</label>
+      <input ng-model='editClientCtrl.editedClient.first_name'
+             ng-required="true"
+             rm-focus>
+      <div ng-show="update-client-form.firstName.$dirty"
+           ng-messages="update-client-form.firstName.$error">
+        <div ng-message="required">
+          A first name must be entered
+        </div>
       </div>
-
-      <!-- Last Name -->
-      <div class="form-group">
-        <label class="control-label" for="clientLastName">Last Name</label>
-        <input ng-model='editClientCtrl.editedClient.last_name' type="text" class="form-control" id="clientLastName" placeholder="Enter Last name" {{ editClientCtrl.editedClient.last_name }}>
+    </md-input-container>
+    <md-input-container flex>
+      <label>Last name</label>
+      <input ng-model='editClientCtrl.editedClient.last_name'
+             ng-required="true"
+             rm-focus>
+      <div ng-show="update-client-form.lastName.$dirty"
+           ng-messages="update-client-form.lastName.$error">
+        <div ng-message="required">
+          A last name must be entered
+        </div>
       </div>
+    </md-input-container>
+  </div>
 
-      <button type="submit" class="btn btn-primary">Update</button>
-      <button type="button"
-              class='btn btn-default'
-              name="cancelClientUpdate" ng-click='editClientCtrl.cancelEditing()'>Cancel</button>
-    </form>
+  <!-- Save -->
+  <md-button ng-click='update-client-form.submit()'
+             md-no-ink class="md-primary">Update</md-button>
 
-  </div> <!-- end panel body -->
-</div> <!-- end panel -->
+  <!-- Cancel -->
+  <md-button ng-click='editClientCtrl.cancelEditing()'>Cancel</md-button>
+
+</form>
