@@ -10,4 +10,10 @@
 </button>
 
 <!-- Calendar -->
-<div ui-calendar="vm.calendar">
+<div>
+    <div ui-calendar="vm.calendar"  ng-model="vm.eventSources">
+</div>
+
+<div>
+    <small>Calendar debug: {{ vm.alertMessage }}</small>
+</div>
