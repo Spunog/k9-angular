@@ -4,6 +4,7 @@
   <md-content layout-padding>
 
     <md-card>
+
       <form ng-submit="loginCtrl.login(user)"
             novalidate
             name="loginForm">
@@ -25,6 +26,9 @@
             </div>
             <div ng-message="email">
               E-mail address is not valid
+            </div>
+            <div ng-message-exp="{loginCtrl.wrongCredentials}">
+              WRONG DETAILS!
             </div>
           </div>
         </md-input-container>
@@ -48,6 +52,10 @@
         </md-input-container>
 
         <!-- Sign In -->
+        <div ng-show="loginCtrl.wrongCredentials">
+          The email and password you entered don't match.
+        </div>
+
         <md-card-actions layout="row" layout-align="center center">
           <md-button ng-disabled="loginForm.$invalid || loginCtrl.isSigningIn()"
                      ng-click='loginCtrl.login(user)'>{{ loginCtrl.getSubmitMessage() }}</md-button>
