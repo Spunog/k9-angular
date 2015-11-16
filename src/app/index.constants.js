@@ -16,7 +16,7 @@
                         editable: true,
                         header:{
                           left: 'title',
-                          center: 'agendaDay, basicWeek, month',
+                          center: 'agendaDay, basicWeek, month, agendaWeek',
                           right: 'today prev,next'
                         },
                         allDaySlot: false,
@@ -25,7 +25,8 @@
                                         today:    'Today',
                                         month:    'Month',
                                         week:     'Week',
-                                        day:      'Day'
+                                        day:      'Day',
+                                        agendaWeek: 'Agenda Week'
                                     }
                       }
     });

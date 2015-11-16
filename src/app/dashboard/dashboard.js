@@ -109,7 +109,8 @@
                 start: event.start,
                 end: event.event,
                 allDay: event.allDay,
-                stick: true
+                stick: true,
+                color: '#C2185B'
               };
 
               vm.calendarEvents.push(newEvent);
