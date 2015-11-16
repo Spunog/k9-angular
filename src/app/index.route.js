@@ -6,7 +6,7 @@
     .config(routerConfig);
 
   /** @ngInject */
-  function routerConfig($stateProvider, $urlRouterProvider) {
+  function routerConfig($stateProvider, $urlRouterProvider,$locationProvider) {
 
     $stateProvider.state('k9',{
       url: '',
@@ -15,7 +15,7 @@
 
     $urlRouterProvider.otherwise("/login");
 
-    // $locationProvider.html5Mode(true); //removes the hash url in supported browsers
+    $locationProvider.html5Mode(true); //removes the hash url in supported browsers
   }
 
 })();
