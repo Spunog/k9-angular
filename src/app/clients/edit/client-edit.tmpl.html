@@ -1,49 +1,75 @@
 <!-- Client Edit -->
-<md-button ui-sref='k9.clients'><i class="material-icons">keyboard_arrow_left</i></md-button>
-<h1 class="md-display-1">
-  Edit Client
-</h1>
 
-<form role="form"
-      name='update-client-form' ng-submit='editClientCtrl.updateClient(editClientCtrl.editedClient)'>
-
-  <!-- First Name and Last Name -->
-  <div layout layout-sm="column">
-    <md-input-container flex>
-      <label>First name</label>
-      <input ng-model='editClientCtrl.editedClient.first_name'
-             ng-required="true"
-             rm-focus>
-      <div ng-show="update-client-form.firstName.$dirty"
-           ng-messages="update-client-form.firstName.$error">
-        <div ng-message="required">
-          A first name must be entered
-        </div>
-      </div>
-    </md-input-container>
-    <md-input-container flex>
-      <label>Last name</label>
-      <input ng-model='editClientCtrl.editedClient.last_name'
-             ng-required="true"
-             rm-focus>
-      <div ng-show="update-client-form.lastName.$dirty"
-           ng-messages="update-client-form.lastName.$error">
-        <div ng-message="required">
-          A last name must be entered
-        </div>
-      </div>
-    </md-input-container>
+<!-- Toolbar -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button ui-sref='k9.clients' class="md-icon-button" aria-label="Go Back">
+      <md-tooltip md-direction="bottom">Go back</md-tooltip>
+      <md-icon md-svg-icon="arrow_left"></md-icon>
+    </md-button>
+    <h2>
+      <span>Clients</span>
+    </h2>
+    <span flex></span>
+    <md-button type='button'
+               class="md-icon-button"
+               aria-label="Delete Client"
+               ng-click='editClientCtrl.deleteClient(editClientCtrl.editedClient)'>
+      <md-tooltip md-direction="bottom">
+        Delete Client
+      </md-tooltip>
+      <md-icon md-svg-icon="delete_white"></md-icon>
+    </md-button>
   </div>
+</md-toolbar>
 
-  <!-- Actions -->
-  <md-card-actions layout="row" layout-align="center center">
-    <!-- Save -->
-    <md-button ng-click='update-client-form.submit()'
-               md-no-ink class="md-primary">Update</md-button>
+<!-- Main Content -->
+<md-content flex id="content">
 
-    <!-- Cancel -->
-    <md-button ng-click='editClientCtrl.cancelEditing()'>Cancel</md-button>
-  </md-card-actions>
+  <h1 class="md-display-1">
+    Edit Client
+  </h1>
 
+  <form role="form"
+        name='update-client-form' ng-submit='editClientCtrl.updateClient(editClientCtrl.editedClient)'>
 
-</form>
+    <!-- First Name and Last Name -->
+    <div layout layout-sm="column">
+      <md-input-container flex>
+        <label>First name</label>
+        <input ng-model='editClientCtrl.editedClient.first_name'
+               ng-required="true"
+               rm-focus>
+        <div ng-show="update-client-form.firstName.$dirty"
+             ng-messages="update-client-form.firstName.$error">
+          <div ng-message="required">
+            A first name must be entered
+          </div>
+        </div>
+      </md-input-container>
+      <md-input-container flex>
+        <label>Last name</label>
+        <input ng-model='editClientCtrl.editedClient.last_name'
+               ng-required="true"
+               rm-focus>
+        <div ng-show="update-client-form.lastName.$dirty"
+             ng-messages="update-client-form.lastName.$error">
+          <div ng-message="required">
+            A last name must be entered
+          </div>
+        </div>
+      </md-input-container>
+    </div>
+
+    <!-- Actions -->
+    <md-card-actions layout="row" layout-align="center center">
+      <!-- Save -->
+      <md-button type='submit'
+                 md-no-ink
+                 class="md-primary">Save Changes</md-button>
+
+    </md-card-actions>
+
+  </form>
+
+</md-content>

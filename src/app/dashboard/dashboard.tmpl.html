@@ -9,11 +9,32 @@
   <md-tooltip>Add Booking</md-tooltip>
 </button>
 
-<!-- Calendar -->
-<div>
-    <div ui-calendar="vm.calendar"  ng-model="vm.eventSources">
-</div>
+<!-- Toolbar -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button" aria-label="Menu">
+      <md-icon md-svg-icon="menu"></md-icon>
+    </md-button>
+    <h2>
+      <span>Dashboard</span>
+    </h2>
+    <span flex></span>
+    <md-button class="md-icon-button" aria-label="More">
+      <md-icon md-svg-icon="more_vert"></md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
 
-<div>
-    <small>Calendar debug: <strong>{{ vm.alertMessage }}</strong></small>
-</div>
+<!-- Main Content -->
+<md-content flex id="content">
+
+  <!-- Calendar -->
+  <div>
+      <div ui-calendar="vm.calendar"  ng-model="vm.eventSources">
+  </div>
+
+  <div>
+      <small>Calendar debug: <strong>{{ vm.alertMessage }}</strong></small>
+  </div>
+
+</md-content>

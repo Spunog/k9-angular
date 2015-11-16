@@ -1,8 +1,15 @@
 <!-- Primary Navigation -->
-<md-toolbar class="md-whiteframe-z1">
-  <h1>Menu</h1>
+
+<!-- Heading -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <h2>
+      <span>Menu</span>
+    </h2>
+  </div>
 </md-toolbar>
 
+<!-- Menu List -->
 <md-list>
   <md-list-item ng-repeat="menuItem in navCtrl.menuItems">
       <md-button ui-sref="{{ menuItem.sref }}" ng-class="{'selected' : navCtrl.isSelected(menuItem) }">

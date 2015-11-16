@@ -29,6 +29,7 @@
     };
 
     self.menuIsSelected = function menuIsSelected(menuItem){
+      if(!currentItem) return false; // in case there is no current item
       return (menuItem.title === currentItem.title) ? true : false;
     };
 

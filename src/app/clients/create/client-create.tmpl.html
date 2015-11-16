@@ -1,46 +1,62 @@
 <!-- Client Create -->
-<h1 class="md-display-1">Add Client</h1>
 
-<form role="form"
-      name='add-client-form'
-      ng-submit='createClientCtrl.createClient(newClient)'>
-
-  <!-- First Name and Last Name -->
-  <div layout layout-sm="column">
-    <md-input-container flex>
-      <label>First name</label>
-      <input ng-model='newClient.firstname'
-             ng-required="true"
-             rm-focus>
-      <div ng-show="add-client-form.firstName.$dirty"
-           ng-messages="add-client-form.firstName.$error">
-        <div ng-message="required">
-          A first name must be entered
-        </div>
-      </div>
-    </md-input-container>
-    <md-input-container flex>
-      <label>Last name</label>
-      <input ng-model='newClient.lastname'
-             ng-required="true"
-             rm-focus>
-      <div ng-show="add-client-form.lastName.$dirty"
-           ng-messages="add-client-form.lastName.$error">
-        <div ng-message="required">
-          A last name must be entered
-        </div>
-      </div>
-    </md-input-container>
+<!-- Toolbar -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button ui-sref='k9.clients' class="md-icon-button" aria-label="Go Back">
+      <md-tooltip md-direction="bottom">Go back</md-tooltip>
+      <md-icon md-svg-icon="arrow_left"></md-icon>
+    </md-button>
+    <h2>
+      <span>Clients</span>
+    </h2>
   </div>
+</md-toolbar>
 
-  <!-- Actions -->
-  <md-card-actions layout="row" layout-align="center center">
-    <!-- Save -->
-    <md-button ng-click='add-client-form.submit()'
-               md-no-ink class="md-primary">Save Client</md-button>
+<!-- Main Content -->
+<md-content flex id="content">
 
-    <!-- Cancel -->
-    <md-button ng-click='createClientCtrl.cancel()'>Cancel</md-button>
-  </md-card-actions>
+  <h1 class="md-display-1">New Client</h1>
 
-</form>
+  <form role="form"
+        name='add-client-form'
+        ng-submit='createClientCtrl.createClient(newClient)'>
+
+    <!-- First Name and Last Name -->
+    <div layout layout-sm="column">
+      <md-input-container flex>
+        <label>First name</label>
+        <input ng-model='newClient.firstname'
+               ng-required="true"
+               rm-focus>
+        <div ng-show="add-client-form.firstName.$dirty"
+             ng-messages="add-client-form.firstName.$error">
+          <div ng-message="required">
+            A first name must be entered
+          </div>
+        </div>
+      </md-input-container>
+      <md-input-container flex>
+        <label>Last name</label>
+        <input ng-model='newClient.lastname'
+               ng-required="true"
+               rm-focus>
+        <div ng-show="add-client-form.lastName.$dirty"
+             ng-messages="add-client-form.lastName.$error">
+          <div ng-message="required">
+            A last name must be entered
+          </div>
+        </div>
+      </md-input-container>
+    </div>
+
+    <!-- Actions -->
+    <md-card-actions layout="row" layout-align="center center">
+      <!-- Save -->
+      <md-button type='submit'
+                 md-no-ink class="md-primary">Save Client</md-button>
+    </md-card-actions>
+
+  </form>
+
+</md-content>

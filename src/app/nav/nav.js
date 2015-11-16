@@ -5,7 +5,7 @@
      'k9.models.nav'
    ])
 
-     .controller("NavigationController",function NavigationController(NavModel,auth,$state){
+     .controller("NavigationController",function NavigationController(NavModel,auth,$state,$window){
        var self = this;
 
        self.menuItems = NavModel.getMenuItems();

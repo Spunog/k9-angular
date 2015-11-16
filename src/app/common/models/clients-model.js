@@ -115,8 +115,14 @@
       self.deleteClient = function deleteClient(client){
 
         return $http({
-          method  : 'DELETE', //patch over put for update - https://goo.gl/JRPN2o
+          method  : 'DELETE',
           url     :  appConfig.API.baseURL + 'clients/' + client.id
+        })
+        .then(function deleteClientSuccessCallback(response) {
+          //Remove from in memory array
+          _.remove(clients, function(c) {
+            return c.id == client.id;
+          });
         });
 
       };

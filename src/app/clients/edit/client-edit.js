@@ -21,47 +21,56 @@
 
   })
 
-  .controller('EditClientController', function ($state, $stateParams, ClientsModel) {
+  .controller('EditClientController', function ($state, $stateParams, ClientsModel,$mdDialog) {
       var self = this;
 
       self.editedClient = ClientsModel.getCurrentClient();
 
       function returnToClients(reload) {
         ClientsModel.resetCurrentClient();
-        $state.go('k9.clients', {}, { reload: reload });
+        $state.go('k9.clients', {}, { reload: false });
       }
 
       function updateClient() {
-          self.client = angular.copy(self.editedClient);
-          ClientsModel.updateClient(self.editedClient)
-                      .then(function (clients) {
+        self.client = angular.copy(self.editedClient);
+        ClientsModel.updateClient(self.editedClient)
+                    .then(function (clients) {
+                      returnToClients(true);
+                    });
+      }
+
+      self.deleteClient = function deleteClient(client){
+
+        var confirm = $mdDialog.confirm()
+                               .title('Are you sure you would like to delete this client?')
+                               .content('Deleting the client will remove all associated records.')
+                               .ok('Cancel')
+                               .cancel('Delete Client');
+
+        $mdDialog.show(confirm).then(function(){
+          //Default Confirm is to cancel delete
+        }, function() {
+          //Delete Client
+          ClientsModel.deleteClient(client)
+                      .then(function () {
                         returnToClients(true);
                       });
-      }
+        });
+
+      };
 
       function cancelEditing() {
           returnToClients(false);
       }
 
-      self.pickClient = function(){
-
-        alert('hi');
-
-        // ClientsModel.setCurrentClient = {
-        //   id:22,
-        //   first_name: 'Alan',
-        //   last_name: 'Rice'
-        // };
-      };
-
       ClientsModel.getClientById($stateParams.clientID)
-          .then(function (client) {
-              if (client) {
-                  ClientsModel.setCurrentClient(client);
-              } else {
-                  returnToClients(true);
-              }
-          });
+                  .then(function (client) {
+                      if (client) {
+                          ClientsModel.setCurrentClient(client);
+                      } else {
+                          returnToClients(true);
+                      }
+                  });
 
       self.cancelEditing = cancelEditing;
       self.updateClient = updateClient;

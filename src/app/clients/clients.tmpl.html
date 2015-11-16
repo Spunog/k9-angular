@@ -1,39 +1,57 @@
 <!-- Clients -->
-<div class="clients-list">
 
-  <div class="top-search md-title">
-    <label>Search:
-      <input ng-model="clientSearchText" focus="true">
-    </label>
+<!-- Toolbar -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button" aria-label="Menu">
+      <md-icon md-svg-icon="menu"></md-icon>
+    </md-button>
+    <h2>
+      <span>Clients</span>
+    </h2>
   </div>
+</md-toolbar>
 
-  <div ng-show='(clientCtrl.clients | filter:clientSearchText).length < 1'
-       class="alert alert-info text-center"
-       role="alert">
-       <p>
-         There are no clients yet. You can add your first client by
-         clicking the Add Client button below.
-       </p>
-  </div>
+<!-- Main Content -->
+<md-content flex id="content">
 
-  <div ng-hide='(clientCtrl.clients | filter:clientSearchText).length < 1'>
+  <div class="clients-list">
 
-    <md-content class='search-results' flex layout-padding>
-      <md-list-item ng-click="clientCtrl.editClient(client)"
-                    ng-repeat="client in clientCtrl.clients | filter:clientSearchText">
-          <i class="material-icons md-48 md-avatar">face</i>
-          <p>
-            {{ client.first_name }} {{ client.last_name }}
-            <br>
-            Dogs: {{ client.dogs.length }}
-          </p>
-          <i class="material-icons">chevron_right</i>
-        </md-list-item>
-      </md-list>
-    </md-content>
+    <div class="top-search md-title">
+      <label>Search:
+        <input ng-model="clientSearchText" focus="true">
+      </label>
+    </div>
 
-  </div> <!-- end client results -->
-</div> <!-- end clients list -->
+    <div ng-show='(clientCtrl.clients | filter:clientSearchText).length < 1'
+         class="alert alert-info text-center"
+         role="alert">
+         <p>
+           There are no clients yet. You can add your first client by
+           clicking the Add Client button below.
+         </p>
+    </div>
+
+    <div ng-hide='(clientCtrl.clients | filter:clientSearchText).length < 1'>
+
+      <md-content class='search-results' flex layout-padding>
+        <md-list-item ng-click="clientCtrl.editClient(client)"
+                      ng-repeat="client in clientCtrl.clients | filter:clientSearchText">
+            <i class="material-icons md-48 md-avatar">face</i>
+            <p>
+              {{ client.first_name }} {{ client.last_name }}
+              <br>
+              Dogs: {{ client.dogs.length }}
+            </p>
+            <i class="material-icons">chevron_right</i>
+          </md-list-item>
+        </md-list>
+      </md-content>
+
+    </div> <!-- end client results -->
+  </div> <!-- end clients list -->
+
+</md-content>
 
 <!-- Add New Client -->
 <button class="md-fab md-fab-bottom-right md-button md-default-theme"

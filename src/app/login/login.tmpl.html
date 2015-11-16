@@ -1,68 +1,84 @@
+<!-- Main Login -->
+
+<!-- Toolbar -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <span flex></span>
+    <h2>
+      <span>Dogzie</span>
+    </h2>
+    <span flex></span>
+  </div>
+</md-toolbar>
+
 <!-- Based on https://code.tutsplus.com/courses/hands-on-angular -->
-<div class='loginForm' layout="column" ng-cloak>
+<md-content flex id="content">
 
-  <md-content layout-padding>
+  <div class='loginForm' layout="column" ng-cloak>
 
-    <md-card>
+    <md-content layout-padding>
 
-      <form ng-submit="loginCtrl.login(user)"
-            novalidate
-            name="loginForm">
+      <md-card>
 
-        <!-- E-mail -->
-        <md-input-container class="md-block">
-          <!-- Use floating placeholder instead of label -->
-          <md-icon md-svg-icon="email" class="email"></md-icon>
-          <input ng-model="user.email"
-                 type="email"
-                 name='email'
-                 placeholder="Email"
-                 ng-required="true"
-                 rm-focus>
-          <div ng-show="loginForm.email.$dirty"
-               ng-messages="loginForm.email.$error">
-            <div ng-message="required">
-              An e-mail address must be entered
+        <form ng-submit="loginCtrl.login(user)"
+              novalidate
+              name="loginForm">
+
+          <!-- E-mail -->
+          <md-input-container class="md-block">
+            <!-- Use floating placeholder instead of label -->
+            <md-icon md-svg-icon="email" class="email"></md-icon>
+            <input ng-model="user.email"
+                   type="email"
+                   name='email'
+                   placeholder="Email"
+                   ng-required="true"
+                   rm-focus>
+            <div ng-show="loginForm.email.$dirty"
+                 ng-messages="loginForm.email.$error">
+              <div ng-message="required">
+                An e-mail address must be entered
+              </div>
+              <div ng-message="email">
+                E-mail address is not valid
+              </div>
+              <div ng-message-exp="loginCtrl.wrongCredentials">
+                WRONG DETAILS!
+              </div>
             </div>
-            <div ng-message="email">
-              E-mail address is not valid
-            </div>
-            <div ng-message-exp="loginCtrl.wrongCredentials">
-              WRONG DETAILS!
-            </div>
-          </div>
-        </md-input-container>
+          </md-input-container>
 
-        <!-- Password -->
-        <md-input-container class="md-block">
-          <md-icon md-svg-icon="key" class="key"></md-icon>
-          <input type="password"
-                 name="password"
-                 placeholder="Password"
-                 ng-model="user.password"
-                 required />
+          <!-- Password -->
+          <md-input-container class="md-block">
+            <md-icon md-svg-icon="key" class="key"></md-icon>
+            <input type="password"
+                   name="password"
+                   placeholder="Password"
+                   ng-model="user.password"
+                   required />
 
-         <div ng-show="loginForm.password.$dirty"
-              ng-messages="loginForm.password.$error">
-           <div ng-message="required">
-             Password is required
+           <div ng-show="loginForm.password.$dirty"
+                ng-messages="loginForm.password.$error">
+             <div ng-message="required">
+               Password is required
+             </div>
            </div>
-         </div>
 
-        </md-input-container>
+          </md-input-container>
 
-        <!-- Sign In -->
-        <div ng-show="loginCtrl.wrongCredentials">
-          The email and password you entered don't match.
-        </div>
+          <!-- Sign In -->
+          <div ng-show="loginCtrl.wrongCredentials">
+            The email and password you entered don't match.
+          </div>
 
-        <md-card-actions layout="row" layout-align="center center">
-          <md-button ng-disabled="loginForm.$invalid || loginCtrl.isSigningIn()"
-                     ng-click='loginCtrl.login(user)'>{{ loginCtrl.getSubmitMessage() }}</md-button>
-        </md-card-actions>
+          <md-card-actions layout="row" layout-align="center center">
+            <md-button ng-disabled="loginForm.$invalid || loginCtrl.isSigningIn()"
+                       ng-click='loginCtrl.login(user)'>{{ loginCtrl.getSubmitMessage() }}</md-button>
+          </md-card-actions>
 
-      </form>
-    </md-card>
+        </form>
+      </md-card>
 
-  </md-content>
-</div>
+    </md-content>
+  </div>
+</md-content>

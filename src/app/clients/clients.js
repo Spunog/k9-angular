@@ -32,7 +32,7 @@
 
      })
 
-     .controller("ClientController",function ClientCtrl(ClientsModel,NavModel,$state){
+     .controller("ClientController",function ClientCtrl(ClientsModel,NavModel,$state,$mdDialog){
 
        var self = this;
 
@@ -63,18 +63,6 @@
        // Go to edit
        self.editClient = function editClient(client){
          $state.go('k9.clients.edit', { clientID:client.id} );
-       };
-
-       // Delete
-       self.deleteClient = function deleteClient(client){
-         ClientsModel.deleteClient(client)
-                     .then(function successCallback(response) {
-                       _.remove(self.clients, function (c) {
-                                       return c.id == client.id;
-                                   });
-                     }, function errorCallback(response) {
-                         alert('Unable to delete client record at this time.');
-                     });
        };
 
        // On Controller Load

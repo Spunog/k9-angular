@@ -12,15 +12,15 @@
     })
     .constant('calendarConfig', {
       'defaults' : {
-                        height: 570, //temp hard coding
+                        height: 620, //temp hard coding
                         editable: true,
                         header:{
                           left: 'title',
-                          center: 'agendaDay, basicWeek, month, agendaWeek',
+                          center: 'basicWeek, month', //agendaWeek, agendaDay
                           right: 'today prev,next'
                         },
                         allDaySlot: false,
-                        defaultView: 'agendaDay',
+                        defaultView: 'month',
                         buttonText: {
                                         today:    'Today',
                                         month:    'Month',
