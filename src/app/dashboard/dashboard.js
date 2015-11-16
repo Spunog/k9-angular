@@ -4,6 +4,7 @@
     angular.module('k9.dashboard',[
       'ui.router',
       'k9.models.nav',
+      'k9.models.calendar_events'
     ])
 
     .config(function config($stateProvider){
@@ -29,7 +30,7 @@
 
     })
 
-    .controller("DashboardController",function DashboardCtrl(NavModel,$compile,calendarConfig){
+    .controller("DashboardController",function DashboardCtrl(NavModel,$compile,calendarConfig,CalendarEventsModel){
 
       var vm = this;
 
@@ -41,41 +42,18 @@
         # http://angular-ui.github.io/ui-calendar
       */
 
-      vm.eventSources = []; //must be defined before calendar config
-      vm.calendar = calendarConfig.defaults;
+      vm.eventSources   = [];
+      vm.calendarEvents = [];
+      vm.calendar       = calendarConfig.defaults;
 
       //Custom Events
       vm.calendar.dayClick = function(date, jsEvent, view) {
-                              vm.alertMessage = 'Day click woohoo';
+                              vm.alertMessage = 'Day was clicked';
                              };
 
       // Date Clicked
       vm.calendar.eventClick = function( date, jsEvent, view){
           vm.alertMessage = (date.title + ' was clicked ');
-      };
-
-      // Date Dropped
-       vm.calendar.eventDrop = function(event, delta, revertFunc, jsEvent, ui, view){
-         vm.alertMessage = ('Event Droped to make dayDelta ' + delta);
-      };
-
-      // Event Resized
-      vm.calendar.eventResize = function(event, delta, revertFunc, jsEvent, ui, view ){
-         vm.alertMessage = ('Event Resized to make dayDelta ' + delta);
-      };
-
-      // Remove Event Source
-      vm.calendar.addRemoveEventSource = function(sources,source) {
-        var canAdd = 0;
-        angular.forEach(sources,function(value, key){
-          if(sources[key] === source){
-            sources.splice(key,1);
-            canAdd = 1;
-          }
-        });
-        if(canAdd === 0){
-          sources.push(source);
-        }
       };
 
       // Remove Event
@@ -95,6 +73,11 @@
         }
       };
 
+      // Add Booking
+      vm.addBooking = function addBooking(){
+        vm.alertMessage = 'Add booking feature coming soon';
+      };
+
       // Tooltip
       vm.calendar.eventRender = function( event, element, view ) {
           element.attr({'tooltip': event.title,
@@ -102,23 +85,42 @@
           $compile(element)(vm.calendar);
       };
 
-      //Testing Code
-      var date = new Date();
-      var d = date.getDate();
-      var m = date.getMonth();
-      var y = date.getFullYear();
+      //Setup References to Sources
+      vm.eventSources = [vm.calendarEvents];
 
-      var calendarEvents = [
-        {title: 'All Day Event',start: new Date(y, m, 1)},
-        {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-        {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-        {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-        {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-        {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-      ];
+      // Refresh Calendar using Calendar Service Model
+      vm.refreshCalendar = function refreshCalendar(){
+        CalendarEventsModel.getCalendarEvents()
+          .then(function (calendarEvents) {
 
-      //Set Calendar datasources (can have multiple sources)
-      vm.eventSources = [calendarEvents];
+            // Important note about the below. Must empty array,
+            // not replace it due to watcher and references
+            // more info: http://stackoverflow.com/a/24051140/3807889
+
+            // Remove items without breaking reference
+            vm.calendarEvents.splice(0, vm.calendarEvents.length);
+
+            // Build up custom event object and push to array
+            // Note the stick: true setting which is required to fix rendering bug
+            angular.forEach(calendarEvents,function(event, key){
+
+              var newEvent = {
+                title: event.title,
+                start: event.start,
+                end: event.event,
+                allDay: event.allDay,
+                stick: true
+              };
+
+              vm.calendarEvents.push(newEvent);
+
+            });
+
+          });
+      };
+
+      //Get latest items on first load
+      vm.refreshCalendar();
 
       //Update Navigation State
       NavModel.setCurrentItem({

@@ -17,6 +17,7 @@
       'k9.login',
       'k9.dashboard',
       'k9.models.clients',
+      'k9.models.calendar_events',
       'k9.clients',
       'k9.clients.create',
       'k9.clients.edit',
