@@ -107,7 +107,7 @@
               var newEvent = {
                 title: event.title,
                 start: event.start,
-                end: event.event,
+                end: event.end,
                 allDay: event.allDay,
                 stick: true,
                 color: '#C2185B'
