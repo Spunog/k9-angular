@@ -36,6 +36,16 @@
                          });
     }
 
+    vm.bookingTimes = [
+      { id: '00:00:00', name: '00:00' },
+      { id: '00:30:00', name: '00:30' },
+      { id: '01:00:00', name: '01:30' },
+      { id: '02:00:00', name: '02:00' },
+      { id: '02:30:00', name: '02:30' },
+    ];
+    vm.selectedTime = { id: '02:30:00', name: '02:30' };
+
+
     //Public
     vm.createAppointment = createAppointment;
 
