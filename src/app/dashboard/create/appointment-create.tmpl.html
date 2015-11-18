@@ -1,0 +1,82 @@
+<!-- Client Create -->
+
+<!-- Toolbar -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button ui-sref='k9.clients' class="md-icon-button" aria-label="Go Back">
+      <md-tooltip md-direction="bottom">Go back</md-tooltip>
+      <md-icon md-svg-icon="arrow_left"></md-icon>
+    </md-button>
+    <h2>
+      <span>Dashboard - New Appointment</span>
+    </h2>
+  </div>
+</md-toolbar>
+
+<!-- Main Content -->
+<md-content flex id="content">
+
+  <h1 class="md-display-1">New Appointment</h1>
+
+  <form role="form"
+        name='add-appointment-form'
+        ng-submit='vm.createAppointment(newAppointment)'>
+
+    <!-- Title -->
+    <div layout layout-sm="column">
+      <md-input-container flex>
+        <label>Title</label>
+        <input ng-model='newAppointment.title'
+               ng-required="true"
+               rm-focus>
+        <div ng-show="add-appointment-form.title.$dirty"
+             ng-messages="add-appointment-form.title.$error">
+          <div ng-message="required">
+            Title must be entered
+          </div>
+        </div>
+      </md-input-container>
+    </div>
+
+    <!-- DateTime Range -->
+    <div layout layout-sm="column">
+      <md-input-container flex>
+
+        <!-- Start -->
+        <label>Start</label>
+        <input ng-model='newAppointment.start'
+               ng-required="true"
+               rm-focus>
+        <div ng-show="add-appointment-form.start.$dirty"
+             ng-messages="add-appointment-form.start.$error">
+          <div ng-message="required">
+            Start
+          </div>
+        </div>
+      </md-input-container>
+
+      <!-- End -->
+      <md-input-container flex>
+        <label>End</label>
+        <input ng-model='newAppointment.end'
+               ng-required="true"
+               rm-focus>
+        <div ng-show="add-appointment-form.end.$dirty"
+             ng-messages="add-appointment-form.end.$error">
+          <div ng-message="required">
+            End
+          </div>
+        </div>
+      </md-input-container>
+    </div>
+
+    <!-- Actions -->
+    <md-card-actions layout="row" layout-align="center center">
+      <!-- Save -->
+      <md-button type='submit'
+                 md-no-ink class="md-primary">Save Appointment</md-button>
+    </md-card-actions>
+
+  </form>
+
+</md-content>

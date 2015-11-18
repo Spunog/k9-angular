@@ -16,6 +16,7 @@
       'k9.navigation',
       'k9.login',
       'k9.dashboard',
+      'k9.appointment.create',
       'k9.models.clients',
       'k9.models.calendar_events',
       'k9.clients',

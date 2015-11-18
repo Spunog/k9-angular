@@ -16,7 +16,7 @@
                         editable: true,
                         header:{
                           left: 'title',
-                          center: 'basicWeek, month', //agendaWeek, agendaDay
+                          center: 'agendaWeek, month', //agendaWeek, agendaDay
                           right: 'today prev,next'
                         },
                         allDaySlot: false,
