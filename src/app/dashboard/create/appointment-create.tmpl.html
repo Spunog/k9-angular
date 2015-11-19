@@ -43,8 +43,7 @@
         <label>Time</label>
         <md-select ng-model="newAppointment.startTime"
                    aria-label="Appointment Start Time">
-          <md-option ng-repeat="time in vm.bookingTimes"
-                     value="time.id">
+          <md-option ng-repeat="time in vm.bookingTimes">
             {{ time.name }}
           </md-option>
         </md-select>
