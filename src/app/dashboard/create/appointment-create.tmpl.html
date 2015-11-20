@@ -1,63 +1,70 @@
 <!-- Client Create -->
 
-<!-- Toolbar -->
-<md-toolbar>
-  <div class="md-toolbar-tools">
-    <md-button ui-sref='k9.dashboard'
-               class="md-icon-button"
-               aria-label="Go Back">
-      <md-tooltip md-direction="bottom">Go back</md-tooltip>
-      <md-icon md-svg-icon="arrow_left"></md-icon>
-    </md-button>
-    <h2>
-      <span>Dashboard - New Appointment</span>
-    </h2>
-  </div>
-</md-toolbar>
-
-<!-- Main Content -->
-<md-content flex id="content">
-
-  <h1 class="md-display-1">New Appointment</h1>
+<md-dialog class='appointmentDialog' aria-label="Create Appointment"  ng-cloak>
 
   <form role="form"
         name='add-appointment-form'
         ng-submit='vm.createAppointment(newAppointment)'>
 
-    <!-- Title -->
-    <div layout layout-sm="column">
-      <md-input-container flex>
-        <label>Title</label>
-        <input ng-model='newAppointment.title'
-               ng-required="true"
-               rm-focus>
-      </md-input-container>
-      <md-datepicker ng-model="newAppointment.start"
-                     md-placeholder="Date"></md-datepicker>
-    </div>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Create Appointment</h2>
+        <span flex></span>
+        <md-button class="md-icon-button"
+                   ng-click="vm.createAppointmentCancel()">
+          <md-icon aria-label="Close dialog"
+                   md-svg-icon="close_white"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
 
-    <!-- Appointment Start Date and Time -->
-    <div layout="row" layout-wrap>
+    <md-dialog-content>
+      <div class="md-dialog-content">
 
-      <md-input-container flex>
-        <label>Time</label>
-        <md-select ng-model="newAppointment.startTime"
-                   aria-label="Appointment Start Time">
-          <md-option ng-repeat="time in vm.bookingTimes">
-            {{ time.name }}
-          </md-option>
-        </md-select>
-      </md-input-container>
+        <!-- Title -->
+        <div layout layout-sm="column">
+          <md-input-container flex>
+            <label>Title</label>
+            <input ng-model='newAppointment.title'
+                   ng-required="true"
+                   rm-focus>
+          </md-input-container>
+        </div>
 
-    </div>
+        <!--Date-->
+        <div layout="row" layout-wrap>
+          <md-datepicker ng-model="newAppointment.start"
+                         ng-required="true"
+                         md-placeholder="Date"></md-datepicker>
+        </div>
 
-    <!-- Actions -->
-    <md-card-actions layout="row" layout-align="center center">
-      <!-- Save -->
+        <!-- Appointment Time -->
+        <div layout="row" layout-wrap>
+
+          <md-input-container flex>
+            <label>Time</label>
+            <md-select ng-model="newAppointment.startTime"
+                       ng-required="true"
+                       aria-label="Appointment Start Time">
+              <md-option ng-repeat="time in vm.bookingTimes">
+                {{ time.name }}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+        </div>
+
+      </div>
+
+    </md-dialog-content>
+
+    <!-- Buttons -->
+    <md-dialog-actions layout="row">
+      <span flex></span>
       <md-button type='submit'
                  md-no-ink class="md-primary">Save Appointment</md-button>
-    </md-card-actions>
+      <span flex></span>
+    </md-dialog-actions>
 
   </form>
-
-</md-content>
+</md-dialog>

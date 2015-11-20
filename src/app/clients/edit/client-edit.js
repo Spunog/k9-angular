@@ -43,14 +43,14 @@
 
         var confirm = $mdDialog.confirm()
                                .title('Are you sure you would like to delete this client?')
-                               .content('Deleting the client will remove all associated records.')
+                               .textContent('Deleting the client will remove all associated records.')
                                .ok('Cancel')
                                .cancel('Delete Client');
 
         $mdDialog.show(confirm).then(function(){
-          //Default Confirm is to cancel delete
+          // Default Confirm is to cancel delete
         }, function() {
-          //Delete Client
+          // Delete Client
           ClientsModel.deleteClient(client)
                       .then(function () {
                         returnToClients(true);

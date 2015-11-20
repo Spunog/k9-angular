@@ -30,7 +30,7 @@
 
     })
 
-    .controller("DashboardController",function DashboardCtrl(NavModel,$compile,calendarConfig,CalendarEventsModel){
+    .controller("DashboardController",function DashboardCtrl(NavModel,$compile,calendarConfig,CalendarEventsModel, $mdDialog, $state){
 
       var vm = this;
 
@@ -48,8 +48,23 @@
 
       //Custom Events
       vm.calendar.dayClick = function(date, jsEvent, view) {
-                              vm.alertMessage = 'Day was clicked';
-                             };
+
+        console.log(date);
+
+        $mdDialog.show({
+          controller    : 'CreateAppointmentController as vm',
+          templateUrl   : 'app/dashboard/create/appointment-create.tmpl.html',
+          parent        :  angular.element(document.body),
+          targetEvent   : jsEvent,
+          clickOutsideToClose:true
+        })
+        .then(function(answer) {
+          $state.go('k9.dashboard', {},{ reload: true });
+        }, function() {
+          // Cancelled
+        });
+
+      };
 
       // Date Clicked
       vm.calendar.eventClick = function( date, jsEvent, view){

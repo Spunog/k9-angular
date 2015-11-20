@@ -8,7 +8,7 @@
 
     //State Providers
     $stateProvider.state('k9.dashboard.create',{
-      url: '/dashboard/create/appointment',
+      url: '/create/appointment',
       views: {
                 'main@' : {
                             controller: 'CreateAppointmentController as vm',
@@ -19,7 +19,7 @@
 
   })
 
-  .controller('CreateAppointmentController', function($state, $stateParams,CalendarEventsModel) {
+  .controller('CreateAppointmentController', function($state, $stateParams,CalendarEventsModel, $mdDialog) {
     var vm = this;
 
     //Private
@@ -29,10 +29,15 @@
       };
     }
 
+    function createAppointmentCancel(){
+      console.log('cancelling...');
+      $mdDialog.cancel();
+    }
+
     function createAppointment(appointment){
       CalendarEventsModel.createAppointment(appointment)
                          .then(function (appointment) {
-                            $state.go('k9.dashboard', {},{ reload: true });
+                            $mdDialog.hide();
                          });
     }
 
@@ -46,6 +51,9 @@
 
     // Create Appointment
     vm.createAppointment = createAppointment;
+
+    //Cancel Creation
+    vm.createAppointmentCancel = createAppointmentCancel;
 
     // On Load
     resetForm();
