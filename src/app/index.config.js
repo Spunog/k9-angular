@@ -4,6 +4,11 @@
   angular
     .module('k9')
     .config(config)
+    .config(function($mdDateLocaleProvider) {
+        $mdDateLocaleProvider.formatDate = function(date) {
+           return moment(date).format('DD-MM-YYYY');
+        };
+    })
     .config(function($mdThemingProvider, $mdIconProvider){
 
         $mdIconProvider
