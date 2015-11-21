@@ -1,6 +1,7 @@
 <!-- Client Create -->
 <md-dialog class='appointmentDialog' aria-label="Create Appointment"  ng-cloak>
 
+
   <form role="form"
         name='add-appointment-form'
         ng-submit='vm.createAppointment(vm.newAppointment)'>
@@ -59,15 +60,13 @@
 
     </md-dialog-content>
 
-    <!-- Buttons -->
+    <!-- Save -->
     <md-dialog-actions layout="row">
-      <md-button type='button'
-                 class="md-warn"
-                 md-no-ink>Delete Appointment</md-button>
       <span flex></span>
       <md-button type='submit'
-                 class="md-primary md-raised"
+                 class="md-primary"
                  md-no-ink>Save Appointment</md-button>
+      <span flex></span>
     </md-dialog-actions>
 
   </form>

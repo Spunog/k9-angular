@@ -49,13 +49,16 @@
       //Custom Events
       vm.calendar.dayClick = function(date, jsEvent, view) {
 
+        var calendarEvent = angular.copy(CalendarEventsModel.newCalendarEvent());
+        calendarEvent.start = date;
+
         $mdDialog.show({
           controller    : 'CreateAppointmentController as vm',
           templateUrl   : 'app/dashboard/create/appointment-create.tmpl.html',
           parent        :  angular.element(document.body),
           targetEvent   : jsEvent,
           clickOutsideToClose:true,
-          locals: {selectedDate: date}
+          locals: {selectedDate: calendarEvent}
         })
         .then(function(answer) {
           $state.go('k9.dashboard', {},{ reload: true });
@@ -68,6 +71,19 @@
       // Date Clicked
       vm.calendar.eventClick = function( date, jsEvent, view){
           vm.alertMessage = (date.title + ' was clicked ');
+          $mdDialog.show({
+            controller    : 'CreateAppointmentController as vm',
+            templateUrl   : 'app/dashboard/create/appointment-create.tmpl.html',
+            parent        :  angular.element(document.body),
+            targetEvent   : jsEvent,
+            clickOutsideToClose:true,
+            locals: {selectedDate: date}
+          })
+          .then(function(answer) {
+            $state.go('k9.dashboard', {},{ reload: true });
+          }, function() {
+            // Cancelled
+          });
       };
 
       // Remove Event
@@ -99,7 +115,7 @@
           $compile(element)(vm.calendar);
       };
 
-      //Setup References to Sources
+      // Setup References to Sources
       vm.eventSources = [vm.calendarEvents];
 
       // Refresh Calendar using Calendar Service Model
@@ -119,6 +135,7 @@
             angular.forEach(calendarEvents,function(event, key){
 
               var newEvent = {
+                id: event.id,
                 title: event.title,
                 start: event.start,
                 end: event.end,

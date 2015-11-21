@@ -34,10 +34,20 @@
     }
 
     function createAppointment(appointment){
-      CalendarEventsModel.createAppointment(appointment)
-                         .then(function (appointment) {
-                            $mdDialog.hide();
-                         });
+
+      if(appointment.id && appointment.id > 0){
+        CalendarEventsModel.updateAppointment(appointment)
+                           .then(function (appointment) {
+                              $mdDialog.hide();
+                           });
+      }else{
+        CalendarEventsModel.createAppointment(appointment)
+                           .then(function (appointment) {
+                              $mdDialog.hide();
+                           });
+      }
+
+
     }
 
     //
@@ -49,11 +59,12 @@
 
     // New Appointment Defaults
     vm.newAppointment = {
-      title: '',
-      start: selectedDate.toDate(),
-      startTime: {
-                    id    : moment().format("HH:00:00"),
-                    name  : moment().format("HH:00")
+      id: selectedDate.id,
+      title: selectedDate.title || '',
+      start: selectedDate.start.toDate(),
+      startTime:  {
+                    id    : moment().add(1,'hours').format("HH:00:00"),
+                    name  : moment().add(1,'hours').format("HH:00")
                  }
     };
 
