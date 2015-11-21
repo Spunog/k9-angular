@@ -19,7 +19,7 @@
 
   })
 
-  .controller('CreateAppointmentController', function($state, $stateParams,CalendarEventsModel, $mdDialog) {
+  .controller('CreateAppointmentController', function($state, $stateParams,CalendarEventsModel, $mdDialog, selectedDate) {
     var vm = this;
 
     //Private
@@ -30,7 +30,6 @@
     }
 
     function createAppointmentCancel(){
-      console.log('cancelling...');
       $mdDialog.cancel();
     }
 
@@ -47,7 +46,16 @@
 
     // Create Array of Booking Times
     vm.bookingTimes = CalendarEventsModel.getBookingTimes();
-    vm.selectedTime = { id: '02:30:00', name: '02:30' };
+
+    // New Appointment Defaults
+    vm.newAppointment = {
+      title: '',
+      start: selectedDate.toDate(),
+      startTime: {
+                    id    : moment().format("HH:00:00"),
+                    name  : moment().format("HH:00")
+                 }
+    };
 
     // Create Appointment
     vm.createAppointment = createAppointment;
@@ -55,9 +63,6 @@
     //Cancel Creation
     vm.createAppointmentCancel = createAppointmentCancel;
 
-    // On Load
-    resetForm();
-
-  }); // end create client ctrl
+  }); // end create appointment ctrl
 
 }()); // end use strict

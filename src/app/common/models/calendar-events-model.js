@@ -60,7 +60,7 @@
         var appointment = angular.copy(newAppointment);
 
         //Concat Start Date and Time
-        var start = concatDateAndTime(appointment.start,appointment.startTime);
+        var start = concatDateAndTime(appointment.start,appointment.startTime.name);
 
         return $http({
           method  : 'POST',
