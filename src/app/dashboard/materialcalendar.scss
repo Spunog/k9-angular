@@ -59,10 +59,16 @@ Colors: Use the following - https://www.google.com/design/spec/style/color.html#
   font-weight: bold !important;
 }
 
+.fc td:first-child {
+  border-left: none !important;
+}
+
 /* Remove the header border from Schedule */
 .fc td, .fc th {
   border-style: none !important;
-  border-width: 1px !important;
+  // border-collapse: collapse;
+  border-left: 1px solid #F2F2F2 !important;
+  // border-width: 1px !important;
   padding: 0 !important;
   vertical-align: top !important;
 }

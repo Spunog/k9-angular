@@ -37,16 +37,15 @@
 
       if(appointment.id && appointment.id > 0){
         CalendarEventsModel.updateAppointment(appointment)
-                           .then(function (appointment) {
-                              $mdDialog.hide();
+                           .then(function (response) {
+                              $mdDialog.hide(appointment);
                            });
       }else{
         CalendarEventsModel.createAppointment(appointment)
-                           .then(function (appointment) {
-                              $mdDialog.hide();
+                           .then(function (response) {
+                              $mdDialog.hide(appointment);
                            });
       }
-
 
     }
 
@@ -63,8 +62,8 @@
       title: selectedDate.title || '',
       start: selectedDate.start.toDate(),
       startTime:  {
-                    id    : moment().add(1,'hours').format("HH:00:00"),
-                    name  : moment().add(1,'hours').format("HH:00")
+                    id    : selectedDate.start.format("HH:00:00"),
+                    name  : selectedDate.start.format("HH:00")
                  }
     };
 

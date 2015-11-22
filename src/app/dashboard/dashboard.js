@@ -52,6 +52,13 @@
         var calendarEvent = angular.copy(CalendarEventsModel.newCalendarEvent());
         calendarEvent.start = date;
 
+        // If using month view there is no valid month, update to use next hour
+        if(view.name==='month'){
+          calendarEvent.start = calendarEvent.start
+                                             .startOf('day')
+                                             .hours(moment().hours() + 1);
+        }
+
         $mdDialog.show({
           controller    : 'CreateAppointmentController as vm',
           templateUrl   : 'app/dashboard/create/appointment-create.tmpl.html',
@@ -60,8 +67,8 @@
           clickOutsideToClose:true,
           locals: {selectedDate: calendarEvent}
         })
-        .then(function(answer) {
-          $state.go('k9.dashboard', {},{ reload: true });
+        .then(function(appointment) {
+          vm.refreshCalendar();
         }, function() {
           // Cancelled
         });
@@ -80,7 +87,7 @@
             locals: {selectedDate: date}
           })
           .then(function(answer) {
-            $state.go('k9.dashboard', {},{ reload: true });
+            vm.refreshCalendar();
           }, function() {
             // Cancelled
           });
@@ -101,11 +108,6 @@
         if(uiCalendarConfig.calendars[calendar]){
           uiCalendarConfig.calendars[calendar].fullCalendar('render');
         }
-      };
-
-      // Add Booking
-      vm.addBooking = function addBooking(){
-        vm.alertMessage = 'Add booking feature coming soon';
       };
 
       // Tooltip
