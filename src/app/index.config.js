@@ -25,7 +25,8 @@
           .icon("arrow_left" , "./assets/svg/arrow_left_24px.svg" , 24)
           .icon("more_vert"  , "./assets/svg/more_vert.svg"       , 24)
           .icon("delete_white","./assets/svg/ic_delete_white_24px.svg", 24)
-          .icon("close_white","./assets/svg/ic_close_white_24px.svg", 24);
+          .icon("close_white","./assets/svg/ic_close_white_24px.svg", 24)
+          .icon("pets_black","./assets/svg/ic_pets_black_24px.svg", 24);
 
         // Update the theme colors to use themes on font-icons
         $mdThemingProvider.theme('default')

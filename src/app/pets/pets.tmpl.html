@@ -1,0 +1,63 @@
+<!-- Pets -->
+
+<!-- Toolbar -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button" aria-label="Menu">
+      <md-icon md-svg-icon="menu"></md-icon>
+    </md-button>
+    <h2>
+      <span>Pets</span>
+    </h2>
+  </div>
+</md-toolbar>
+
+<!-- Main Content -->
+<md-content flex id="content">
+
+  <div class="pets-list">
+
+    <div class="top-search md-title">
+      <label>Search:
+        <input ng-model="petSearchText" focus="true">
+      </label>
+    </div>
+
+    <div ng-show='(petCtrl.pets | filter:petSearchText).length < 1'
+         class="alert alert-info text-center"
+         role="alert">
+         <p>
+           There are no pets yet. You can add your first pet by
+           clicking the Add Pet button below.
+         </p>
+    </div>
+
+    <div ng-hide='(petCtrl.pets | filter:petSearchText).length < 1'>
+
+      <md-content class='search-results' flex layout-padding>
+        <md-list-item ng-click="petCtrl.editPet(pet)"
+                      ng-repeat="pet in petCtrl.pets | filter:petSearchText">
+            <md-button class="md-icon-button" aria-label="Pet">
+              <md-icon md-svg-icon="pets_black"></md-icon>
+            </md-button>
+            <p>
+              {{ pet.name }}
+            </p>
+            <i class="material-icons">chevron_right</i>
+          </md-list-item>
+        </md-list>
+      </md-content>
+
+    </div> <!-- end pet results -->
+  </div> <!-- end pets list -->
+
+</md-content>
+
+<!-- Add New Pet -->
+<button class="md-fab md-fab-bottom-right md-button md-default-theme"
+        ui-sref='k9.pets.create'
+        aria-label="Add"
+        tabindex="0">
+  <md-icon md-svg-icon="add"></md-icon>
+  <md-tooltip>Add Pet</md-tooltip>
+</button>

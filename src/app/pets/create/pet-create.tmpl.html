@@ -1,0 +1,50 @@
+<!-- Pet Create -->
+
+<!-- Toolbar -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button ui-sref='k9.pets' class="md-icon-button" aria-label="Go Back">
+      <md-tooltip md-direction="bottom">Go back</md-tooltip>
+      <md-icon md-svg-icon="arrow_left"></md-icon>
+    </md-button>
+    <h2>
+      <span>Pets</span>
+    </h2>
+  </div>
+</md-toolbar>
+
+<!-- Main Content -->
+<md-content flex id="content">
+
+  <h1 class="md-display-1">New Pet</h1>
+
+  <form role="form"
+        name='add-pet-form'
+        ng-submit='createPetCtrl.createPet(newPet)'>
+
+    <!-- First Name and Last Name -->
+    <div layout layout-sm="column">
+      <md-input-container flex>
+        <label>Name</label>
+        <input ng-model='newPet.name'
+               ng-required="true"
+               rm-focus>
+        <div ng-show="add-pet-form.name.$dirty"
+             ng-messages="add-pet-form.name.$error">
+          <div ng-message="required">
+            A name must be entered
+          </div>
+        </div>
+      </md-input-container>
+    </div>
+
+    <!-- Actions -->
+    <md-card-actions layout="row" layout-align="center center">
+      <!-- Save -->
+      <md-button type='submit'
+                 md-no-ink class="md-primary">Save Pet</md-button>
+    </md-card-actions>
+
+  </form>
+
+</md-content>

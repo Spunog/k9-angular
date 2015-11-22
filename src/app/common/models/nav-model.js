@@ -21,7 +21,8 @@
     //Default values
     var menuItems = [
       menuItem('Dashboard','k9.dashboard','home'),
-      menuItem('Clients','k9.clients','face')
+      menuItem('Clients','k9.clients','face'),
+      menuItem('Pets','k9.pets','face')
     ];
 
     self.menuItem = function menuItem(title,sref){

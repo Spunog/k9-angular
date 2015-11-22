@@ -15,15 +15,19 @@
       'toastr',
       'k9.navigation',
       'k9.login',
+      'ui.calendar',
+      'k9.models.calendar_events',
       'k9.dashboard',
       'k9.appointment.create',
+      'ui.router.title',
       'k9.models.clients',
-      'k9.models.calendar_events',
       'k9.clients',
       'k9.clients.create',
       'k9.clients.edit',
-      'ui.calendar',
-      'ui.router.title'
+      'k9.models.pets',
+      'k9.pets',
+      'k9.pets.create',
+      'k9.pets.edit'
     ]);
 
 })();
