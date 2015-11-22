@@ -5,44 +5,44 @@
 
   .service('NavModel', function(){
 
-    var self = this;
+    var vm = this;
     var currentItem;
 
-    var menuItem = function menuItem(title,sref,avatar){
+    var menuItem = function menuItem(title,sref,icon){
       // must be a nicer way to do this, feels wrong but not found it yet
       // only purpose is to make creating new object shorter later
       return {
         title : title,
         sref : sref,
-        avatar : avatar
+        icon : icon
       };
     };
 
     //Default values
     var menuItems = [
-      menuItem('Dashboard','k9.dashboard','home'),
+      menuItem('Dashboard','k9.dashboard','dashboard'),
       menuItem('Clients','k9.clients','face'),
-      menuItem('Pets','k9.pets','face')
+      menuItem('Pets','k9.pets','paw')
     ];
 
-    self.menuItem = function menuItem(title,sref){
+    vm.menuItem = function menuItem(title,sref){
       return menuItem;
     };
 
-    self.menuIsSelected = function menuIsSelected(menuItem){
+    vm.menuIsSelected = function menuIsSelected(menuItem){
       if(!currentItem) return false; // in case there is no current item
       return (menuItem.title === currentItem.title) ? true : false;
     };
 
-    self.getMenuItems = function getMenuItems(){
+    vm.getMenuItems = function getMenuItems(){
       return menuItems;
     };
 
-    self.getCurrentItem = function getCurrentItem(){
+    vm.getCurrentItem = function getCurrentItem(){
       return currentItem;
     };
 
-    self.setCurrentItem = function setCurrentItem(menuItem){
+    vm.setCurrentItem = function setCurrentItem(menuItem){
       currentItem = menuItem;
     };
 

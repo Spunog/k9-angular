@@ -20,7 +20,7 @@
                                templateUrl: 'app/pets/pets.tmpl.html'
                              },
                    'nav@' : {
-                               controller: 'NavigationController as navCtrl',
+                               controller: 'NavigationController as vm',
                                templateUrl: 'app/nav/nav.tmpl.html'
                              }
                 },

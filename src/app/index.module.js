@@ -12,6 +12,7 @@
       'ngResource',
       'ui.router',
       'ngMaterial',
+      'ngMdIcons',
       'toastr',
       'k9.navigation',
       'k9.login',

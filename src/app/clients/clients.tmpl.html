@@ -4,7 +4,7 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Menu">
-      <md-icon md-svg-icon="menu"></md-icon>
+      <ng-md-icon icon="menu" size="24"></ng-md-icon>
     </md-button>
     <h2>
       <span>Clients</span>
@@ -37,13 +37,13 @@
       <md-content class='search-results' flex layout-padding>
         <md-list-item ng-click="clientCtrl.editClient(client)"
                       ng-repeat="client in clientCtrl.clients | filter:clientSearchText">
-            <i class="material-icons md-48 md-avatar">face</i>
+            <ng-md-icon icon="face" size="24"></ng-md-icon>
             <p>
               {{ client.first_name }} {{ client.last_name }}
               <br>
               Dogs: {{ client.dogs.length }}
             </p>
-            <i class="material-icons">chevron_right</i>
+            <ng-md-icon icon="chevron_right" size="24"></ng-md-icon>
           </md-list-item>
         </md-list>
       </md-content>
@@ -58,6 +58,6 @@
         ui-sref='k9.clients.create'
         aria-label="Add"
         tabindex="0">
-  <md-icon md-svg-icon="add"></md-icon>
+  <ng-md-icon icon="person_add" size="24"></ng-md-icon>
   <md-tooltip>Add Client</md-tooltip>
 </button>

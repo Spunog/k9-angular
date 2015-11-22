@@ -4,7 +4,7 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Menu">
-      <md-icon md-svg-icon="menu"></md-icon>
+      <ng-md-icon icon="menu" size="24"></ng-md-icon>
     </md-button>
     <h2>
       <span>Pets</span>
@@ -35,11 +35,12 @@
     <div ng-hide='(petCtrl.pets | filter:petSearchText).length < 1'>
 
       <md-content class='search-results' flex layout-padding>
+
         <md-list-item ng-click="petCtrl.editPet(pet)"
                       ng-repeat="pet in petCtrl.pets | filter:petSearchText">
-            <md-button class="md-icon-button" aria-label="Pet">
-              <md-icon md-svg-icon="pets_black"></md-icon>
-            </md-button>
+
+            <ng-md-icon icon="paw" size="24"></ng-md-icon>
+
             <p>
               {{ pet.name }}
             </p>
@@ -57,7 +58,7 @@
 <button class="md-fab md-fab-bottom-right md-button md-default-theme"
         ui-sref='k9.pets.create'
         aria-label="Add"
-        tabindex="0">
-  <md-icon md-svg-icon="add"></md-icon>
+        tabindex="0">  
+  <ng-md-icon icon="add" size="24"></ng-md-icon>
   <md-tooltip>Add Pet</md-tooltip>
 </button>
