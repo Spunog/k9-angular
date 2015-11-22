@@ -10,10 +10,23 @@
       <div class="md-toolbar-tools">
         <h2>Create Appointment</h2>
         <span flex></span>
+        <md-button type='button'
+                   class="md-icon-button"
+                   aria-label="Delete Client"
+                   ng-show='vm.newAppointment.id && vm.newAppointment.id > 0'
+                   ng-click='vm.deleteAppointment(vm.newAppointment)'>
+          <md-tooltip md-direction="bottom">
+            Delete Appointment
+          </md-tooltip>
+          <md-icon md-svg-icon="delete_white"></md-icon>
+        </md-button>
         <md-button class="md-icon-button"
                    ng-click="vm.createAppointmentCancel()">
           <md-icon aria-label="Close dialog"
                    md-svg-icon="close_white"></md-icon>
+           <md-tooltip md-direction="bottom">
+             Close
+           </md-tooltip>
         </md-button>
       </div>
     </md-toolbar>

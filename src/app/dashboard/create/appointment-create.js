@@ -49,6 +49,13 @@
 
     }
 
+    function deleteAppointment(appointment){
+      CalendarEventsModel.deleteAppointment(appointment)
+                         .then(function (response) {
+                            $mdDialog.hide(appointment);
+                         });
+    }
+
     //
     // Public
     //
@@ -69,6 +76,9 @@
 
     // Create Appointment
     vm.createAppointment = createAppointment;
+
+    // Delete appointment
+    vm.deleteAppointment = deleteAppointment;
 
     //Cancel Creation
     vm.createAppointmentCancel = createAppointmentCancel;

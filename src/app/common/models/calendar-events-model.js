@@ -139,6 +139,19 @@
 
       };
 
+      // Delete
+      vm.deleteAppointment = function deleteAppointment(appointment){
+        return $http({
+          method  : 'DELETE',
+          url     : URLS.APPOINTMENTS + '/' + appointment.id
+        }).then(function (response) {
+          //Remove from in memory array
+          _.remove(calendarEvents, function(calEvents) {
+            return calEvents.id == appointment.id;
+          });
+        });
+      };
+
       // Index
       vm.getCalendarEvents = function getCalendarEvents(){
         return (calendarEvents) ? $q.when(calendarEvents) : $http.get(URLS.APPOINTMENTS).then(cacheCalendarEvents);
