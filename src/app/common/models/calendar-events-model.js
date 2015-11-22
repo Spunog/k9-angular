@@ -36,6 +36,66 @@
                .add(minutes, 'minutes');
       }
 
+      function _updateAppointment(newAppointment,updateType){
+
+        var appointment = angular.copy(newAppointment);
+
+        //Concat Start Date and Time
+        var start = concatDateAndTime(appointment.start,appointment.startTime.name);
+
+        //New Record Vs Updating Record
+        var updateParams = {
+          methodx: 'POST',
+          url: URLS.APPOINTMENTS,
+          appointment: {
+            title  : appointment.title,
+            start  : start.format(),
+            end    : start.format() //calendarAppointment.end
+          }
+        };
+
+        if(updateType==='update'){
+          // Update existing record
+          updateParams.methodx = 'PUT';
+          updateParams.url = URLS.APPOINTMENTS + '/' + appointment.id;
+        }
+
+        //Call backend API and update/create
+        return $http({
+          method  : updateParams.methodx,
+          url     : updateParams.url,
+          data    : {
+                      appointment: updateParams.appointment
+                    }
+        }).then(function (response) {
+
+          var newAppointment = response.data.appointment;
+
+          // If user loads add page directly without
+          // going through the index then calendarEvents was never retrieved
+          if(calendarEvents){
+
+            if(updateType==='update'){
+              // Find existing record and update details
+              var matchedCalendarEvent = _.find(calendarEvents, function (c) {
+                  return c.id == parseInt(newAppointment.id, 10);
+              });
+              matchedCalendarEvent.title        =   newAppointment.title;
+              matchedCalendarEvent.description  =   newAppointment.description;
+              matchedCalendarEvent.note         =   newAppointment.note;
+              matchedCalendarEvent.start        =   newAppointment.start;
+              matchedCalendarEvent.end          =   newAppointment.end;
+            }else{
+              //New Appointment add to events list
+              calendarEvents.push(newAppointment);
+            }
+
+          }
+
+        });
+
+      }
+
       //
       // Public
       //
@@ -69,74 +129,12 @@
 
       // Create
       vm.createAppointment = function createAppointment(newAppointment){
-
-        var appointment = angular.copy(newAppointment);
-
-        //Concat Start Date and Time
-        var start = concatDateAndTime(appointment.start,appointment.startTime.name);
-
-        return $http({
-          method  : 'POST',
-          url     : URLS.APPOINTMENTS,
-          data    : {
-                      appointment: {
-                        title  : appointment.title,
-                        start  : start.format(),
-                        end    : start.format() //calendarAppointment.end
-                      }
-                    }
-        }).then(function (response) {
-          var newAppointment = response.data.appointment;
-
-          // If user loads add page directly without going through the index
-          // then calendarEvents may never have been retrieved
-          if(calendarEvents){
-            calendarEvents.push(newAppointment);
-          }
-
-        });
-
+        return _updateAppointment(newAppointment,'create');
       };
 
       // Update
       vm.updateAppointment = function updateAppointment(newAppointment){
-
-        var appointment = angular.copy(newAppointment);
-
-        //Concat Start Date and Time
-        var start = concatDateAndTime(appointment.start,appointment.startTime.name);
-
-        return $http({
-          method  : 'PUT',
-          url     : URLS.APPOINTMENTS + '/' + appointment.id,
-          data    : {
-                      appointment: {
-                        title  : appointment.title,
-                        start  : start.format(),
-                        end    : start.format() //calendarAppointment.end
-                      }
-                    }
-        }).then(function (response) {
-          var newAppointment = response.data.appointment;
-
-          // If user loads add page directly without
-          // going through the index then calendarEvents was never retrieved
-          if(calendarEvents){
-
-            var matchedCalendarEvent = _.find(calendarEvents, function (c) {
-                return c.id == parseInt(newAppointment.id, 10);
-            });
-
-            matchedCalendarEvent.title        =   newAppointment.title;
-            matchedCalendarEvent.description  =   newAppointment.description;
-            matchedCalendarEvent.note         =   newAppointment.note;
-            matchedCalendarEvent.start        =   newAppointment.start;
-            matchedCalendarEvent.end          =   newAppointment.end;
-
-          }
-
-        });
-
+        return _updateAppointment(newAppointment,'update');
       };
 
       // Delete
