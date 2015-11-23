@@ -9,7 +9,7 @@
         url: '/login',
         views: {
                   'main@' : {
-                              controller: 'LoginController as loginCtrl',
+                              controller: 'LoginController as vm',
                               templateUrl: 'app/login/login.tmpl.html'
                             }
                }
@@ -19,32 +19,32 @@
     })
 
     .controller("LoginController",function LoginCtrl(auth,$state){
-      var self = this,
+      var vm = this,
           isSigningIn;
 
-      self.login = function login(user){
+      vm.login = function login(user){
         var promise = auth.login(user);
         isSigningIn = true;
-        promise.then(self.success, self.error);
+        promise.then(vm.success, vm.error);
       };
 
-      self.success = function loginSuccess(response){
+      vm.success = function loginSuccess(response){
         localStorage.setItem('auth_token',response.data.token);
         localStorage.setItem('auth_email',response.data.email);
         isSigningIn = false;
         $state.go('k9.dashboard');
       };
 
-      self.error = function loginSuccess(response){
+      vm.error = function loginSuccess(response){
         isSigningIn = false;
-        self.wrongCredentials = true;
+        vm.wrongCredentials = true;
       };
 
-      self.isSigningIn = function getSubmitMessage(){
+      vm.isSigningIn = function getSubmitMessage(){
         return isSigningIn;
       };
 
-      self.getSubmitMessage = function getSubmitMessage(){
+      vm.getSubmitMessage = function getSubmitMessage(){
         return (isSigningIn) ? ' Signing In. Please wait...' : 'Sign In' ;
       };
 
@@ -68,18 +68,18 @@
 
     .service('auth', function($http, appConfig){
 
-      var self = this;
+      var vm = this;
 
-      self.isLoggedIn = function isLoggedIn(){
+      vm.isLoggedIn = function isLoggedIn(){
         return (localStorage.getItem('auth_token')) ? true : false;
       };
 
-      self.logout = function logout(){
+      vm.logout = function logout(){
         // return $http.delete('');
         return 1;
       };
 
-      self.login = function login(user){
+      vm.login = function login(user){
 
         return $http.post(appConfig.API.baseURL + 'login', {
           user: {
