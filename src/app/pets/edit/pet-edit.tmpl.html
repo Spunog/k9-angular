@@ -5,7 +5,10 @@
   <div class="md-toolbar-tools">
     <md-button ui-sref='k9.pets' class="md-icon-button" aria-label="Go Back">
       <md-tooltip md-direction="bottom">Go back</md-tooltip>
-      <ng-md-icon icon="keyboard_backspace" size="24"></ng-md-icon>
+      <ng-md-icon ng-click='editPetCtrl.clickIconMorph()'
+                  icon="{{editPetCtrl.clickIcon}}"
+                  options='{ "easing": "quad-in", "duration": 500 }'
+                  size="24"></ng-md-icon>
     </md-button>
     <h2>
       <span>Pets</span>

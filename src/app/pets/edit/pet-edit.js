@@ -24,6 +24,13 @@
   .controller('EditPetController', function ($state, $stateParams, PetsModel,$mdDialog) {
       var self = this;
 
+
+      //Menu Icon Animation
+      self.clickIcon = 'menu';
+      setTimeout(function(){
+         self.clickIcon = 'keyboard_backspace';
+      }, 1);
+
       self.editedPet = PetsModel.getCurrentPet();
 
       function returnToPets(reload) {

@@ -36,6 +36,12 @@
 
        var self = this;
 
+       //Menu Icon Animation
+       self.clickIcon = 'keyboard_backspace';
+       setTimeout(function(){
+          self.clickIcon = 'menu';
+       }, 1);
+
        //Update Navigation State
        NavModel.setCurrentItem({
            title: 'Pets',

@@ -6,7 +6,7 @@
     .config(routerConfig);
 
   /** @ngInject */
-  function routerConfig($stateProvider, $urlRouterProvider,$locationProvider) {
+  function routerConfig($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $stateProvider.state('k9',{
       url: '',

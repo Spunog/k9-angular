@@ -4,7 +4,10 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Menu">
-      <ng-md-icon icon="menu" size="24"></ng-md-icon>
+      <ng-md-icon ng-click='petCtrl.clickIconMorph()'
+                  icon="{{ petCtrl.clickIcon }}"
+                  options='{ "easing": "quad-out", "duration": 500 }'
+                  size="24"></ng-md-icon>
     </md-button>
     <h2>
       <span>Pets</span>
@@ -58,7 +61,7 @@
 <button class="md-fab md-fab-bottom-right md-button md-default-theme"
         ui-sref='k9.pets.create'
         aria-label="Add"
-        tabindex="0">  
+        tabindex="0">
   <ng-md-icon icon="add" size="24"></ng-md-icon>
   <md-tooltip>Add Pet</md-tooltip>
 </button>
