@@ -23,7 +23,7 @@
       </label>
     </div>
 
-    <div ng-show='(clientCtrl.clients | filter:clientSearchText).length < 1'
+    <div ng-show='(vm.clients | filter:clientSearchText).length < 1'
          class="alert alert-info text-center"
          role="alert">
          <p>
@@ -32,11 +32,11 @@
          </p>
     </div>
 
-    <div ng-hide='(clientCtrl.clients | filter:clientSearchText).length < 1'>
+    <div ng-hide='(vm.clients | filter:clientSearchText).length < 1'>
 
       <md-content class='search-results' flex layout-padding>
-        <md-list-item ng-click="clientCtrl.editClient(client)"
-                      ng-repeat="client in clientCtrl.clients | filter:clientSearchText">
+        <md-list-item ng-click="vm.editClient(client)"
+                      ng-repeat="client in vm.clients | filter:clientSearchText">
             <ng-md-icon icon="face" size="24"></ng-md-icon>
             <p>
               {{ client.first_name }} {{ client.last_name }}

@@ -12,7 +12,7 @@
       url: '/client/create',
       views: {
                 'main@' : {
-                            controller: 'CreateClientController as createClientCtrl',
+                            controller: 'CreateClientController as vm',
                             templateUrl: 'app/clients/create/client-create.tmpl.html'
                           }
              }
@@ -21,7 +21,7 @@
   })
 
   .controller('CreateClientController', function($state, $stateParams, ClientsModel) {
-    var self = this;
+    var vm = this;
 
     // Private
     function returnToClients(reload){
@@ -41,15 +41,15 @@
     }
 
     function resetForm(){
-      self.newClient = {
+      vm.newClient = {
         first_name: '',
         last_name: ''
       };
     }
 
     // Public
-    self.cancel = cancelCreating;
-    self.createClient = createClient;
+    vm.cancel = cancelCreating;
+    vm.createClient = createClient;
 
     // On Load
     resetForm();

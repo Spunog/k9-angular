@@ -13,7 +13,7 @@
       url: '/pet/:petID/edit',
       views: {
                 'main@' : {
-                            controller: 'EditPetController as editPetCtrl',
+                            controller: 'EditPetController as vm',
                             templateUrl: 'app/pets/edit/pet-edit.tmpl.html'
                           }
              }
@@ -22,16 +22,16 @@
   })
 
   .controller('EditPetController', function ($state, $stateParams, PetsModel,$mdDialog) {
-      var self = this;
 
+      var vm = this;
 
       //Menu Icon Animation
-      self.clickIcon = 'menu';
+      vm.clickIcon = 'menu';
       setTimeout(function(){
-         self.clickIcon = 'keyboard_backspace';
+         vm.clickIcon = 'keyboard_backspace';
       }, 1);
 
-      self.editedPet = PetsModel.getCurrentPet();
+      vm.editedPet = PetsModel.getCurrentPet();
 
       function returnToPets(reload) {
         PetsModel.resetCurrentPet();
@@ -39,14 +39,14 @@
       }
 
       function updatePet() {
-        self.pet = angular.copy(self.editedPet);
-        PetsModel.updatePet(self.editedPet)
+        vm.pet = angular.copy(vm.editedPet);
+        PetsModel.updatePet(vm.editedPet)
                     .then(function (pets) {
                       returnToPets(true);
                     });
       }
 
-      self.deletePet = function deletePet(pet){
+      vm.deletePet = function deletePet(pet){
 
         var confirm = $mdDialog.confirm()
                                .title('Are you sure you would like to delete this dog?')
@@ -79,8 +79,8 @@
                       }
                   });
 
-      self.cancelEditing = cancelEditing;
-      self.updatePet = updatePet;
+      vm.cancelEditing = cancelEditing;
+      vm.updatePet = updatePet;
 
   }); // end edit pet ctrl
 

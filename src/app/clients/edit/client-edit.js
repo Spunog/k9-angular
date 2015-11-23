@@ -22,9 +22,9 @@
   })
 
   .controller('EditClientController', function ($state, $stateParams, ClientsModel,$mdDialog) {
-      var self = this;
+      var vm = this;
 
-      self.editedClient = ClientsModel.getCurrentClient();
+      vm.editedClient = ClientsModel.getCurrentClient();
 
       function returnToClients(reload) {
         ClientsModel.resetCurrentClient();
@@ -32,14 +32,14 @@
       }
 
       function updateClient() {
-        self.client = angular.copy(self.editedClient);
-        ClientsModel.updateClient(self.editedClient)
+        vm.client = angular.copy(vm.editedClient);
+        ClientsModel.updateClient(vm.editedClient)
                     .then(function (clients) {
                       returnToClients(true);
                     });
       }
 
-      self.deleteClient = function deleteClient(client){
+      vm.deleteClient = function deleteClient(client){
 
         var confirm = $mdDialog.confirm()
                                .title('Are you sure you would like to delete this client?')
@@ -72,8 +72,8 @@
                       }
                   });
 
-      self.cancelEditing = cancelEditing;
-      self.updateClient = updateClient;
+      vm.cancelEditing = cancelEditing;
+      vm.updateClient = updateClient;
 
   }); // end edit client ctrl
 

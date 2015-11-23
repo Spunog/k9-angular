@@ -16,7 +16,7 @@
          url: '/clients',
          views: {
                    'main@' : {
-                               controller: 'ClientController as clientCtrl',
+                               controller: 'ClientController as vm',
                                templateUrl: 'app/clients/clients.tmpl.html'
                              },
                    'nav@' : {
@@ -34,7 +34,7 @@
 
      .controller("ClientController",function ClientCtrl(ClientsModel,NavModel,$state,$mdDialog){
 
-       var self = this;
+       var vm = this;
 
        //Update Navigation State
        NavModel.setCurrentItem({
@@ -42,26 +42,26 @@
            sref: 'k9.clients'
        });
 
-       self.isEditing = function isEditing(){
-         if(self.currentClient.first_name.length > 0){
+       vm.isEditing = function isEditing(){
+         if(vm.currentClient.first_name.length > 0){
            return 'col-md-7';
          }else{
            return 'col-md-12';
          }
        };
 
-       self.currentClient = ClientsModel.getCurrentClient();
+       vm.currentClient = ClientsModel.getCurrentClient();
 
        // Index
        var getClients = function getClients(){
          ClientsModel.getClients()
                      .then(function (clients) {
-                       self.clients = clients;
+                       vm.clients = clients;
                      });
        };
 
        // Go to edit
-       self.editClient = function editClient(client){
+       vm.editClient = function editClient(client){
          $state.go('k9.clients.edit', { clientID:client.id} );
        };
 

@@ -16,7 +16,7 @@
          url: '/pets',
          views: {
                    'main@' : {
-                               controller: 'PetController as petCtrl',
+                               controller: 'PetController as vm',
                                templateUrl: 'app/pets/pets.tmpl.html'
                              },
                    'nav@' : {
@@ -34,12 +34,12 @@
 
      .controller("PetController",function PetCtrl(PetsModel,NavModel,$state,$mdDialog){
 
-       var self = this;
+       var vm = this;
 
        //Menu Icon Animation
-       self.clickIcon = 'keyboard_backspace';
+       vm.clickIcon = 'keyboard_backspace';
        setTimeout(function(){
-          self.clickIcon = 'menu';
+          vm.clickIcon = 'menu';
        }, 1);
 
        //Update Navigation State
@@ -48,30 +48,28 @@
            sref: 'k9.pets'
        });
 
-       self.isEditing = function isEditing(){
-         if(self.currentPet.name.length > 0){
+       vm.isEditing = function isEditing(){
+         if(vm.currentPet.name.length > 0){
            return 'col-md-7';
          }else{
            return 'col-md-12';
          }
        };
 
-       self.currentPet = PetsModel.getCurrentPet();
+       vm.currentPet = PetsModel.getCurrentPet();
 
        // Index
        var getPets = function getPets(){
          PetsModel.getPets()
                      .then(function (pets) {
-                       self.pets = pets;
+                       vm.pets = pets;
                      });
        };
 
        // Go to edit
-       self.editPet = function editPet(pet){
+       vm.editPet = function editPet(pet){
          $state.go('k9.pets.edit', { petID:pet.id} );
        };
-
-       self.test = 'Alan';
 
        // On Controller Load
        getPets();

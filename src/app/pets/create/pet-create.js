@@ -12,7 +12,7 @@
       url: '/pet/create',
       views: {
                 'main@' : {
-                            controller: 'CreatePetController as createPetCtrl',
+                            controller: 'CreatePetController as vm',
                             templateUrl: 'app/pets/create/pet-create.tmpl.html'
                           }
              }
@@ -21,7 +21,7 @@
   })
 
   .controller('CreatePetController', function($state, $stateParams, PetsModel) {
-    var self = this;
+    var vm = this;
 
     // Private
     function returnTopets(reload){
@@ -41,14 +41,14 @@
     }
 
     function resetForm(){
-      self.newPet = {
+      vm.newPet = {
         name: ''
       };
     }
 
     // Public
-    self.cancel = cancelCreating;
-    self.createPet = createPet;
+    vm.cancel = cancelCreating;
+    vm.createPet = createPet;
 
     // On Load
     resetForm();

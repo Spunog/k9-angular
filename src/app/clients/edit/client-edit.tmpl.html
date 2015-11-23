@@ -14,7 +14,7 @@
     <md-button type='button'
                class="md-icon-button"
                aria-label="Delete Client"
-               ng-click='editClientCtrl.deleteClient(editClientCtrl.editedClient)'>
+               ng-click='vm.deleteClient(vm.editedClient)'>
       <md-tooltip md-direction="bottom">
         Delete Client
       </md-tooltip>
@@ -31,13 +31,13 @@
   </h1>
 
   <form role="form"
-        name='update-client-form' ng-submit='editClientCtrl.updateClient(editClientCtrl.editedClient)'>
+        name='update-client-form' ng-submit='vm.updateClient(vm.editedClient)'>
 
     <!-- First Name and Last Name -->
     <div layout layout-sm="column">
       <md-input-container flex>
         <label>First name</label>
-        <input ng-model='editClientCtrl.editedClient.first_name'
+        <input ng-model='vm.editedClient.first_name'
                ng-required="true"
                rm-focus>
         <div ng-show="update-client-form.firstName.$dirty"
@@ -49,7 +49,7 @@
       </md-input-container>
       <md-input-container flex>
         <label>Last name</label>
-        <input ng-model='editClientCtrl.editedClient.last_name'
+        <input ng-model='vm.editedClient.last_name'
                ng-required="true"
                rm-focus>
         <div ng-show="update-client-form.lastName.$dirty"

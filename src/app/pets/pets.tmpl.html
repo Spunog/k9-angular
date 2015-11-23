@@ -4,8 +4,8 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Menu">
-      <ng-md-icon ng-click='petCtrl.clickIconMorph()'
-                  icon="{{ petCtrl.clickIcon }}"
+      <ng-md-icon ng-click='vm.clickIconMorph()'
+                  icon="{{ vm.clickIcon }}"
                   options='{ "easing": "quad-out", "duration": 500 }'
                   size="24"></ng-md-icon>
     </md-button>
@@ -26,7 +26,7 @@
       </label>
     </div>
 
-    <div ng-show='(petCtrl.pets | filter:petSearchText).length < 1'
+    <div ng-show='(vm.pets | filter:petSearchText).length < 1'
          class="alert alert-info text-center"
          role="alert">
          <p>
@@ -35,15 +35,13 @@
          </p>
     </div>
 
-    <div ng-hide='(petCtrl.pets | filter:petSearchText).length < 1'>
+    <div ng-hide='(vm.pets | filter:petSearchText).length < 1'>
 
       <md-content class='search-results' flex layout-padding>
 
-        <md-list-item ng-click="petCtrl.editPet(pet)"
-                      ng-repeat="pet in petCtrl.pets | filter:petSearchText">
-
+        <md-list-item ng-click="vm.editPet(pet)"
+                      ng-repeat="pet in vm.pets | filter:petSearchText">
             <ng-md-icon icon="paw" size="24"></ng-md-icon>
-
             <p>
               {{ pet.name }}
             </p>
