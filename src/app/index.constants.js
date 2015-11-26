@@ -8,6 +8,7 @@
     .constant('appConfig', {
       'API' : {
                   'baseURL' : 'http://api.k9.dev/v1/'
+                  //'baseURL' : 'http://api.groomk9.com/v1/'
               }
     })
     .constant('calendarConfig', {

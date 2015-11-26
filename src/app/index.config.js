@@ -17,6 +17,12 @@
               .accentPalette('amber')
               .warnPalette('red')
               .backgroundPalette('grey');
+
+        $mdThemingProvider.theme('night')
+              .primaryPalette("pink")
+              .accentPalette('amber')
+              .warnPalette('red')
+              .backgroundPalette('grey');
   });
 
   /** @ngInject */

@@ -22,7 +22,10 @@
     var menuItems = [
       menuItem('Dashboard','k9.dashboard','dashboard'),
       menuItem('Clients','k9.clients','face'),
-      menuItem('Pets','k9.pets','paw')
+      menuItem('Pets','k9.pets','paw'),
+      menuItem('Reports','k9.dashboard','my_library_books'), //assessment
+      menuItem('Social Media','k9.dashboard','facebook-box'),
+      menuItem('Settings','k9.dashboard','settings'),
     ];
 
     vm.menuItem = function menuItem(title,sref){
