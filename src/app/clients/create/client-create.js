@@ -5,23 +5,15 @@
     'ui.router',
     'k9.models.clients'
   ])
-  .config(function ($stateProvider) {
-
-    //State Providers
-    $stateProvider.state('k9.clients.create',{
-      url: '/client/create',
-      views: {
-                'main@' : {
-                            controller: 'CreateClientController as vm',
-                            templateUrl: 'app/clients/create/client-create.tmpl.html'
-                          }
-             }
-    });
-
-  })
 
   .controller('CreateClientController', function($state, $stateParams, ClientsModel) {
+
+    //Public
     var vm = this;
+    vm.cancel = cancelCreating;
+    vm.createClient = createClient;
+
+    resetForm();
 
     // Private
     function returnToClients(reload){
@@ -35,8 +27,12 @@
     function createClient(client){
       ClientsModel.createClient(client)
                   .then(function (clients) {
-                    ClientsModel.addClient(clients.data.client);
-                    $state.go('k9.clients', {clientID: clients.data.client.id}, { reload: true });
+                      ClientsModel.addClient(clients.data.client);
+                      $state.go(
+                                  'k9.clients',
+                                  {clientID: clients.data.client.id},
+                                  { reload: true }
+                                );
                   });
     }
 
@@ -47,13 +43,22 @@
       };
     }
 
-    // Public
-    vm.cancel = cancelCreating;
-    vm.createClient = createClient;
+  }) // end create client controller
 
-    // On Load
-    resetForm();
+  //Routes
+  .config(function ($stateProvider) {
 
-  }); // end create client ctrl
+    //State Providers
+    $stateProvider.state('k9.clients.create',{
+      url: '/client/create',
+      views: {
+                'main@' : {
+                            controller: 'CreateClientController as vm',
+                            templateUrl: 'app/clients/create/client-create.tmpl.html'
+                          }
+             }
+    });
+
+  });
 
 }()); // end use strict

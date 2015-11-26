@@ -3,50 +3,38 @@
 
   angular.module('k9.login',['ui.router','ngMessages'])
 
-    .config(function config($stateProvider){
-
-      $stateProvider.state('k9.login',{
-        url: '/login',
-        views: {
-                  'main@' : {
-                              controller: 'LoginController as vm',
-                              templateUrl: 'app/login/login.tmpl.html'
-                            }
-               }
-
-      });
-
-    })
-
     .controller("LoginController",function LoginCtrl(auth,$state){
-      var vm = this,
-          isSigningIn;
 
-      vm.login = function login(user){
+      //Public
+      var vm = this, isSigningIn;
+      vm.login              =   login;
+      vm.success            =   loginSuccess;
+      vm.error              =   loginError;
+      vm.isSigningIn        =   isSigningIn;
+      vm.getSubmitMessage   =   getSubmitMessage;
+
+      //Private
+      function login(user){
         var promise = auth.login(user);
         isSigningIn = true;
         promise.then(vm.success, vm.error);
-      };
+      }
 
-      vm.success = function loginSuccess(response){
+      function loginSuccess(response){
         localStorage.setItem('auth_token',response.data.token);
         localStorage.setItem('auth_email',response.data.email);
         isSigningIn = false;
         $state.go('k9.dashboard');
-      };
+      }
 
-      vm.error = function loginSuccess(response){
+      function loginError(response){
         isSigningIn = false;
         vm.wrongCredentials = true;
-      };
+      }
 
-      vm.isSigningIn = function getSubmitMessage(){
-        return isSigningIn;
-      };
-
-      vm.getSubmitMessage = function getSubmitMessage(){
+      function getSubmitMessage(){
         return (isSigningIn) ? ' Signing In. Please wait...' : 'Sign In' ;
-      };
+      }
 
     })
 
@@ -68,18 +56,22 @@
 
     .service('auth', function($http, appConfig){
 
-      var vm = this;
+      //Public
+      var vm          =   this;
+      vm.isLoggedIn   =   isLoggedIn;
+      vm.logout       =   logout;
+      vm.login        =   login;
 
-      vm.isLoggedIn = function isLoggedIn(){
+      //Private
+      function isLoggedIn(){
         return (localStorage.getItem('auth_token')) ? true : false;
-      };
+      }
 
-      vm.logout = function logout(){
-        // return $http.delete('');
+      function logout(){
         return 1;
-      };
+      }
 
-      vm.login = function login(user){
+      function login(user){
 
         return $http.post(appConfig.API.baseURL + 'login', {
           user: {
@@ -88,8 +80,23 @@
                 }
         });
 
-      };
+      }
 
-    }); //end LoginCtrl
+    }) //end Login Controller
+
+    .config(function config($stateProvider){
+
+      $stateProvider.state('k9.login',{
+        url: '/login',
+        views: {
+                  'main@' : {
+                              controller: 'LoginController as vm',
+                              templateUrl: 'app/login/login.tmpl.html'
+                            }
+               }
+
+      });
+
+    });
 
 }()); // end use strict

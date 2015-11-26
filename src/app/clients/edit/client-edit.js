@@ -6,25 +6,28 @@
     'k9.models.clients'
   ])
 
-  .config(function ($stateProvider,$httpProvider,$urlRouterProvider) {
-
-    //State Providers
-    $stateProvider.state('k9.clients.edit',{
-      url: '/client/:clientID/edit',
-      views: {
-                'main@' : {
-                            controller: 'EditClientController as editClientCtrl',
-                            templateUrl: 'app/clients/edit/client-edit.tmpl.html'
-                          }
-             }
-    });
-
-  })
-
   .controller('EditClientController', function ($state, $stateParams, ClientsModel,$mdDialog) {
-      var vm = this;
 
-      vm.editedClient = ClientsModel.getCurrentClient();
+      //Public
+      var vm = this;
+      vm.editedClient   =   ClientsModel.getCurrentClient();
+      vm.deleteClient   =   deleteClient;
+      vm.cancelEditing  =   cancelEditing;
+      vm.updateClient   =   updateClient;
+
+      getClientById();
+
+      //Private
+      function getClientById() {
+        ClientsModel.getClientById($stateParams.clientID)
+                    .then(function (client) {
+                        if (client) {
+                            ClientsModel.setCurrentClient(client);
+                        } else {
+                            returnToClients(true);
+                        }
+                    });
+      }
 
       function returnToClients(reload) {
         ClientsModel.resetCurrentClient();
@@ -32,14 +35,14 @@
       }
 
       function updateClient() {
-        vm.client = angular.copy(vm.editedClient);
+        var client = angular.copy(vm.editedClient);
         ClientsModel.updateClient(vm.editedClient)
                     .then(function (clients) {
                       returnToClients(true);
                     });
       }
 
-      vm.deleteClient = function deleteClient(client){
+      function deleteClient(client){
 
         var confirm = $mdDialog.confirm()
                                .title('Are you sure you would like to delete this client?')
@@ -57,24 +60,28 @@
                       });
         });
 
-      };
+      }
 
       function cancelEditing() {
           returnToClients(false);
       }
 
-      ClientsModel.getClientById($stateParams.clientID)
-                  .then(function (client) {
-                      if (client) {
-                          ClientsModel.setCurrentClient(client);
-                      } else {
-                          returnToClients(true);
-                      }
-                  });
+  }) // end edit client controller
 
-      vm.cancelEditing = cancelEditing;
-      vm.updateClient = updateClient;
+  //Routes
+  .config(function ($stateProvider,$httpProvider,$urlRouterProvider) {
 
-  }); // end edit client ctrl
+    //State Providers
+    $stateProvider.state('k9.clients.edit',{
+      url: '/client/:clientID/edit',
+      views: {
+                'main@' : {
+                            controller: 'EditClientController as vm',
+                            templateUrl: 'app/clients/edit/client-edit.tmpl.html'
+                          }
+             }
+    });
+
+  });
 
 }()); // end use strict

@@ -5,15 +5,70 @@
 
     .service('CalendarEventsModel', function(appConfig, $http, $q){
 
-      //
-      // Private
-      //
+      //Public
+      var vm = this, calendarEvents;
+      var URLS = {
+                    APPOINTMENTS : appConfig.API.baseURL + 'appointments'
+                  };
 
-      var vm = this,
-          URLS = {
-            APPOINTMENTS : appConfig.API.baseURL + 'appointments'
-          },
-          calendarEvents;
+      vm.newCalendarEvent   =   newCalendarEvent;
+      vm.getBookingTimes    =   getBookingTimes;
+      vm.createAppointment  =   createAppointment;
+      vm.updateAppointment  =   updateAppointment;
+      vm.deleteAppointment  =   deleteAppointment;
+      vm.getCalendarEvents  =   getCalendarEvents;
+
+      //Private
+      function newCalendarEvent(){
+        return {
+          id: '',
+          title: '',
+          description: '',
+          note: '',
+          start: '',
+          end: ''
+        };
+      }
+
+      function createAppointment(newAppointment){
+        return _updateAppointment(newAppointment,'create');
+      }
+
+      function getBookingTimes(){
+        var times = [];
+        var day1 = moment("2015-01-01"); // pick any day range
+        var day2 = moment("2015-01-02");
+
+        // Start at 00:00 and loop over every 30mins to build up times
+        while(day1.diff(day2) < 0){
+            times.push({
+             id: day1.format("HH:mm:ss"),
+             name: day1.format("HH:mm")
+            });
+            day1.add(30, 'minutes');
+        }
+        return times;
+      }
+
+      function updateAppointment(newAppointment){
+        return _updateAppointment(newAppointment,'update');
+      }
+
+      function deleteAppointment(appointment){
+        return $http({
+          method  : 'DELETE',
+          url     : URLS.APPOINTMENTS + '/' + appointment.id
+        }).then(function (response) {
+          //Remove from in memory array
+          _.remove(calendarEvents, function(calEvents) {
+            return calEvents.id == appointment.id;
+          });
+        });
+      }
+
+      function getCalendarEvents(){
+        return (calendarEvents) ? $q.when(calendarEvents) : $http.get(URLS.APPOINTMENTS).then(cacheCalendarEvents);
+      }
 
       function extract(result){
         return result.data.appointments;
@@ -95,65 +150,6 @@
         });
 
       }
-
-      //
-      // Public
-      //
-
-      vm.newCalendarEvent = function newCalendarEvent(){
-        return {
-          id: '',
-          title: '',
-          description: '',
-          note: '',
-          start: '',
-          end: ''
-        };
-      };
-
-      vm.getBookingTimes = function getBookingTimes(){
-        var times = [];
-        var day1 = moment("2015-01-01"); // pick any day range
-        var day2 = moment("2015-01-02");
-
-        // Start at 00:00 and loop over every 30mins to build up times
-        while(day1.diff(day2) < 0){
-            times.push({
-             id: day1.format("HH:mm:ss"),
-             name: day1.format("HH:mm")
-            });
-            day1.add(30, 'minutes');
-        }
-        return times;
-      };
-
-      // Create
-      vm.createAppointment = function createAppointment(newAppointment){
-        return _updateAppointment(newAppointment,'create');
-      };
-
-      // Update
-      vm.updateAppointment = function updateAppointment(newAppointment){
-        return _updateAppointment(newAppointment,'update');
-      };
-
-      // Delete
-      vm.deleteAppointment = function deleteAppointment(appointment){
-        return $http({
-          method  : 'DELETE',
-          url     : URLS.APPOINTMENTS + '/' + appointment.id
-        }).then(function (response) {
-          //Remove from in memory array
-          _.remove(calendarEvents, function(calEvents) {
-            return calEvents.id == appointment.id;
-          });
-        });
-      };
-
-      // Index
-      vm.getCalendarEvents = function getCalendarEvents(){
-        return (calendarEvents) ? $q.when(calendarEvents) : $http.get(URLS.APPOINTMENTS).then(cacheCalendarEvents);
-      };
 
     }); //end service calendar events model
 

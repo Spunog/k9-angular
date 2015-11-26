@@ -5,58 +5,48 @@
 
     .service('PetsModel', function(appConfig, $http, $q){
 
-      // Private
-      var self = this,
-          URLS = {
-            INDEX : appConfig.API.baseURL + 'dogs'
-          },
+      //Public
+      var vm                =   this;
+      vm.getCurrentPet      =   getCurrentPet;
+      vm.setCurrentPet      =   setCurrentPet;
+      vm.resetCurrentPet    =   resetCurrentPet;
+      vm.getPets            =   getPets;
+      vm.addPet             =   addPet;
+      vm.createPet          =   createPet;
+      vm.getPetById         =   getPetById;
+      vm.updatePet          =   updatePet;
+      vm.deletePet          =   deletePet;
+
+      //Private
+      var URLS = { INDEX : appConfig.API.baseURL + 'dogs'},
           pets;
 
       var currentPet = {
         name: ''
       };
 
-      function extract(result){
-        return result.data.dogs;
-      }
-
-      function cachePets(result){
-        pets = extract(result);
-        return pets;
-      }
-
-      function findPet(petID) {
-
-        var result = _.find(pets, function (c) {
-            return c.id == parseInt(petID, 10);
-        });
-        return result;
-      }
-
-      // Public
-      self.getCurrentPet = function getCurrentPet(pet){
+      function getCurrentPet(pet){
         return currentPet;
-      };
+      }
 
-      self.setCurrentPet = function setCurrentPet(pet){
+      function setCurrentPet(pet){
         currentPet.id = pet.id;
         currentPet.name = pet.name;
-      };
+      }
 
-      self.resetCurrentPet = function resetCurrentPet(){
+      function resetCurrentPet(){
         currentPet.name = '';
-      };
+      }
 
-      self.getPets = function getPets(){
+      function getPets(){
         return (pets) ? $q.when(pets) : $http.get(URLS.INDEX).then(cachePets);
-      };
+      }
 
-      self.addPet = function addPet(pet){
+      function addPet(pet){
         pets.unshift(pet);
-      };
+      }
 
-      // Create
-      self.createPet = function createPet(pet){
+      function createPet(pet){
 
         return $http({
           method  : 'POST',
@@ -68,24 +58,22 @@
                     }
         });
 
-      };
+      }
 
-      // Read
-      self.getPetById = function getPetById(petID){
+      function getPetById(petID){
         var deferred = $q.defer();
 
         if (pets) {
             deferred.resolve(findPet(petID));
         } else {
-            self.getPets().then(function () {
+            vm.getPets().then(function () {
                 deferred.resolve(findPet(petID));
             });
         }
         return deferred.promise;
-      };
+      }
 
-      // Update
-      self.updatePet = function updatePet(pet){
+      function updatePet(pet){
         return $http({
                         method  : 'PATCH', //patch over put for update - https://goo.gl/JRPN2o
                         url     : appConfig.API.baseURL + 'dogs/' + pet.id,
@@ -102,11 +90,9 @@
                         });
                         matchedPet.name = pet.name;
                       });
-      };
+      }
 
-
-      // Delete
-      self.deletePet = function deletePet(pet){
+      function deletePet(pet){
 
         return $http({
           method  : 'DELETE',
@@ -119,7 +105,23 @@
           });
         });
 
-      };
+      }
+
+      function extract(result){
+        return result.data.dogs;
+      }
+
+      function cachePets(result){
+        pets = extract(result);
+        return pets;
+      }
+
+      function findPet(petID) {
+        var result = _.find(pets, function (c) {
+            return c.id == parseInt(petID, 10);
+        });
+        return result;
+      }
 
     }); //end service pet model
 

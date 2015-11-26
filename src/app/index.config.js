@@ -5,7 +5,7 @@
     .module('k9')
     .config(config)
     .config(function($mdDateLocaleProvider) {
-      //Default date format
+        //Default date format
         $mdDateLocaleProvider.formatDate = function(date) {
            return moment(date).format('DD-MM-YYYY');
         };

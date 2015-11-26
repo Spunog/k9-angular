@@ -6,24 +6,29 @@
    ])
 
      .controller("NavigationController",function NavigationController(NavModel,auth,$state,$window){
+
+       //Public
        var vm = this;
+       vm.menuItems       =   NavModel.getMenuItems();
+       vm.isSelected      =   isSelected;
+       vm.setCurrentItem  =   setCurrentItem;
+       vm.logout          =   logout;
 
-       vm.menuItems = NavModel.getMenuItems();
-
-       vm.isSelected = function isSelected(menuItem){
+       //Private
+       function isSelected(menuItem){
          return NavModel.menuIsSelected(menuItem);
-       };
+       }
 
-       vm.setCurrentItem = function setCurrentItem(menuItem){
+       function setCurrentItem(menuItem){
          NavModel.setCurrentItem(menuItem);
-       };
+       }
 
-       vm.logout = function logout(){
+       function logout(){
          var promise = auth.logout();
          localStorage.removeItem('auth_token');
          localStorage.removeItem('auth_email');
          $state.go('k9.login');
-       };
+       }
 
      });
 

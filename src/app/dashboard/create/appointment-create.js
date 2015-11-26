@@ -4,25 +4,33 @@
   angular.module('k9.appointment.create', [
     'ui.router'
   ])
-  .config(function ($stateProvider) {
-
-    //State Providers
-    $stateProvider.state('k9.dashboard.create',{
-      url: '/create/appointment',
-      views: {
-                'main@' : {
-                            controller: 'CreateAppointmentController as vm',
-                            templateUrl: 'app/dashboard/create/appointment-create.tmpl.html'
-                          }
-             }
-    });
-
-  })
 
   .controller('CreateAppointmentController', function($state, $stateParams,CalendarEventsModel, $mdDialog, selectedDate) {
+
+    //Public
     var vm = this;
 
+    // Create Array of Booking Times
+    vm.bookingTimes             =   CalendarEventsModel.getBookingTimes();
+    vm.createAppointment        =   createAppointment;
+    vm.deleteAppointment        =   deleteAppointment;
+    vm.createAppointmentCancel  =   createAppointmentCancel;
+
+    vm.newAppointment = getNewAppointmentDefaults();
+
     //Private
+    function getNewAppointmentDefaults(){
+      return {
+        id: selectedDate.id,
+        title: selectedDate.title || '',
+        start: selectedDate.start.toDate(),
+        startTime:  {
+                      id    : selectedDate.start.format("HH:00:00"),
+                      name  : selectedDate.start.format("HH:00")
+                   }
+      };
+    }
+
     function resetForm(){
       vm.newAppointment = {
         title: ''
@@ -56,33 +64,22 @@
                          });
     }
 
-    //
-    // Public
-    //
+  }) // end create appointment controller
 
-    // Create Array of Booking Times
-    vm.bookingTimes = CalendarEventsModel.getBookingTimes();
+  //Routes
+  .config(function ($stateProvider) {
 
-    // New Appointment Defaults
-    vm.newAppointment = {
-      id: selectedDate.id,
-      title: selectedDate.title || '',
-      start: selectedDate.start.toDate(),
-      startTime:  {
-                    id    : selectedDate.start.format("HH:00:00"),
-                    name  : selectedDate.start.format("HH:00")
-                 }
-    };
+    //State Providers
+    $stateProvider.state('k9.dashboard.create',{
+      url: '/create/appointment',
+      views: {
+                'main@' : {
+                            controller: 'CreateAppointmentController as vm',
+                            templateUrl: 'app/dashboard/create/appointment-create.tmpl.html'
+                          }
+             }
+    });
 
-    // Create Appointment
-    vm.createAppointment = createAppointment;
-
-    // Delete appointment
-    vm.deleteAppointment = deleteAppointment;
-
-    //Cancel Creation
-    vm.createAppointmentCancel = createAppointmentCancel;
-
-  }); // end create appointment ctrl
+  });
 
 }()); // end use strict

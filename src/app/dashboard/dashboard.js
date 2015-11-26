@@ -7,47 +7,32 @@
       'k9.models.calendar_events'
     ])
 
-    .config(function config($stateProvider){
-
-      //State Providers
-      $stateProvider.state('k9.dashboard',{
-        url: '/dashboard',
-        views: {
-                  'main@' : {
-                              controller: 'DashboardController as vm',
-                              templateUrl: 'app/dashboard/dashboard.tmpl.html'
-                            },
-                  'nav@' : {
-                              controller: 'NavigationController as vm',
-                              templateUrl: 'app/nav/nav.tmpl.html'
-                            }
-               },
-           resolve: {
-             // Page Title
-             $title: function() { return 'Dashboard'; }
-           }
-      });
-
-    })
-
     .controller("DashboardController",function DashboardCtrl(NavModel,$compile,calendarConfig,CalendarEventsModel, $mdDialog, $state){
 
-      var vm = this;
+      //Public
+      var vm                     =   this;
+      vm.calendarEvents          =   [];
+      vm.eventSources            =   [vm.calendarEvents]; //cal sources
+      vm.calendar                =   calendarConfig.defaults;
+      vm.calendar.dayClick       =   calendarDayClick;
+      vm.calendar.eventClick     =   calendarEventClick;
+      vm.calendar.remove         =   calendarRemove;
+      vm.calendar.changeView     =   calendarChangeView;
+      vm.calendar.renderCalender =   calendarRender;
+      vm.calendar.eventRender    =   calendarEventRender;
+      vm.refreshCalendar         =   calendarRefresh;
+
+      vm.refreshCalendar();
+      updateNav();
+
+      //Private
 
       /*
-        Calendar
-
-        # http://fullcalendar.io/
-        # https://github.com/angular-ui/ui-calendar
-        # http://angular-ui.github.io/ui-calendar
+        Calendar - http://fullcalendar.io/
+                 - http://angular-ui.github.io/ui-calendar
       */
 
-      vm.eventSources   = [];
-      vm.calendarEvents = [];
-      vm.calendar       = calendarConfig.defaults;
-
-      //Custom Events
-      vm.calendar.dayClick = function(date, jsEvent, view) {
+      function calendarDayClick(date, jsEvent, view) {
 
         var calendarEvent = angular.copy(CalendarEventsModel.newCalendarEvent());
         calendarEvent.start = date;
@@ -73,10 +58,9 @@
           // Cancelled
         });
 
-      };
+      }
 
-      // Date Clicked
-      vm.calendar.eventClick = function( date, jsEvent, view){
+      function calendarEventClick( date, jsEvent, view){
           vm.alertMessage = (date.title + ' was clicked ');
           $mdDialog.show({
             controller    : 'CreateAppointmentController as vm',
@@ -91,37 +75,32 @@
           }, function() {
             // Cancelled
           });
-      };
+      }
 
-      // Remove Event
-      vm.calendar.remove = function(index) {
+      function calendarRemove(index) {
         vm.calendar.events.splice(index,1);
-      };
+      }
 
       // View changed
-      vm.calendar.changeView = function(view,calendar) {
+      function calendarChangeView(view,calendar) {
         uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
-      };
+      }
 
       // Calendar Rendered
-      vm.calendar.renderCalender = function(calendar) {
+      function calendarRender(calendar) {
         if(uiCalendarConfig.calendars[calendar]){
           uiCalendarConfig.calendars[calendar].fullCalendar('render');
         }
-      };
+      }
 
       // Tooltip
-      vm.calendar.eventRender = function( event, element, view ) {
+      function calendarEventRender( event, element, view ) {
           element.attr({'tooltip': event.title,
                        'tooltip-append-to-body': true});
           $compile(element)(vm.calendar);
-      };
+      }
 
-      // Setup References to Sources
-      vm.eventSources = [vm.calendarEvents];
-
-      // Refresh Calendar using Calendar Service Model
-      vm.refreshCalendar = function refreshCalendar(){
+      function calendarRefresh(){
         CalendarEventsModel.getCalendarEvents()
           .then(function (calendarEvents) {
 
@@ -151,15 +130,37 @@
             });
 
           });
-      };
+      }
 
-      //Get latest items on first load
-      vm.refreshCalendar();
+      function updateNav(){
+        NavModel.setCurrentItem({
+            title: 'Dashboard',
+            sref: 'k9.dashboard'
+        });
+      }
 
-      //Update Navigation State
-      NavModel.setCurrentItem({
-          title: 'Dashboard',
-          sref: 'k9.dashboard'
+    })
+
+    //Routes
+    .config(function config($stateProvider){
+
+      //State Providers
+      $stateProvider.state('k9.dashboard',{
+        url: '/dashboard',
+        views: {
+                  'main@' : {
+                              controller: 'DashboardController as vm',
+                              templateUrl: 'app/dashboard/dashboard.tmpl.html'
+                            },
+                  'nav@' : {
+                              controller: 'NavigationController as vm',
+                              templateUrl: 'app/nav/nav.tmpl.html'
+                            }
+               },
+           resolve: {
+             // Page Title
+             $title: function() { return 'Dashboard'; }
+           }
       });
 
     });

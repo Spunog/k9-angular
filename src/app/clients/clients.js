@@ -9,6 +9,42 @@
      'k9.clients.edit'
    ])
 
+     .controller("ClientController",function ClientCtrl(ClientsModel,NavModel,$state,$mdDialog){
+
+       //Public
+       var vm = this;
+       vm.currentClient = ClientsModel.getCurrentClient();
+       vm.editClient    = editClient;
+
+       getClients();
+       updateNav();
+
+       //Private
+
+       //Update Navigation State
+       function updateNav(){
+         NavModel.setCurrentItem({
+             title: 'Clients',
+             sref: 'k9.clients'
+         });
+       }
+
+       // Index
+       function getClients(){
+         ClientsModel.getClients()
+                     .then(function (clients) {
+                       vm.clients = clients;
+                     });
+       }
+
+       // Go to edit
+       function editClient(client){
+         $state.go('k9.clients.edit', { clientID:client.id} );
+       }
+
+     }) //end client ctrl
+
+     //Routes
      .config(function config($stateProvider,$httpProvider,$urlRouterProvider){
 
        //State Providers
@@ -30,44 +66,6 @@
           }
        });
 
-     })
-
-     .controller("ClientController",function ClientCtrl(ClientsModel,NavModel,$state,$mdDialog){
-
-       var vm = this;
-
-       //Update Navigation State
-       NavModel.setCurrentItem({
-           title: 'Clients',
-           sref: 'k9.clients'
-       });
-
-       vm.isEditing = function isEditing(){
-         if(vm.currentClient.first_name.length > 0){
-           return 'col-md-7';
-         }else{
-           return 'col-md-12';
-         }
-       };
-
-       vm.currentClient = ClientsModel.getCurrentClient();
-
-       // Index
-       var getClients = function getClients(){
-         ClientsModel.getClients()
-                     .then(function (clients) {
-                       vm.clients = clients;
-                     });
-       };
-
-       // Go to edit
-       vm.editClient = function editClient(client){
-         $state.go('k9.clients.edit', { clientID:client.id} );
-       };
-
-       // On Controller Load
-       getClients();
-
-     }); //end client ctrl
+     });
 
 }()); //end use strict

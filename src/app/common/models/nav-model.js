@@ -5,9 +5,16 @@
 
   .service('NavModel', function(){
 
+    //Public
     var vm = this;
-    var currentItem;
+    vm.menuItem         =   getMenuItem;
+    vm.menuIsSelected   =   menuIsSelected;
+    vm.getMenuItems     =   getMenuItems;
+    vm.getCurrentItem   =   getCurrentItem;
+    vm.setCurrentItem   =   setCurrentItem;
 
+    //Private
+    var currentItem;
     var menuItem = function menuItem(title,sref,icon){
       // must be a nicer way to do this, feels wrong but not found it yet
       // only purpose is to make creating new object shorter later
@@ -28,27 +35,27 @@
       menuItem('Settings','k9.dashboard','settings'),
     ];
 
-    vm.menuItem = function menuItem(title,sref){
+    function getMenuItem(title,sref){
       return menuItem;
-    };
+    }
 
-    vm.menuIsSelected = function menuIsSelected(menuItem){
+    function menuIsSelected(menuItem){
       if(!currentItem) return false; // in case there is no current item
       return (menuItem.title === currentItem.title) ? true : false;
-    };
+    }
 
-    vm.getMenuItems = function getMenuItems(){
+    function getMenuItems(){
       return menuItems;
-    };
+    }
 
-    vm.getCurrentItem = function getCurrentItem(){
+    function getCurrentItem(){
       return currentItem;
-    };
+    }
 
-    vm.setCurrentItem = function setCurrentItem(menuItem){
+    function setCurrentItem(menuItem){
       currentItem = menuItem;
-    };
+    }
 
-  }); //end nav model
+  }); //end navigation model
 
 }()); //end use strict

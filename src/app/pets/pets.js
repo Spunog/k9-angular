@@ -9,6 +9,48 @@
      'k9.pets.edit'
    ])
 
+     .controller("PetController",function PetCtrl(PetsModel,NavModel,$state,$mdDialog){
+
+       //Public
+       var vm = this;
+       vm.clickIcon   =   'keyboard_backspace';
+       vm.currentPet  =   PetsModel.getCurrentPet();
+       vm.editPet     =   editPet;
+
+       animateBackIcon();
+       getPets();
+       updateNav();
+
+       //Private
+       function animateBackIcon(){
+         setTimeout(function(){
+            vm.clickIcon = 'menu';
+         }, 1);
+       }
+
+       function updateNav(){
+         //Update Navigation State
+         NavModel.setCurrentItem({
+             title: 'Pets',
+             sref: 'k9.pets'
+         });
+       }
+
+       // Index
+       function getPets(){
+         PetsModel.getPets()
+                  .then(function (pets) {
+                     vm.pets = pets;
+                  });
+       }
+
+       // Go to edit
+       function editPet(pet){
+         $state.go('k9.pets.edit', { petID:pet.id} );
+       }
+
+     }) //end pet controller
+
      .config(function config($stateProvider,$httpProvider,$urlRouterProvider){
 
        //State Providers
@@ -30,50 +72,6 @@
           }
        });
 
-     })
-
-     .controller("PetController",function PetCtrl(PetsModel,NavModel,$state,$mdDialog){
-
-       var vm = this;
-
-       //Menu Icon Animation
-       vm.clickIcon = 'keyboard_backspace';
-       setTimeout(function(){
-          vm.clickIcon = 'menu';
-       }, 1);
-
-       //Update Navigation State
-       NavModel.setCurrentItem({
-           title: 'Pets',
-           sref: 'k9.pets'
-       });
-
-       vm.isEditing = function isEditing(){
-         if(vm.currentPet.name.length > 0){
-           return 'col-md-7';
-         }else{
-           return 'col-md-12';
-         }
-       };
-
-       vm.currentPet = PetsModel.getCurrentPet();
-
-       // Index
-       var getPets = function getPets(){
-         PetsModel.getPets()
-                     .then(function (pets) {
-                       vm.pets = pets;
-                     });
-       };
-
-       // Go to edit
-       vm.editPet = function editPet(pet){
-         $state.go('k9.pets.edit', { petID:pet.id} );
-       };
-
-       // On Controller Load
-       getPets();
-
-     }); //end pet ctrl
+     });
 
 }()); //end use strict
