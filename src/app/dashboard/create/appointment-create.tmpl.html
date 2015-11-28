@@ -8,8 +8,21 @@
 
     <md-toolbar>
       <div class="md-toolbar-tools">
+
+        <!---Close--->
+        <md-button class="md-icon-button"
+                   ng-click="vm.createAppointmentCancel()">
+           <ng-md-icon icon="close" size="24"></ng-md-icon>
+           <md-tooltip md-direction="bottom">
+             Cancel and Close
+           </md-tooltip>
+        </md-button>
+
+        <!-- Title -->
         <h2>Create Appointment</h2>
         <span flex></span>
+
+        <!--- Delete--->
         <md-button type='button'
                    class="md-icon-button"
                    aria-label="Delete Client"
@@ -20,13 +33,18 @@
           </md-tooltip>
           <ng-md-icon icon="delete" size="24"></ng-md-icon>
         </md-button>
-        <md-button class="md-icon-button"
-                   ng-click="vm.createAppointmentCancel()">
-           <ng-md-icon icon="close" size="24"></ng-md-icon>
+
+        <!---Save--->
+        <md-button type='submit'
+                   class="md-icon-button"
+                   aria-label="Save">
+                   <span ng-hide='vm.newAppointment.id && vm.newAppointment.id > 0'>Save</span>
+                   <ng-md-icon ng-show='vm.newAppointment.id && vm.newAppointment.id > 0' icon="done" size="24"></ng-md-icon>
            <md-tooltip md-direction="bottom">
-             Close
+             Save
            </md-tooltip>
         </md-button>
+
       </div>
     </md-toolbar>
 
@@ -71,15 +89,6 @@
       </div>
 
     </md-dialog-content>
-
-    <!-- Save -->
-    <md-dialog-actions layout="row">
-      <span flex></span>
-      <md-button type='submit'
-                 class="md-primary"
-                 md-no-ink>Save Appointment</md-button>
-      <span flex></span>
-    </md-dialog-actions>
 
   </form>
 </md-dialog>
