@@ -13,15 +13,21 @@
 
        //Public
        var vm = this;
-       vm.clickIcon   =   'keyboard_backspace';
-       vm.currentPet  =   PetsModel.getCurrentPet();
-       vm.editPet     =   editPet;
+       vm.clickIcon     =   'keyboard_backspace';
+       vm.currentPet    =   PetsModel.getCurrentPet();
+       vm.editPet       =   editPet;
+       vm.searchActive  =   false;
+       vm.toggleSearch  =   toggleSearch;
 
        animateBackIcon();
        getPets();
        updateNav();
 
        //Private
+       function toggleSearch(searchOn){
+         vm.searchActive = searchOn;
+       }
+
        function animateBackIcon(){
          setTimeout(function(){
             vm.clickIcon = 'menu';

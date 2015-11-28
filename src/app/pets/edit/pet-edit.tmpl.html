@@ -1,40 +1,46 @@
 <!-- Pet Edit -->
 
-<!-- Toolbar -->
-<md-toolbar>
-  <div class="md-toolbar-tools">
-    <md-button ui-sref='k9.pets' class="md-icon-button" aria-label="Go Back">
-      <md-tooltip md-direction="bottom">Go back</md-tooltip>
-      <ng-md-icon ng-click='vm.clickIconMorph()'
-                  icon="{{vm.clickIcon}}"
-                  options='{ "easing": "quad-in", "duration": 500 }'
-                  size="24"></ng-md-icon>
-    </md-button>
-    <h2>
-      <span>Pets</span>
-    </h2>
-    <span flex></span>
-    <md-button type='button'
-               class="md-icon-button"
-               aria-label="Delete Pet"
-               ng-click='vm.deletePet(vm.editedPet)'>
-      <md-tooltip md-direction="bottom">
-        Delete Pet
-      </md-tooltip>
-      <ng-md-icon icon="delete" size="24"></ng-md-icon>
-    </md-button>
-  </div>
-</md-toolbar>
+<form role="form"
+      name='update-pet-form' ng-submit='vm.updatePet(vm.editedPet)'>
 
-<!-- Main Content -->
-<md-content flex id="content">
+  <!-- Toolbar -->
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button ui-sref='k9.pets' class="md-icon-button" aria-label="Go Back">
+        <md-tooltip md-direction="bottom">Go back</md-tooltip>
+        <ng-md-icon ng-click='vm.clickIconMorph()'
+                    icon="{{vm.clickIcon}}"
+                    options='{ "easing": "quad-in", "duration": 500 }'
+                    size="24"></ng-md-icon>
+      </md-button>
+      <h2>
+        <span>Edit Pet</span>
+      </h2>
+      <span flex></span>
+      <md-button type='button'
+                 class="md-icon-button"
+                 aria-label="Delete Pet"
+                 ng-click='vm.deletePet(vm.editedPet)'>
+        <md-tooltip md-direction="bottom">
+          Delete Pet
+        </md-tooltip>
+        <ng-md-icon icon="delete" size="24"></ng-md-icon>
+      </md-button>
 
-  <h1 class="md-display-1">
-    Edit Pet
-  </h1>
+      <md-button type='submit'
+                 class="md-icon-button"
+                 aria-label="Save Pet">
+        <md-tooltip md-direction="bottom">
+          Save Pet
+        </md-tooltip>
+        <ng-md-icon icon="done" size="24"></ng-md-icon>
+      </md-button>
 
-  <form role="form"
-        name='update-pet-form' ng-submit='vm.updatePet(vm.editedPet)'>
+    </div>
+  </md-toolbar>
+
+  <!-- Main Content -->
+  <md-content flex id="content">
 
     <!-- Name -->
     <div layout layout-sm="column">
@@ -52,15 +58,5 @@
       </md-input-container>
     </div>
 
-    <!-- Actions -->
-    <md-card-actions layout="row" layout-align="center center">
-      <!-- Save -->
-      <md-button type='submit'
-                 md-no-ink
-                 class="md-primary">Save Changes</md-button>
-
-    </md-card-actions>
-
-  </form>
-
-</md-content>
+  </md-content>
+</form>

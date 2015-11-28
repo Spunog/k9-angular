@@ -1,7 +1,7 @@
 <!-- Pets -->
 
 <!-- Toolbar -->
-<md-toolbar>
+<md-toolbar ng-show='!vm.searchActive'>
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Menu">
       <ng-md-icon ng-click='vm.clickIconMorph()'
@@ -12,19 +12,66 @@
     <h2>
       <span>Pets</span>
     </h2>
+    <span flex></span>
+
+    <!-- Search -->
+
+    <md-button type='button'
+               class="md-icon-button"
+               ng-click='vm.toggleSearch(true)'
+               aria-label="Search Pets">
+      <md-tooltip md-direction="bottom">
+        Search Pets
+      </md-tooltip>
+      <ng-md-icon icon="search" size="24"></ng-md-icon>
+    </md-button>
+
   </div>
+</md-toolbar>
+
+<!-- Toolbar Search -->
+<md-toolbar class="md-hue-1" ng-show='vm.searchActive'>
+
+  <div class="md-toolbar-tools">
+
+    <!-- Back Button -->
+    <md-button type='button'
+               class="md-icon-button"
+               ng-click='vm.toggleSearch(false)'
+               aria-label="Back">
+      <md-tooltip md-direction="bottom">
+        Back
+      </md-tooltip>
+      <ng-md-icon icon="arrow_back" size="24"></ng-md-icon>
+    </md-button>
+
+    <!-- Title -->
+    <h3 flex="10">
+      Back
+    </h3>
+
+    <!-- Search -->
+    <md-input-container flex>
+      <label></label>
+      <input ng-model="petSearchText" focus="true" placeholder="enter search">
+    </md-input-container>
+
+    <md-button type='button'
+               class="md-icon-button"
+               aria-label="Search">
+      <md-tooltip md-direction="bottom">
+        Search
+      </md-tooltip>
+      <ng-md-icon icon="search" size="24"></ng-md-icon>
+    </md-button>
+  </div>
+
 </md-toolbar>
 
 <!-- Main Content -->
 <md-content flex id="content">
 
   <div class="pets-list">
-
-    <div class="top-search md-title">
-      <label>Search:
-        <input ng-model="petSearchText" focus="true">
-      </label>
-    </div>
 
     <div ng-show='(vm.pets | filter:petSearchText).length < 1'
          class="alert alert-info text-center"
