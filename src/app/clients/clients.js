@@ -13,13 +13,23 @@
 
        //Public
        var vm = this;
-       vm.currentClient = ClientsModel.getCurrentClient();
-       vm.editClient    = editClient;
+       vm.currentClient     =   ClientsModel.getCurrentClient();
+       vm.editClient        =   editClient;
+       vm.searchActive      =   false;
+       vm.toggleSearch      =   toggleSearch;
+       vm.clientSearchText  =   '';
 
        getClients();
        updateNav();
 
        //Private
+       function toggleSearch(searchOn){
+         vm.searchActive = searchOn;
+         if(!searchOn){
+           //Reset search if user turns off search
+           vm.clientSearchText = '';
+         }
+       }
 
        //Update Navigation State
        function updateNav(){

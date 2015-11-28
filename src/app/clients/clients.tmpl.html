@@ -1,7 +1,7 @@
 <!-- Clients -->
 
 <!-- Toolbar -->
-<md-toolbar>
+<md-toolbar ng-show='!vm.searchActive'>
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Menu">
       <ng-md-icon icon="menu" size="24"></ng-md-icon>
@@ -9,7 +9,59 @@
     <h2>
       <span>Clients</span>
     </h2>
+    <span flex></span>
+
+    <!-- Search -->
+    <md-button type='button'
+               class="md-icon-button"
+               ng-click='vm.toggleSearch(true)'
+               aria-label="Search Pets">
+      <md-tooltip md-direction="bottom">
+        Search Pets
+      </md-tooltip>
+      <ng-md-icon icon="search" size="24"></ng-md-icon>
+    </md-button>
   </div>
+</md-toolbar>
+
+
+<!-- Toolbar Search -->
+<md-toolbar class="md-hue-1" ng-show='vm.searchActive'>
+
+  <div class="md-toolbar-tools">
+
+    <!-- Back Button -->
+    <md-button type='button'
+               class="md-icon-button"
+               ng-click='vm.toggleSearch(false)'
+               aria-label="Back">
+      <md-tooltip md-direction="bottom">
+        Back
+      </md-tooltip>
+      <ng-md-icon icon="arrow_back" size="24"></ng-md-icon>
+    </md-button>
+
+    <!-- Title -->
+    <h3 flex="10">
+      Back
+    </h3>
+
+    <!-- Search -->
+    <md-input-container flex>
+      <label></label>
+      <input ng-model="vm.clientSearchText" focus="true" placeholder="enter search">
+    </md-input-container>
+
+    <md-button type='button'
+               class="md-icon-button"
+               aria-label="Search">
+      <md-tooltip md-direction="bottom">
+        Search
+      </md-tooltip>
+      <ng-md-icon icon="search" size="24"></ng-md-icon>
+    </md-button>
+  </div>
+
 </md-toolbar>
 
 <!-- Main Content -->
@@ -17,13 +69,7 @@
 
   <div class="clients-list">
 
-    <div class="top-search md-title">
-      <label>Search:
-        <input ng-model="clientSearchText" focus="true">
-      </label>
-    </div>
-
-    <div ng-show='(vm.clients | filter:clientSearchText).length < 1'
+    <div ng-show='(vm.clients | filter:vm.clientSearchText).length < 1'
          class="alert alert-info text-center"
          role="alert">
          <p>
@@ -32,11 +78,11 @@
          </p>
     </div>
 
-    <div ng-hide='(vm.clients | filter:clientSearchText).length < 1'>
+    <div ng-hide='(vm.clients | filter:vm.clientSearchText).length < 1'>
 
       <md-content class='search-results' flex layout-padding>
         <md-list-item ng-click="vm.editClient(client)"
-                      ng-repeat="client in vm.clients | filter:clientSearchText">
+                      ng-repeat="client in vm.clients | filter:vm.clientSearchText">
             <ng-md-icon icon="face" size="24"></ng-md-icon>
             <p>
               {{ client.first_name }} {{ client.last_name }}

@@ -15,7 +15,6 @@
     <span flex></span>
 
     <!-- Search -->
-
     <md-button type='button'
                class="md-icon-button"
                ng-click='vm.toggleSearch(true)'
@@ -53,7 +52,8 @@
     <!-- Search -->
     <md-input-container flex>
       <label></label>
-      <input ng-model="petSearchText" focus="true" placeholder="enter search">
+      <input ng-model="vm.petSearchText"
+             focus="true" placeholder="enter search">
     </md-input-container>
 
     <md-button type='button'
@@ -73,7 +73,7 @@
 
   <div class="pets-list">
 
-    <div ng-show='(vm.pets | filter:petSearchText).length < 1'
+    <div ng-show='(vm.pets | filter:vm.petSearchText).length < 1'
          class="alert alert-info text-center"
          role="alert">
          <p>
@@ -82,12 +82,12 @@
          </p>
     </div>
 
-    <div ng-hide='(vm.pets | filter:petSearchText).length < 1'>
+    <div ng-hide='(vm.pets | filter:vm.petSearchText).length < 1'>
 
       <md-content class='search-results' flex layout-padding>
 
         <md-list-item ng-click="vm.editPet(pet)"
-                      ng-repeat="pet in vm.pets | filter:petSearchText">
+                      ng-repeat="pet in vm.pets | filter:vm.petSearchText">
             <ng-md-icon icon="paw" size="24"></ng-md-icon>
             <p>
               {{ pet.name }}

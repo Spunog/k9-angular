@@ -18,6 +18,7 @@
        vm.editPet       =   editPet;
        vm.searchActive  =   false;
        vm.toggleSearch  =   toggleSearch;
+       vm.petSearchText = '';
 
        animateBackIcon();
        getPets();
@@ -26,6 +27,9 @@
        //Private
        function toggleSearch(searchOn){
          vm.searchActive = searchOn;
+         if(!searchOn){
+           vm.petSearchText = '';
+         }
        }
 
        function animateBackIcon(){
