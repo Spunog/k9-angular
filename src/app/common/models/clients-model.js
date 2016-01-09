@@ -113,7 +113,8 @@
       }
 
       function extract(result){
-        return result.data.clients;
+        console.log(result,'result');
+        return result.data;
       }
 
       function cacheClients(result){

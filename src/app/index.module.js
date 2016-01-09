@@ -5,7 +5,6 @@
     .module('k9', [
       'ngAnimate',
       'ngCookies',
-      'ngTouch',
       'ngSanitize',
       'ngMessages',
       'ngAria',
