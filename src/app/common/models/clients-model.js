@@ -113,7 +113,6 @@
       }
 
       function extract(result){
-        console.log(result,'result');
         return result.data;
       }
 

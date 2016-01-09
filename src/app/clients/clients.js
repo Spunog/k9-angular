@@ -42,12 +42,9 @@
        // Index
        function getClients(){
 
-         console.log(vm.clients,'clients1');
-
          ClientsModel.getClients()
                      .then(function (clients) {
                        vm.clients = clients;
-                       console.log(vm.clients,'clients2');
                      });
        }
 

@@ -7,7 +7,7 @@
     .constant('moment', moment)
     .constant('appConfig', {
       'API' : {
-                  'baseURL' : 'http://api.k9.dev/v1/'
+                  'baseURL' : 'http://www.k9.dev/api/v1/'
                   //'baseURL' : 'http://api.groomk9.com/v1/'
               }
     })
