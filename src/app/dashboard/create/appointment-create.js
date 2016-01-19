@@ -12,20 +12,19 @@
 
     vm.simulateQuery = false;
     vm.isDisabled    = false;
-    // list of `state` value/display objects
-    vm.states        = loadAll();
+    vm.pets        = loadAll();
     vm.querySearch   = querySearch;
     vm.selectedItemChange = selectedItemChange;
     vm.searchTextChange   = searchTextChange;
-    vm.newState = newState;
+    vm.newPet = newPet;
 
-    function newState(state) {
-      alert("Sorry! You'll need to create a Constituion for " + state + " first!");
+    function newPet(pet) {
+      alert("Sorry! More information needed for " + pet.name + " first!");
     }
 
 
     function querySearch (query) {
-      var results = query ? vm.states.filter( createFilterFor(query) ) : vm.states;
+      var results = query ? vm.pets.filter( createFilterFor(query) ) : vm.pets;
       return results;
     }
 
@@ -36,15 +35,15 @@
       $log.info('Item changed to ' + JSON.stringify(item));
     }
     /**
-     * Build `states` list of key/value pairs
+     * Build `pets` list of key/value pairs
      */
     function loadAll() {
       return PetsModel.getPets().then(function(response) {
 
-          vm.states = response.map( function (state) {
+          vm.pets = response.map( function (pet) {
             return {
-              id: state.id,
-              name: state.name //.toLowerCase()
+              id: pet.id,
+              name: pet.name
             };
           });
 
@@ -56,8 +55,8 @@
      */
     function createFilterFor(query) {
       var lowercaseQuery = angular.lowercase(query);
-      return function filterFn(state) {
-        return (state.name.toLowerCase().indexOf(lowercaseQuery) === 0);
+      return function filterFn(pet) {
+        return (pet.name.toLowerCase().indexOf(lowercaseQuery) === 0);
       };
     }
 
