@@ -5,10 +5,63 @@
     'ui.router'
   ])
 
-  .controller('CreateAppointmentController', function($state, $stateParams,CalendarEventsModel, $mdDialog, selectedDate) {
+  .controller('CreateAppointmentController', function(PetsModel, $log, $state, $stateParams,CalendarEventsModel, $mdDialog, selectedDate) {
 
     //Public
     var vm = this;
+
+    vm.simulateQuery = false;
+    vm.isDisabled    = false;
+    // list of `state` value/display objects
+    vm.states        = loadAll();
+    vm.querySearch   = querySearch;
+    vm.selectedItemChange = selectedItemChange;
+    vm.searchTextChange   = searchTextChange;
+    vm.newState = newState;
+
+    function newState(state) {
+      alert("Sorry! You'll need to create a Constituion for " + state + " first!");
+    }
+
+
+    function querySearch (query) {
+      var results = query ? vm.states.filter( createFilterFor(query) ) : vm.states;
+      return results;
+    }
+
+    function searchTextChange(text) {
+      $log.info('Text changed to ' + text);
+    }
+    function selectedItemChange(item) {
+      $log.info('Item changed to ' + JSON.stringify(item));
+    }
+    /**
+     * Build `states` list of key/value pairs
+     */
+    function loadAll() {
+      return PetsModel.getPets().then(function(response) {
+
+          vm.states = response.map( function (state) {
+            return {
+              id: state.id,
+              name: state.name //.toLowerCase()
+            };
+          });
+
+          return response;
+      });
+    }
+    /**
+     * Create filter function for a query string
+     */
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+      return function filterFn(state) {
+        return (state.name.toLowerCase().indexOf(lowercaseQuery) === 0);
+      };
+    }
+
+
 
     // Create Array of Booking Times
     vm.bookingTimes             =   CalendarEventsModel.getBookingTimes();

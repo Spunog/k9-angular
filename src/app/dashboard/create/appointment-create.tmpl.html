@@ -86,6 +86,26 @@
 
         </div>
 
+        <!-- Dog -->
+        <md-autocomplete
+            ng-disabled="vm.isDisabled"
+            md-selected-item="vm.selectedItem"
+            md-search-text-change="vm.searchTextChange(vm.searchText)"
+            md-search-text="vm.searchText"
+            md-selected-item-change="vm.selectedItemChange(pet)"
+            md-items="pet in vm.querySearch(vm.searchText)"
+            md-item-text="pet.name"
+            md-min-length="0"
+            placeholder="Pets Name">
+          <md-item-template>
+            <span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{pet.name}}</span>
+          </md-item-template>
+          <md-not-found>
+            No states matching "{{vm.searchText}}" were found.
+            <a ng-click="vm.newState(vm.searchText)">Create a new one!</a>
+          </md-not-found>
+        </md-autocomplete>
+
       </div>
 
     </md-dialog-content>
