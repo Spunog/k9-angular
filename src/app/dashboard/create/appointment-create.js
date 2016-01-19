@@ -39,14 +39,7 @@
      */
     function loadAll() {
       return PetsModel.getPets().then(function(response) {
-
-          vm.pets = response.map( function (pet) {
-            return {
-              id: pet.id,
-              name: pet.name
-            };
-          });
-
+          vm.pets = response;
           return response;
       });
     }
