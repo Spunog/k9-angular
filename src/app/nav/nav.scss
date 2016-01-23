@@ -17,10 +17,11 @@ md-list .md-button {
   text-align: left;
   width: 100%;
 }
-  md-list .md-button.selected {
-    color: #C92D58; //#F9CC41;
-  }
 
-  md-sidenav  md-list {
-    padding: 0px 0px 8px 0px;
-  }
+md-list .md-button.selected {
+  color: #C92D58; //#F9CC41;
+}
+
+md-sidenav  md-list {
+  padding: 0px 0px 8px 0px;
+}
