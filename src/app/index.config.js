@@ -13,7 +13,7 @@
     .config(function($mdThemingProvider, $mdIconProvider){
         // Update the theme colors to use themes on font-icons
         $mdThemingProvider.theme('default')
-              .primaryPalette("pink")
+              .primaryPalette("blue")
               .accentPalette('amber')
               .warnPalette('red')
               .backgroundPalette('grey');
