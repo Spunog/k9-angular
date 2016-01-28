@@ -3,7 +3,9 @@
 <!-- Toolbar -->
 <md-toolbar ng-show='!vm.searchActive'>
   <div class="md-toolbar-tools">
-    <md-button ng-click="vm.toggleLeft()" class="md-icon-button" aria-label="Menu">
+    <md-button ng-click="vm.toggleLeft()"
+               class="md-icon-button"
+               aria-label="Menu">
       <ng-md-icon ng-click='vm.clickIconMorph()'
                   icon="{{ vm.clickIcon }}"
                   options='{ "easing": "quad-out", "duration": 500 }'
