@@ -7,7 +7,7 @@
       'k9.models.calendar_events'
     ])
 
-    .controller("DashboardController",function DashboardCtrl(NavModel,$compile,calendarConfig,CalendarEventsModel, $mdDialog, $state){
+    .controller("DashboardController",function DashboardCtrl($scope, $timeout, $mdSidenav, $log, NavModel,$compile,calendarConfig,CalendarEventsModel, $mdDialog, $state){
 
       //Public
       var vm                     =   this;
@@ -21,6 +21,7 @@
       vm.calendar.renderCalender =   calendarRender;
       vm.calendar.eventRender    =   calendarEventRender;
       vm.refreshCalendar         =   calendarRefresh;
+      vm.toggleLeft              =   NavModel.buildDelayedToggler('left');
 
       vm.refreshCalendar();
       updateNav();

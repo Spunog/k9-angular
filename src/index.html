@@ -28,28 +28,68 @@
         }
     </style>
   </head>
-  <body layout="row">
+  <body layout="column">
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Left Side Navigation -->
+    <section layout="row" flex>
+
+      <md-sidenav class="md-sidenav-left md-whiteframe-z2"
+                  md-component-id="left"
+                  md-is-locked-open="$mdMedia('gt-md')">
+        <div ui-view='nav'></div>
+      </md-sidenav>
+
+      <div layout="column" flex>
+
+        <!--<md-toolbar>
+          <div class="md-toolbar-tools">
+            <md-button ng-show="$mdMedia('gt-md')" class="md-icon-button" aria-label="Menu">
+              <ng-md-icon icon="menu" size="24"></ng-md-icon>
+            </md-button>
+            <h2>
+              <span>Dashboard [{{ $mdMedia('gt-md') }}] </span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="More">
+              <ng-md-icon icon="more_vert" size="24"></ng-md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>-->
+
+
+        <div layout-fill
+             layout-align="top center"
+             ui-view='main'></div>
+
+
+      </div>
+
+
+
+
+    </section>
+
+<!--
+
+
     <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
                 md-component-id="left"
                 md-is-locked-open="$mdMedia('gt-md')">
       <div ui-view='nav'></div>
     </md-sidenav>
 
-    <!-- Right Side Content -->
+
     <div flex layout="column"
          tabIndex="-1"
          role="main"
          class="md-whiteframe-z2">
 
-      <!-- Main Page Content -->
+
       <div ui-view='main'></div>
 
-    </div>
+    </div> -->
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->

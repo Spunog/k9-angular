@@ -1,27 +1,27 @@
 <!-- Primary Navigation -->
 
-<!-- Heading -->
-<md-toolbar>
-  <div class="md-toolbar-tools">
-    <h2>
-      <span>Menu</span>
-    </h2>
-  </div>
+<md-toolbar class="md-theme-indigo">
+  <h1 class="md-toolbar-tools">Navigation Menu</h1>
 </md-toolbar>
 
-<!-- Menu List -->
-<md-list>
-  <md-list-item ng-repeat="menuItem in vm.menuItems">
-      <md-button ui-sref="{{ menuItem.sref }}"
-                 ng-class="{'selected' : vm.isSelected(menuItem) }">
-        <ng-md-icon icon="{{ menuItem.icon }}" size="24"></ng-md-icon>
-        {{ menuItem.title }}
-      </md-button>
-  </md-list-item>
-  <md-list-item>
-      <md-button ng-click='vm.logout()'>
-        <ng-md-icon icon="exit_to_app" size="24"></ng-md-icon>
-        Sign Out
-      </md-button>
-  </md-list-item>
-</md-list>
+<md-content>
+
+  <!-- Menu List -->
+  <md-list>
+    <md-list-item ng-repeat="menuItem in vm.menuItems">
+        <md-button ui-sref="{{ menuItem.sref }}"
+                   ng-click="vm.close()"
+                   ng-class="{'selected' : vm.isSelected(menuItem) }">
+          <ng-md-icon icon="{{ menuItem.icon }}" size="24"></ng-md-icon>
+          {{ menuItem.title }}
+        </md-button>
+    </md-list-item>
+    <md-list-item>
+        <md-button ng-click='vm.logout()'>
+          <ng-md-icon icon="exit_to_app" size="24"></ng-md-icon>
+          Sign Out
+        </md-button>
+    </md-list-item>
+  </md-list>
+
+</md-content>

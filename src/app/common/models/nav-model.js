@@ -1,19 +1,44 @@
 (function () {
    'use strict';
 
-   angular.module("k9.models.nav",[])
+   angular.module("k9.models.nav",[
+     'ui.router'
+   ])
 
-  .service('NavModel', function(){
+  .service("NavModel", function NavModelService($timeout, $mdSidenav, $log, $compile, $state){
 
     //Public
     var vm = this;
-    vm.menuItem         =   getMenuItem;
-    vm.menuIsSelected   =   menuIsSelected;
-    vm.getMenuItems     =   getMenuItems;
-    vm.getCurrentItem   =   getCurrentItem;
-    vm.setCurrentItem   =   setCurrentItem;
+    vm.menuItem             =   getMenuItem;
+    vm.menuIsSelected       =   menuIsSelected;
+    vm.getMenuItems         =   getMenuItems;
+    vm.getCurrentItem       =   getCurrentItem;
+    vm.setCurrentItem       =   setCurrentItem;
+    vm.buildDelayedToggler  =   buildDelayedToggler;
+    vm.closeSideMenu        =   closeSideMenu;
 
     //Private
+
+    function closeSideMenu(){
+      $mdSidenav('left').close();
+    }
+
+    function debounce(func, wait, context) {
+      return function debounced() {
+        $mdSidenav('left').toggle();
+      };
+    }
+
+    function buildDelayedToggler(navID) {
+      return debounce(function() {
+        $mdSidenav(navID)
+          .toggle()
+          .then(function () {
+            $log.debug("toggle " + navID + " is done");
+          });
+      }, 200);
+    }
+
     var currentItem;
     var menuItem = function menuItem(title,sref,icon){
       // must be a nicer way to do this, feels wrong but not found it yet

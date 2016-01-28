@@ -9,12 +9,18 @@
 
        //Public
        var vm = this;
-       vm.menuItems       =   NavModel.getMenuItems();
-       vm.isSelected      =   isSelected;
-       vm.setCurrentItem  =   setCurrentItem;
-       vm.logout          =   logout;
+       vm.menuItems           =   NavModel.getMenuItems();
+       vm.isSelected          =   isSelected;
+       vm.setCurrentItem      =   setCurrentItem;
+       vm.logout              =   logout;
+       vm.close               =   closeSideMenu;
 
        //Private
+
+       function closeSideMenu(){
+         NavModel.closeSideMenu();
+       }
+
        function isSelected(menuItem){
          return NavModel.menuIsSelected(menuItem);
        }
