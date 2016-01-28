@@ -34,6 +34,7 @@
          localStorage.removeItem('auth_token');
          localStorage.removeItem('auth_email');
          $state.go('k9.login');
+         NavModel.closeSideMenu();
        }
 
      });
