@@ -186,6 +186,27 @@ span.name {
   padding-left:5px;
 }
 
+.siteicon{
+  margin:0 0 0 0;
+  position: absolute;
+  top: 1.4em;
+  -ms-transform: rotate(-30deg); /* IE 9 */
+  -webkit-transform: rotate(-30deg); /* Chrome, Safari, Opera */
+  transform: rotate(-30deg);
+}
+
+.com{
+  margin-left: 12px;
+}
+
+.menu {
+  background-color: transparent;
+  border: none;
+  height: 38px;
+  margin: 16px;
+  width: 36px;
+}
+
 /**
  *  Do not remove the comment below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically

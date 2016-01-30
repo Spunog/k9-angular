@@ -1,15 +1,17 @@
-.loginForm{
+.k9-login{
+  .loginForm{
 
-  .inputdemoErrors .inputErrorsApp {
-    min-height: 48px;
+    .inputdemoErrors .inputErrorsApp {
+      min-height: 48px;
+    }
+
+    form{
+      padding: 2em;
+    }
+
+    md-input-container{
+      margin-bottom: 1.5em;
+    }
+
   }
-
-  form{
-    padding: 2em;
-  }
-
-  md-input-container{
-    margin-bottom: 1.5em;
-  }
-
 }
