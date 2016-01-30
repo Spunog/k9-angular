@@ -6,7 +6,7 @@
   <!-- Toolbar -->
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <md-button ui-sref='k9.clients'
+      <md-button ng-click='vm.viewClient(vm.editedClient)'
                  class="md-icon-button"
                  aria-label="Go Back">
         <md-tooltip md-direction="bottom">Go back</md-tooltip>
@@ -41,7 +41,7 @@
   </md-toolbar>
 
   <!-- Main Content -->
-  <md-content flex id="content">
+  <md-content flex class='md-padding'>
 
       <!-- First Name and Last Name -->
       <div layout layout-xs="column">

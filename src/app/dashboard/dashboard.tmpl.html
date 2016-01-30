@@ -19,15 +19,11 @@
 </md-toolbar>
 
 <!-- Main Content -->
-<md-content flex id="content">
+<md-content flex layout-padding>
 
   <!-- Calendar -->
   <div>
       <div ui-calendar="vm.calendar"  ng-model="vm.eventSources">
-  </div>
-
-  <div>
-      <small>Calendar debug: <strong>{{ vm.alertMessage }}</strong></small>
   </div>
 
 </md-content>

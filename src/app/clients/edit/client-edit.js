@@ -14,10 +14,16 @@
       vm.deleteClient   =   deleteClient;
       vm.cancelEditing  =   cancelEditing;
       vm.updateClient   =   updateClient;
+      vm.viewClient     =   viewClient;
 
       getClientById();
 
       //Private
+
+      function viewClient(client){
+        $state.go('k9.clients.view', { clientID:client.id} );
+      }
+
       function getClientById() {
         ClientsModel.getClientById($stateParams.clientID)
                     .then(function (client) {
@@ -31,14 +37,16 @@
 
       function returnToClients(reload) {
         ClientsModel.resetCurrentClient();
-        $state.go('k9.clients', {}, { reload: false });
+        vm.viewClient(vm.editedClient);
+        // $state.go('k9.clients', {}, { reload: false });
       }
 
       function updateClient() {
         var client = angular.copy(vm.editedClient);
         ClientsModel.updateClient(vm.editedClient)
                     .then(function (clients) {
-                      returnToClients(true);
+                      // returnToClients(true);
+                      vm.viewClient(vm.editedClient);
                     });
       }
 

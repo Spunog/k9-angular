@@ -15,6 +15,7 @@
        var vm = this;
        vm.currentClient     =   ClientsModel.getCurrentClient();
        vm.editClient        =   editClient;
+       vm.viewClient        =   viewClient;
        vm.searchActive      =   false;
        vm.toggleSearch      =   toggleSearch;
        vm.clientSearchText  =   '';
@@ -53,6 +54,11 @@
        // Go to edit
        function editClient(client){
          $state.go('k9.clients.edit', { clientID:client.id} );
+       }
+
+       // Go to view
+       function viewClient(client){
+         $state.go('k9.clients.view', { clientID:client.id} );
        }
 
      }) //end client ctrl

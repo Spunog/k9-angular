@@ -22,7 +22,8 @@
       //Private
       var currentClient = {
         first_name: '',
-        last_name: ''
+        last_name: '',
+        dogs: []
       };
 
       function getCurrentClient(client){
@@ -33,6 +34,7 @@
         currentClient.id = client.id;
         currentClient.first_name = client.first_name;
         currentClient.last_name = client.last_name;
+        currentClient.dogs = client.dogs;
       }
 
       function resetCurrentClient(){

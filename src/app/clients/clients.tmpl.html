@@ -83,7 +83,7 @@
     <div ng-hide='(vm.clients | filter:vm.clientSearchText).length < 1'>
 
       <md-content class='search-results' flex layout-padding>
-        <md-list-item ng-click="vm.editClient(client)"
+        <md-list-item ng-click="vm.viewClient(client)"
                       ng-repeat="client in vm.clients | filter:vm.clientSearchText">
             <ng-md-icon icon="face" size="24"></ng-md-icon>
             <p>

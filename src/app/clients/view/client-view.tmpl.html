@@ -1,0 +1,207 @@
+<!-- Client View -->
+
+<!-- Toolbar -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button ui-sref='k9.clients'
+               class="md-icon-button"
+               aria-label="Go Back">
+      <md-tooltip md-direction="bottom">Go back</md-tooltip>
+      <ng-md-icon icon="keyboard_backspace" size="24"></ng-md-icon>
+    </md-button>
+    <h2>
+      <span>{{ vm.client.first_name }} {{ vm.client.last_name }}</span>
+    </h2>
+    <span flex></span>
+
+    <!-- Edit -->
+    <md-button type='submit'
+               class="md-icon-button"
+               aria-label="Edit Client"
+               ng-click="vm.editClient(vm.client)">
+      <md-tooltip md-direction="bottom">
+        Edit Client
+      </md-tooltip>
+      <ng-md-icon icon="edit" size="24"></ng-md-icon>
+    </md-button>
+
+  </div>
+</md-toolbar>
+
+<!-- Main Content -->
+<md-content flex layout="row">
+
+  <md-card layout="column" flex="33">
+
+    <!-- Photo -->
+    <img ng-src="//i.imgur.com/ITDHZRl.jpg"
+         class="md-card-image"
+         alt="Profile Image"
+         layout-padding>
+
+    <!-- <md-card-content>
+      <p></p>
+    </md-card-content> -->
+
+    <!-- Contact Details -->
+    <md-list>
+      <!-- <md-divider ></md-divider> -->
+      <md-subheader class="md-no-sticky">Contact Details</md-subheader>
+      <md-list-item class="md-2-line">
+        <ng-md-icon icon="phone" size="16" ng-class="md-avatar-icon"></ng-md-icon>
+        <div class="md-list-item-text">
+          <h3><a href="tel:015551312">01-555 1312</a></h3>
+          <p> home phone </p>
+        </div>
+      </md-list-item>
+      <md-list-item class="md-2-line">
+        <ng-md-icon icon="email" size="16" ng-class="md-avatar-icon"></ng-md-icon>
+        <div class="md-list-item-text">
+          <h3><a href="mailto:{{ vm.client.first_name }}@gmail.com">{{ vm.client.first_name }}@mailinator.com</a></h3>
+          <p> e-mail </p>
+        </div>
+      </md-list-item>
+    </md-list>
+
+  </md-card>
+
+  <!--Right section-->
+  <md-card layout="column" flex="66">
+
+    <!--Tabs-->
+    <div ng-cloak>
+      <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="Pets ({{ vm.client.dogs.length }})">
+            <md-content>
+
+              <div class="pets-list">
+
+                <div ng-show='(vm.client.dogs | filter:vm.petSearchText).length < 1'
+                     class="alert alert-info text-center"
+                     flex layout-padding
+                     role="alert">
+                     <p>
+                       There are no pets yet. You can add your first pet by
+                       clicking the Add Pet button below.
+                     </p>
+                </div>
+
+                <div ng-hide='(vm.client.dogs | filter:vm.petSearchText).length < 1'>
+
+                  <md-content class='search-results' flex layout-padding>
+
+                    <md-list-item class='pets-list-detailed'
+                                  ng-click="vm.editPet(pet)"
+                                  ng-repeat="pet in vm.client.dogs | filter:vm.petSearchText">
+
+                        <img src="//i.imgur.com/GUWVnui.jpg"
+                             class='thumb'
+                             alt="Fido" />
+                        <div>
+                          <h3>{{ pet.name }}</h3>
+                          <ul class='pet-meta'>
+                            <li><strong>Breed:</strong> Yorkshire Terrier</li>
+                            <li><strong>Age:</strong> 2</li>
+                            <li><strong>Visits:</strong> 34</li>
+                            <li><strong>Last Visit:</strong> 20th Dec '15</li>
+                          </ul>
+                        </div>
+
+                      </md-list-item>
+                    </md-list>
+                  </md-content>
+
+                </div> <!-- end pet results -->
+              </div> <!-- end pets list -->
+
+            </md-content>
+
+            <!-- Add New Pet -->
+            <button class="md-fab md-fab-bottom-right md-button md-default-theme"
+                    ui-sref='k9.pets.create'
+                    aria-label="Add"
+                    tabindex="0">
+              <ng-md-icon icon="add" size="24"></ng-md-icon>
+              <md-tooltip>Add Pet</md-tooltip>
+            </button>
+
+          </md-tab>
+
+          <!-- Appointments -->
+          <md-tab label="Appointments">
+            <md-content style="height: 600px;" md-theme="altTheme">
+
+                <section>
+                  <md-subheader class="md-primary">Upcoming Appointments</md-subheader>
+                  <md-list layout-padding>
+                    <md-list-item class="md-3-line">
+                        <ng-md-icon icon="schedule" class="md-avatar" size="28"></ng-md-icon>
+                        <div class="md-list-item-text">
+                          <h3>Feburary 8th 2016</h3>
+                          <h4>Fido @ 4pm</h4>
+                          <p>
+                            Clip and Wash
+                          </p>
+                        </div>
+                    </md-list-item>
+                  </md-list>
+                </section>
+
+                <section>
+                  <md-subheader class="md-warn">Previous Appointments</md-subheader>
+                  <md-list layout="column" layout-padding>
+                    <md-list-item class="md-3-line">
+                      <ng-md-icon icon="event" class="md-avatar" size="28"></ng-md-icon>
+                      <div class="md-list-item-text">
+                        <h3>Dec 20th 2015</h3>
+                        <h4>Fido @ 11am</h4>
+                        <p>
+                          Clip and Wash for Christmas
+                        </p>
+                      </div>
+                    </md-list-item>
+                  </md-list>
+                </section>
+              </md-content>
+          </md-tab> <!--end appointments-->
+
+          <!-- Photos -->
+          <md-tab label="Photos">
+            <md-content class="md-padding">
+              <md-card>
+                 <md-card-title>
+                   <md-card-title-text>
+                     <span class="md-headline">Fido</span>
+                     <span class="md-subhead">Groomed and ready for Christmas</span>
+                   </md-card-title-text>
+                 </md-card-title>
+                 <md-card-content layout="row" layout-align="space-between">
+                   <div class="md-media-xl card-media">
+                     <img src="//i.imgur.com/GUWVnui.jpg" alt="" />
+                   </div>
+                   <md-card-actions layout="column">
+                     <md-button class="md-icon-button" aria-label="Favorite">
+                       <ng-md-icon icon="favorite" size="28"></ng-md-icon>
+                     </md-button>
+                     <md-button class="md-icon-button" aria-label="Settings">
+                       <ng-md-icon icon="menu" size="28"></ng-md-icon>
+                     </md-button>
+                     <md-button class="md-icon-button" aria-label="Share">
+                       <ng-md-icon icon="share" size="28"></ng-md-icon>
+                     </md-button>
+                   </md-card-actions>
+                 </md-card-content>
+               </md-card>
+            </md-content>
+          </md-tab>
+
+        </md-tabs> <!--end tabs-->
+
+      </md-content> <!--end tabs content-->
+
+    </div> <!-- end ng:cloak -->
+
+  </md-card>
+
+</md-content>

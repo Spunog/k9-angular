@@ -23,6 +23,7 @@
       'k9.models.clients',
       'k9.clients',
       'k9.clients.create',
+      'k9.clients.view',
       'k9.clients.edit',
       'k9.models.pets',
       'k9.pets',

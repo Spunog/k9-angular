@@ -19,6 +19,10 @@
     <!-- css files will be automatically insert here -->
     <!-- endinject -->
     <!-- endbuild -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.layouts.min.css"
+          media="screen"
+          charset="utf-8">
     <style type="text/css">
         /**
          * Hide when Angular is not yet loaded and initialized
@@ -41,55 +45,9 @@
         <div ui-view='nav'></div>
       </md-sidenav>
 
-      <div layout="column" flex>
-
-        <!--<md-toolbar>
-          <div class="md-toolbar-tools">
-            <md-button ng-show="$mdMedia('gt-md')" class="md-icon-button" aria-label="Menu">
-              <ng-md-icon icon="menu" size="24"></ng-md-icon>
-            </md-button>
-            <h2>
-              <span>Dashboard [{{ $mdMedia('gt-md') }}] </span>
-            </h2>
-            <span flex></span>
-            <md-button class="md-icon-button" aria-label="More">
-              <ng-md-icon icon="more_vert" size="24"></ng-md-icon>
-            </md-button>
-          </div>
-        </md-toolbar>-->
-
-
-        <div layout-fill
-             layout-align="top center"
-             ui-view='main'></div>
-
-
-      </div>
-
-
-
+      <div ui-view='main' flex></div>
 
     </section>
-
-<!--
-
-
-    <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
-                md-component-id="left"
-                md-is-locked-open="$mdMedia('gt-md')">
-      <div ui-view='nav'></div>
-    </md-sidenav>
-
-
-    <div flex layout="column"
-         tabIndex="-1"
-         role="main"
-         class="md-whiteframe-z2">
-
-
-      <div ui-view='main'></div>
-
-    </div> -->
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
