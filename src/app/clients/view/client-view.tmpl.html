@@ -1,5 +1,5 @@
 <!-- Toolbar -->
-<md-toolbar>
+<md-toolbar class='client-view'>
   <div class="md-toolbar-tools">
     <md-button ui-sref='k9.clients'
                class="md-icon-button"
@@ -26,25 +26,25 @@
   </div>
 </md-toolbar>
 
-<div layout="row" layout-xs="column">
+<div layout="row" layout-xs="column" class='client-view'>
 
   <!-- Main Client Details -->
   <md-card layout="column" flex='33' flex-xs='100'>
 
     <!-- Photo -->
-    <img ng-src="//i.imgur.com/ITDHZRl.jpg"
-         class="md-card-image"
-         alt="Profile Image"
-         layout-padding>
+    <div class="client-profile">
+      <img ng-src="//i.imgur.com/ITDHZRl.jpg"
+           class="md-card-image"
+           alt="Profile Image"
+           layout-padding>
 
-    <!-- <md-card-content>
-      <p></p>
-    </md-card-content> -->
+      <div class='client-name'>
+        <h3>{{ vm.client.first_name }} {{ vm.client.last_name }}</h3>
+      </div>
+    </div>
 
-    <!-- Contact Details -->
-    <md-list>
-      <!-- <md-divider ></md-divider> -->
-      <md-subheader class="md-no-sticky">Contact Details</md-subheader>
+    <md-list class='contact-details'>
+      <md-divider ></md-divider>
       <md-list-item class="md-2-line">
         <ng-md-icon icon="phone" size="16" ng-class="md-avatar-icon"></ng-md-icon>
         <div class="md-list-item-text">
@@ -52,6 +52,7 @@
           <p> home phone </p>
         </div>
       </md-list-item>
+      <md-divider ></md-divider>
       <md-list-item class="md-2-line">
         <ng-md-icon icon="email" size="16" ng-class="md-avatar-icon"></ng-md-icon>
         <div class="md-list-item-text">
@@ -87,7 +88,7 @@
 
                 <md-content class='search-results' flex layout-padding>
 
-                  <md-list-item class='pets-list-detailed'
+                  <md-list-item class='pet-list'
                                 ng-click="vm.editPet(pet)"
                                 ng-repeat="pet in vm.client.dogs | filter:vm.petSearchText">
 
@@ -111,17 +112,15 @@
               </div> <!-- end pet results -->
             </div> <!-- end pets list -->
 
-
-
-          <!-- Add New Pet -->
-          <button class="md-button md-default-theme"
-                  ui-sref='k9.pets.create'
-                  aria-label="Add"
-                  tabindex="0">
-            <ng-md-icon icon="add" size="24"></ng-md-icon>
-            <md-tooltip>Add Pet</md-tooltip>
-            Add Pet
-          </button>
+            <!-- Add New Pet -->
+            <button class="md-button md-default-theme"
+                    ui-sref='k9.pets.create'
+                    aria-label="Add"
+                    tabindex="0">
+              <ng-md-icon icon="add" size="24"></ng-md-icon>
+              <md-tooltip>Add Pet</md-tooltip>
+              Add Pet
+            </button>
 
           </md-content>
 

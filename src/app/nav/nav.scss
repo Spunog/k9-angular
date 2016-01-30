@@ -1,3 +1,16 @@
+.siteicon{
+  margin:0 0 0 3px;
+  position: absolute;
+  top:31px;
+  -ms-transform: rotate(-30deg); /* IE 9 */
+  -webkit-transform: rotate(-30deg); /* Chrome, Safari, Opera */
+  transform: rotate(-30deg);
+}
+
+.com{
+  margin-left: 12px;
+}
+
 .menu {
   background-color: transparent;
   border: none;

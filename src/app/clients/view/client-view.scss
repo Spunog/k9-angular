@@ -1,22 +1,49 @@
-//
-.pets-list-detailed{
-  h3{
-    margin-bottom: 0;
-    padding-bottom: 0;
+//Client View Styles
+
+.client-view{
+
+  .client-profile{
+    position: relative;
   }
-  .thumb{
-    margin-right:2em;
-    max-height:50px;
-    max-width:50px;
+
+  .client-name{
+    position: absolute;
+    bottom: 0;
+    color: #FFF;
+    text-align: center;
+    display: block;
+    width: 100%;
+    font-size: 2em;
+
+    h3{
+      text-shadow: 2px 2px #000;
+      // -webkit-text-stroke: 1px #000;
+    }
+
   }
-  .pet-meta{
-    list-style: none;
-    margin:0 !important;
-    padding:0 !important;
-    li{
-      margin:0 1em 0 0;
+
+
+
+  .pet-list{
+
+    h3{
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .thumb{
+      margin-right:2em;
+      max-height:50px;
+      max-width:50px;
+    }
+    .pet-meta{
       list-style: none;
-      display: inline-block;
+      margin:0 !important;
+      padding:0 !important;
+      li{
+        margin:0 1em 0 0;
+        list-style: none;
+        display: inline-block;
+      }
     }
   }
 }
