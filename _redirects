@@ -1,0 +1,3 @@
+# Simple redirects from one path to another
+#   required for netlify.com and page refreshes
+/* /index.html    200
