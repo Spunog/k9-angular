@@ -6,6 +6,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <base href="/"> <!-- needed for HTML5 url mode-->
+
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -19,10 +21,10 @@
     <!-- css files will be automatically insert here -->
     <!-- endinject -->
     <!-- endbuild -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.4/angular-material.layouts.min.css"
-          media="screen"
-          charset="utf-8">
+
+    <!--issue with build script that this angular material layout not included-->
+    <link rel="stylesheet" href="../bower_components/angular-material/angular-material.layouts.min.css" />
+
     <style type="text/css">
         /**
          * Hide when Angular is not yet loaded and initialized
