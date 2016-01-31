@@ -29,7 +29,7 @@
                   .then(function (clients) {
                       ClientsModel.addClient(clients.data.client);
                       $state.go(
-                                  'k9.clients',
+                                  'k9.clients.view',
                                   {clientID: clients.data.client.id},
                                   { reload: true }
                                 );
