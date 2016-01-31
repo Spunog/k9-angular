@@ -13,6 +13,7 @@
       vm.getPets            =   getPets;
       vm.addPet             =   addPet;
       vm.createPet          =   createPet;
+      vm.createPetWithOwner =   createPetWithOwner;
       vm.getPetById         =   getPetById;
       vm.updatePet          =   updatePet;
       vm.deletePet          =   deletePet;
@@ -43,7 +44,9 @@
       }
 
       function addPet(pet){
-        pets.unshift(pet);
+        if(pets){
+            pets.unshift(pet);
+        }
       }
 
       function createPet(pet){
@@ -51,6 +54,22 @@
         return $http({
           method  : 'POST',
           url     : appConfig.API.baseURL +'dogs',
+          data    : {
+                      dog: {
+                        name  : pet.name
+                      }
+                    }
+        });
+
+      }
+
+      function createPetWithOwner(pet,ownerID){
+        // Function creates a new dog that is linked
+        // to a particular owner
+
+        return $http({
+          method  : 'POST',
+          url     : appConfig.API.baseURL + 'clients/' + ownerID + '/dogs',
           data    : {
                       dog: {
                         name  : pet.name

@@ -114,9 +114,9 @@
 
             <!-- Add New Pet -->
             <button class="md-button md-default-theme"
-                    ui-sref='k9.pets.create'
                     aria-label="Add"
-                    tabindex="0">
+                    tabindex="0"
+                    ng-click='vm.createPet(this)'>
               <ng-md-icon icon="add" size="24"></ng-md-icon>
               <md-tooltip>Add Pet</md-tooltip>
               Add Pet
@@ -128,7 +128,7 @@
 
         <!-- Appointments -->
         <md-tab label="Appointments (1)">
-          <md-content md-theme="altTheme">
+          <md-content>
 
               <section>
                 <md-subheader class="md-primary">Upcoming Appointments</md-subheader>

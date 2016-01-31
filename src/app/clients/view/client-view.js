@@ -12,10 +12,25 @@
       var vm = this;
       vm.client       =   ClientsModel.getCurrentClient();
       vm.editClient   =   editClient;
+      vm.createPet    =   createPet;
 
       getClientById();
 
       //Private
+
+      function createPet(jsEvent){
+
+          $mdDialog.show({
+            controller    : 'CreatePetPopController as vm',
+            templateUrl   : 'app/pets/create/pop/pet-create-pop.tmpl.html',
+            parent        :  angular.element(document.body),
+            targetEvent   : jsEvent,
+            clickOutsideToClose:true,
+            locals: {client: vm.client}
+          });
+
+      }
+
       function getClientById() {
         ClientsModel.getClientById($stateParams.clientID)
                     .then(function (client) {

@@ -28,7 +28,8 @@
       'k9.models.pets',
       'k9.pets',
       'k9.pets.create',
-      'k9.pets.edit'
+      'k9.pets.edit',
+      'k9.pet.pop.create'
     ]);
 
 })();
