@@ -13,10 +13,16 @@
       vm.client       =   ClientsModel.getCurrentClient();
       vm.editClient   =   editClient;
       vm.createPet    =   createPet;
+      vm.editPet      =   editPet;
 
       getClientById();
 
       //Private
+
+      // Go to edit
+      function editPet(pet){
+        $state.go('k9.pets.edit', { petID:pet.id} );
+      }
 
       function createPet(jsEvent){
 

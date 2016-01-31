@@ -19,6 +19,7 @@
       vm.updateClient         =   updateClient;
       vm.deleteClient         =   deleteClient;
       vm.addDogLocally        =   addDogLocally;
+      vm.removeDogLocally     =   removeDogLocally;
 
       //Private
       var currentClient = {
@@ -29,6 +30,12 @@
 
       function addDogLocally(dog){
         currentClient.dogs.push(dog);
+      }
+
+      function removeDogLocally(pet){
+        _.remove(currentClient.dogs, function(c) {
+          return c.id == pet.id;
+        });
       }
 
       function getCurrentClient(client){

@@ -21,7 +21,7 @@
 
   })
 
-  .controller('EditPetController', function ($state, $stateParams, PetsModel,$mdDialog) {
+  .controller('EditPetController', function ($state, $stateParams, ClientsModel, PetsModel,$mdDialog) {
 
       var vm = this;
 
@@ -60,6 +60,7 @@
           // Delete Pet
           PetsModel.deletePet(pet)
                       .then(function () {
+                        ClientsModel.removeDogLocally(pet);
                         returnToPets(true);
                       });
         });
