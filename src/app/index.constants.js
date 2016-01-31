@@ -15,7 +15,7 @@
     })
     .constant('calendarConfig', {
       'defaults' : {
-                        height: 620, //temp hard coding
+                        height: 'auto', //620
                         editable: true,
                         header:{
                           left: 'title',
