@@ -44,19 +44,19 @@
     </div>
 
     <md-list class='contact-details'>
-      <md-divider ></md-divider>
-      <md-list-item class="md-2-line">
+      <md-divider ng-show='vm.client.phone.length > 0'></md-divider>
+      <md-list-item class="md-2-line" ng-show="vm.client.phone.length > 0">
         <ng-md-icon icon="phone" size="16" ng-class="md-avatar-icon"></ng-md-icon>
         <div class="md-list-item-text">
-          <h3><a href="tel:015551312">01-555 1312</a></h3>
+          <h3><a href="tel:{{ vm.client.phone }}">{{ vm.client.phone }}</a></h3>
           <p> home phone </p>
         </div>
       </md-list-item>
-      <md-divider ></md-divider>
-      <md-list-item class="md-2-line">
+      <md-divider ng-show="vm.client.email.length > 0"></md-divider>
+      <md-list-item class="md-2-line" ng-show="vm.client.email.length > 0">
         <ng-md-icon icon="email" size="16" ng-class="md-avatar-icon"></ng-md-icon>
         <div class="md-list-item-text">
-          <h3><a href="mailto:{{ vm.client.first_name }}@gmail.com">{{ vm.client.first_name }}@mailinator.com</a></h3>
+          <h3><a href="mailto:{{ vm.client.email }}">{{ vm.client.email }}</a></h3>
           <p> e-mail </p>
         </div>
       </md-list-item>

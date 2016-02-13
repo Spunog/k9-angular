@@ -25,6 +25,8 @@
       var currentClient = {
         first_name: '',
         last_name: '',
+        phone: '',
+        email: '',
         dogs: []
       };
 
@@ -46,12 +48,18 @@
         currentClient.id = client.id;
         currentClient.first_name = client.first_name;
         currentClient.last_name = client.last_name;
+        currentClient.phone = client.phone;
+        currentClient.email = client.email;
         currentClient.dogs = client.dogs;
       }
 
       function resetCurrentClient(){
-        currentClient.first_name = '';
-        currentClient.last_name = '';
+        currentClient.id          = 0;
+        currentClient.first_name  = '';
+        currentClient.last_name   = '';
+        currentClient.phone       = '';
+        currentClient.email       = '';
+        currentClient.dogs        = [];
       }
 
       function getClients(){
@@ -70,7 +78,9 @@
           data    : {
                       client: {
                         first_name  : client.firstname,
-                        last_name   : client.lastname
+                        last_name   : client.lastname,
+                        phone       : client.phone,
+                        email       : client.email
                       }
                     }
         });
@@ -97,7 +107,9 @@
                         data    : {
                                     client: {
                                       first_name  : client.first_name,
-                                      last_name   : client.last_name
+                                      last_name   : client.last_name,
+                                      phone       : client.phone,
+                                      email       : client.email
                                     }
                                   }
 
@@ -108,6 +120,8 @@
                         });
                         matchedClient.first_name = client.first_name;
                         matchedClient.last_name  = client.last_name;
+                        matchedClient.phone      = client.phone;
+                        matchedClient.email      = client.email;
                       });
       }
 
