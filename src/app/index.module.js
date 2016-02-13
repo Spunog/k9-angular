@@ -29,7 +29,10 @@
       'k9.pets',
       'k9.pets.create',
       'k9.pets.edit',
-      'k9.pet.pop.create'
+      'k9.pet.pop.create',
+      'k9.social',
+      'k9.setting',
+      'k9.report'
     ]);
 
 })();

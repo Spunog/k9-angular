@@ -1,0 +1,75 @@
+<!-- Social Media -->
+
+<!-- Toolbar -->
+<md-toolbar ng-show='!vm.searchActive'>
+  <div class="md-toolbar-tools">
+    <md-button ng-click="vm.toggleLeft()"
+               hide-gt-md
+               class="md-icon-button"
+               aria-label="Menu">
+      <ng-md-icon ng-click='vm.clickIconMorph()'
+                  icon="{{ vm.clickIcon }}"
+                  options='{ "easing": "quad-out", "duration": 500 }'
+                  size="24"></ng-md-icon>
+    </md-button>
+    <h2>
+      <span>Social Media</span>
+    </h2>
+    <span flex></span>
+
+  </div>
+</md-toolbar>
+
+<!-- Toolbar Search -->
+<md-toolbar ng-show='vm.searchActive'>
+
+  <div class="md-toolbar-tools">
+
+    <!-- Back Button -->
+    <md-button type='button'
+               class="md-icon-button"
+               ng-click='vm.toggleSearch(false)'
+               aria-label="Back">
+      <md-tooltip md-direction="bottom">
+        Back
+      </md-tooltip>
+      <ng-md-icon icon="arrow_back" size="24"></ng-md-icon>
+    </md-button>
+
+    <!-- Title -->
+    <h3 flex="10">
+      Back
+    </h3>
+
+  </div>
+
+</md-toolbar>
+
+<!-- Main Content -->
+<md-content flex id="content">
+
+<md-card>
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">Campaign Manager</span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-content>
+    <img src='http://i.imgur.com/nDn0Aqa.jpg'>
+    <p>
+      This section will allow you to create new social Media
+      activities such as Facebook posts to share photos of newly
+      groomed dogs and help advertise your business (WIP)
+    </p>
+  </md-card-content>
+</md-card>
+
+</md-content>
+
+<!-- Add New Pet -->
+<button class="md-fab md-fab-bottom-right md-button md-default-theme"
+        aria-label="Add"
+        tabindex="0">
+  <ng-md-icon icon="add" size="24"></ng-md-icon>
+  <md-tooltip>Add New Campaign</md-tooltip>
+</button>
