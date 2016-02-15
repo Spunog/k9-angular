@@ -68,11 +68,21 @@
       <div layout layout-xs="column">
         <md-input-container flex>
           <label>Phone</label>
-          <input ng-model='vm.editedClient.phone'>
+          <input ng-model='newClient.phone'>
         </md-input-container>
         <md-input-container flex>
           <label>Email</label>
-          <input ng-model='vm.editedClient.email'>
+          <input ng-model='newClient.email'>
+        </md-input-container>
+      </div>
+
+      <!-- Address -->
+      <div layout layout-xs="column">
+        <md-input-container flex>
+          <label>address</label>
+          <textarea name="address"
+                    ng-model="newClient.address"
+                    md-maxlength="100"></textarea>
         </md-input-container>
       </div>
 

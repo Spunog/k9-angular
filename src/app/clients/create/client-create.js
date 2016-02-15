@@ -25,6 +25,9 @@
     }
 
     function createClient(client){
+
+      console.log('client before posting...',client);
+
       ClientsModel.createClient(client)
                   .then(function (clients) {
                       ClientsModel.addClient(clients.data.client);
@@ -37,10 +40,8 @@
     }
 
     function resetForm(){
-      vm.newClient = {
-        first_name: '',
-        last_name: ''
-      };
+      ClientsModel.resetCurrentClient();
+      vm.newClient = angular.copy(ClientsModel.getCurrentClient());
     }
 
   }) // end create client controller

@@ -27,6 +27,7 @@
         last_name: '',
         phone: '',
         email: '',
+        address:'',
         dogs: []
       };
 
@@ -45,12 +46,13 @@
       }
 
       function setCurrentClient(client){
-        currentClient.id = client.id;
-        currentClient.first_name = client.first_name;
-        currentClient.last_name = client.last_name;
-        currentClient.phone = client.phone;
-        currentClient.email = client.email;
-        currentClient.dogs = client.dogs;
+        currentClient.id          = client.id;
+        currentClient.first_name  = client.first_name;
+        currentClient.last_name   = client.last_name;
+        currentClient.phone       = client.phone;
+        currentClient.email       = client.email;
+        currentClient.dogs        = client.dogs;
+        currentClient.address     = client.address;
       }
 
       function resetCurrentClient(){
@@ -59,6 +61,7 @@
         currentClient.last_name   = '';
         currentClient.phone       = '';
         currentClient.email       = '';
+        currentClient.address     = '';
         currentClient.dogs        = [];
       }
 
@@ -67,7 +70,9 @@
       }
 
       function addClient(client){
-        clients.unshift(client);
+        if(clients.length > 0){
+          clients.unshift(client);
+        }
       }
 
       function createClient(client){
@@ -80,7 +85,8 @@
                         first_name  : client.firstname,
                         last_name   : client.lastname,
                         phone       : client.phone,
-                        email       : client.email
+                        email       : client.email,
+                        address     : client.address
                       }
                     }
         });
@@ -109,7 +115,8 @@
                                       first_name  : client.first_name,
                                       last_name   : client.last_name,
                                       phone       : client.phone,
-                                      email       : client.email
+                                      email       : client.email,
+                                      address     : client.address
                                     }
                                   }
 
@@ -122,6 +129,7 @@
                         matchedClient.last_name  = client.last_name;
                         matchedClient.phone      = client.phone;
                         matchedClient.email      = client.email;
+                        matchedClient.address    = client.address;
                       });
       }
 

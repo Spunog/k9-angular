@@ -60,6 +60,14 @@
           <p> e-mail </p>
         </div>
       </md-list-item>
+      <md-divider ng-show="vm.client.address.length > 0"></md-divider>
+      <md-list-item class="md-2-line" ng-show="vm.client.address.length > 0">
+        <ng-md-icon icon="home" size="16" ng-class="md-avatar-icon"></ng-md-icon>
+        <div class="md-list-item-text">
+          <span>{{ vm.client.address }}</span>
+          <p> address </p>
+        </div>
+      </md-list-item>
     </md-list>
 
   </md-card>
