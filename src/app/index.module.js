@@ -31,8 +31,13 @@
       'k9.pets.edit',
       'k9.pet.pop.create',
       'k9.social',
-      'k9.setting',
-      'k9.report'
+      'k9.breeds',
+      'k9.breeds.create',
+      'k9.breeds.edit',
+      'k9.breed.pop.create',
+      'k9.models.breeds',
+      'k9.report',
+      'k9.settings'
     ]);
 
 })();

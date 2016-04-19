@@ -1,0 +1,64 @@
+<!-- Breed Edit -->
+
+<form role="form"
+      name='update-breed-form'
+      ng-submit='vm.updateBreed(vm.editedBreed)'>
+
+  <!-- Toolbar -->
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button ui-sref='k9.breeds' class="md-icon-button" aria-label="Go Back">
+        <md-tooltip md-direction="bottom">Go back</md-tooltip>
+        <ng-md-icon ng-click='vm.clickIconMorph()'
+                    icon="{{vm.clickIcon}}"
+                    options='{ "easing": "quad-in", "duration": 500 }'
+                    size="24"></ng-md-icon>
+      </md-button>
+      <h2>
+        <span>Edit Breed</span>
+      </h2>
+      <span flex></span>
+      <md-button type='button'
+                 class="md-icon-button"
+                 aria-label="Delete Breed"
+                 ng-click='vm.deleteBreed(vm.editedBreed)'>
+        <md-tooltip md-direction="bottom">
+          Delete Breed
+        </md-tooltip>
+        <ng-md-icon icon="delete" size="24"></ng-md-icon>
+      </md-button>
+
+      <!-- Save -->
+      <md-button type='submit'
+                 class="md-icon-button"
+                 aria-label="Save Breed">
+        <md-tooltip md-direction="bottom">
+          Save Breed
+        </md-tooltip>
+        <ng-md-icon icon="done" size="24"></ng-md-icon>
+      </md-button>
+
+    </div>
+  </md-toolbar>
+
+  <!-- Main Content -->
+  <md-content flex class='md-padding'>
+
+    <!-- Name -->
+    <div layout layout-xs="column">
+      <md-input-container flex>
+        <label>Name</label>
+        <input ng-model='vm.editedBreed.name'
+               ng-required="true"
+               rm-focus>
+        <div ng-show="update-breed-form.name.$dirty"
+             ng-messages="update-breed-form.name.$error">
+          <div ng-message="required">
+            A name must be entered
+          </div>
+        </div>
+      </md-input-container>
+    </div>
+
+  </md-content>
+</form>

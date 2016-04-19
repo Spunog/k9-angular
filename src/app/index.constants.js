@@ -5,6 +5,8 @@
   var development = true;
   var baseURL = development ? 'http://www.k9.dev/api/v1/' : 'https://k9g.herokuapp.com/api/v1/';
 
+  var test = 'something';
+
   angular
     .module('k9')
     .constant('moment', moment)

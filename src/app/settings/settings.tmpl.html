@@ -48,12 +48,97 @@
 <!-- Main Content -->
 <md-content flex id="content">
 
-<md-card>
-  <md-card-content>
-    <p>
-      Not currently available
-    </p>
-  </md-card-content>
-</md-card>
+<md-content ng-cloak>
+  <md-tabs md-dynamic-height md-border-bottom>
+    <md-tab label="Breeds ({{ vm.breeds.length }})">
+      <md-content>
+
+        <div class="settings-list">
+
+          <div ng-show='(vm.client.dogs | filter:vm.settingSearchText).length < 1'
+               class="alert alert-info text-center"
+               flex layout-padding
+               role="alert">
+               <p>
+                 There are no settings setting breeds entered yet yet. You can add your
+                 first breed by clicking the Add Setting button below.
+               </p>
+          </div>
+
+          <div ng-hide='(vm.client.dogs | filter:vm.settingSearchText).length < 1'>
+
+            <md-content class='search-results' flex layout-padding>
+
+              <md-list-item class='setting-list noright'
+                            ng-click="vm.editSetting(breed)"
+                            ng-repeat="breed in vm.breeds | filter:vm.settingSearchText">
+
+                  <p>
+                    {{ breed.name }}
+                  </p>
+
+                </md-list-item>
+              </md-list>
+            </md-content>
+
+          </div> <!-- end setting results -->
+        </div> <!-- end settings list -->
+
+        <!-- Add New Breed -->
+        <button class="md-button md-default-theme"
+                aria-label="Add"
+                tabindex="0"
+                ng-click='vm.createSetting(this)'>
+          <ng-md-icon icon="add" size="24"></ng-md-icon>
+          <md-tooltip>Add Breed</md-tooltip>
+          Add Breed
+        </button>
+
+      </md-content>
+
+    </md-tab>
+
+    <!-- Jobs -->
+    <md-tab label="Jobs (1)">
+      <md-content>
+
+          <section>
+            <md-subheader class="md-primary">Upcoming Appointments</md-subheader>
+            <md-list layout-padding>
+              <md-list-item class="md-3-line">
+                  <ng-md-icon icon="schedule" class="md-avatar" size="28"></ng-md-icon>
+                  <div class="md-list-item-text">
+                    <h3>Feburary 8th 2016</h3>
+                    <h4>Fido @ 4pm</h4>
+                    <p>
+                      Clip and Wash
+                    </p>
+                  </div>
+              </md-list-item>
+            </md-list>
+          </section>
+
+          <section>
+            <md-subheader class="md-warn">Previous Appointments</md-subheader>
+            <md-list layout="column" layout-padding>
+              <md-list-item class="md-3-line">
+                <ng-md-icon icon="event" class="md-avatar" size="28"></ng-md-icon>
+                <div class="md-list-item-text">
+                  <h3>Dec 20th 2015</h3>
+                  <h4>Fido @ 11am</h4>
+                  <p>
+                    Clip and Wash for Christmas
+                  </p>
+                </div>
+              </md-list-item>
+            </md-list>
+          </section>
+        </md-content>
+    </md-tab> <!--end Work Type-->
+
+  </md-tabs> <!--end tabs-->
+
+</md-content> <!--end tabs content-->
+
 
 </md-content>

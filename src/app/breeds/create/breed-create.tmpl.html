@@ -1,0 +1,51 @@
+<!-- Breed Create -->
+<form role="form"
+      name='add-breed-form'
+      ng-submit='vm.createBreed(newBreed)'>
+
+  <!-- Toolbar -->
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button ui-sref='k9.breeds' class="md-icon-button" aria-label="Go Back">
+        <md-tooltip md-direction="bottom">Go back</md-tooltip>
+        <ng-md-icon icon="keyboard_backspace" size="24"></ng-md-icon>
+      </md-button>
+      <h2>
+        <span>New Breed</span>
+      </h2>
+      <span flex></span>
+
+      <!-- Save -->
+      <md-button type='submit'
+                 class="md-icon-button"
+                 aria-label="Save Breed">
+        <md-tooltip md-direction="bottom">
+          Save Breed
+        </md-tooltip>
+        <ng-md-icon icon="done" size="24"></ng-md-icon>
+      </md-button>
+
+    </div>
+  </md-toolbar>
+
+  <!-- Main Content -->
+  <md-content flex class='md-padding'>
+
+      <!-- First Name and Last Name -->
+      <div layout layout-xs="column">
+        <md-input-container flex>
+          <label>Name</label>
+          <input ng-model='newBreed.name'
+                 ng-required="true"
+                 rm-focus>
+          <div ng-show="add-breed-form.name.$dirty"
+               ng-messages="add-breed-form.name.$error">
+            <div ng-message="required">
+              A name must be entered
+            </div>
+          </div>
+        </md-input-container>
+      </div>
+
+  </md-content>
+</form>

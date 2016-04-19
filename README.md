@@ -2,7 +2,7 @@
 Dog Grooming Management App
 Front end using AngularJS and Bootstrap for K9 Restful API app - https://github.com/Spunog/k9
 
-## Setup
+## Setup + Running
 After cloning:
 * bower install - will download dependancies
 * npm Install
