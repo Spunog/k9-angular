@@ -1,0 +1,44 @@
+<!-- Breeds -->
+
+<!-- Main Content -->
+<md-content flex id="content">
+
+  <div class="breeds-list">
+
+    <div ng-show='(vm.breeds | filter:vm.breedSearchText).length < 1'
+         class="alert alert-info text-center"
+         role="alert">
+         <p>
+           There are no breeds yet. You can add your first breed by
+           clicking the Add Breed button below.
+         </p>
+    </div>
+
+    <div ng-hide='(vm.breeds | filter:vm.breedSearchText).length < 1'>
+
+      <md-content class='search-results' flex layout-padding>
+
+        <md-list-item ng-click="vm.editBreed(breed)"
+                      ng-repeat="breed in vm.breeds | filter:vm.breedSearchText">
+            <ng-md-icon icon="paw" size="24"></ng-md-icon>
+            <p>
+              {{ breed.name }}
+            </p>
+            <ng-md-icon icon="chevron_right" size="24"></ng-md-icon>
+          </md-list-item>
+        </md-list>
+      </md-content>
+
+    </div> <!-- end breed results -->
+  </div> <!-- end breeds list -->
+
+</md-content>
+
+<!-- Add New Breed -->
+<button class="md-fab md-fab-bottom-right md-button md-default-theme"
+        ui-sref='k9.breeds.create'
+        aria-label="Add"
+        tabindex="0">
+  <ng-md-icon icon="add" size="24"></ng-md-icon>
+  <md-tooltip>Add Breed</md-tooltip>
+</button>

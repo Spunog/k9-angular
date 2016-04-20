@@ -20,9 +20,11 @@
       //Private
 
       // Go to edit
-      function editSetting(setting){
+      function editSetting(setting) {
         alert('going to edit...');
-        $state.go('k9.settings.breed.edit', { settingID:setting.id} );
+        $state.go('k9.settings.breed.edit', {
+          settingID: setting.id
+        });
       }
 
       function getBreeds() {
@@ -54,10 +56,15 @@
 
     }) //end setting controller
 
+
   .config(function config($stateProvider, $httpProvider, $urlRouterProvider) {
 
     //State Providers
-    $stateProvider.state('k9.settings', {
+    $stateProvider
+
+      // Settings > Abstract Root Level
+      .state('k9.settings', {
+      abstract: true,
       url: '/settings',
       views: {
         'main@': {
@@ -69,13 +76,44 @@
           templateUrl: 'app/nav/nav.tmpl.html'
         }
       },
-      resolve: {
-        // Page Title
-        $title: function() {
-          return 'Settings';
+      controller: function($scope) {
+        $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+          $scope.currentTab = toState.data.selectedTab;
+        });
+      }
+    })
+
+    // Settings > Breeds
+    .state('k9.settings.breeds', {
+        url: '/breeds',
+        data: {
+          'selectedTab': 0
+        },
+        views: {
+          'breeds': {
+            controller: 'BreedController as vm',
+            templateUrl: 'app/settings/breeds/settings-breeds.tmpl.html'
+          }
+        }
+    })
+
+    // Settings > Activity
+    .state('k9.settings.activity', {
+      url: '/activity',
+      data: {
+        'selectedTab': 1
+      },
+      views: {
+        'activity': {
+          controller: function(NavModel, $state, $mdDialog) {
+            var vm = this;
+            vm.name = 'activity';
+          },
+          templateUrl: 'app/settings/activity/settings-activity.tmpl.html'
         }
       }
     });
+
 
   });
 
