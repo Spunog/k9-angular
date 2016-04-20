@@ -25,7 +25,7 @@
 
     // Private
     function returnTobreeds(reload){
-      $state.go('k9.breeds', {}, { reload: reload });
+      $state.go('k9.settings.breeds', {}, { reload: reload });
     }
 
     function cancelCreating(){
@@ -35,8 +35,8 @@
     function createBreed(breed){
       BreedsModel.createBreed(breed)
                   .then(function (breeds) {
-                    BreedsModel.addBreed(breeds.data.dog);
-                    $state.go('k9.breeds', {breedID: breeds.data.dog.id}, { reload: true });
+                    BreedsModel.addBreed(breeds.data.breed);
+                    $state.go('k9.breeds', {breedID: breeds.data.breed.id}, { reload: true });
                   });
     }
 

@@ -35,7 +35,7 @@
 
       function returnToBreeds(reload) {
         BreedsModel.resetCurrentBreed();
-        $state.go('k9.breeds', {}, { reload: false });
+        $state.go('k9.settings.breeds', {}, { reload: false });
       }
 
       function updateBreed() {
@@ -49,8 +49,8 @@
       vm.deleteBreed = function deleteBreed(breed){
 
         var confirm = $mdDialog.confirm()
-                               .title('Are you sure you would like to delete this dog?')
-                               .textContent('Deleting the dog will remove all associated records.')
+                               .title('Are you sure you would like to delete this breed?')
+                               .textContent('Deleting the breed will remove all associated records.')
                                .ok('Cancel')
                                .cancel('Delete Breed');
 
