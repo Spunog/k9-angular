@@ -1,0 +1,115 @@
+<!-- Activities -->
+
+<!-- Toolbar -->
+<md-toolbar ng-show='!vm.searchActive'>
+  <div class="md-toolbar-tools">
+    <md-button ng-click="vm.toggleLeft()"
+               hide-gt-md
+               class="md-icon-button"
+               aria-label="Menu">
+      <ng-md-icon ng-click='vm.clickIconMorph()'
+                  icon="{{ vm.clickIcon }}"
+                  options='{ "easing": "quad-out", "duration": 500 }'
+                  size="24"></ng-md-icon>
+    </md-button>
+    <h2>
+      <span>Activities</span>
+    </h2>
+    <span flex></span>
+
+    <!-- Search -->
+    <md-button type='button'
+               class="md-icon-button"
+               ng-click='vm.toggleSearch(true)'
+               aria-label="Search Activities">
+      <md-tooltip md-direction="bottom">
+        Search Activities
+      </md-tooltip>
+      <ng-md-icon icon="search" size="24"></ng-md-icon>
+    </md-button>
+
+  </div>
+</md-toolbar>
+
+<!-- Toolbar Search -->
+<md-toolbar class="md-hue-1" ng-show='vm.searchActive'>
+
+  <div class="md-toolbar-tools">
+
+    <!-- Back Button -->
+    <md-button type='button'
+               class="md-icon-button"
+               ng-click='vm.toggleSearch(false)'
+               aria-label="Back">
+      <md-tooltip md-direction="bottom">
+        Back
+      </md-tooltip>
+      <ng-md-icon icon="arrow_back" size="24"></ng-md-icon>
+    </md-button>
+
+    <!-- Title -->
+    <h3 flex="10">
+      Back
+    </h3>
+
+    <!-- Search -->
+    <md-input-container flex>
+      <label></label>
+      <input ng-model="vm.activitySearchText"
+             focus="true" placeholder="enter search">
+    </md-input-container>
+
+    <md-button type='button'
+               class="md-icon-button"
+               aria-label="Search">
+      <md-tooltip md-direction="bottom">
+        Search
+      </md-tooltip>
+      <ng-md-icon icon="search" size="24"></ng-md-icon>
+    </md-button>
+  </div>
+
+</md-toolbar>
+
+<!-- Main Content -->
+<md-content flex id="content">
+
+  <div class="activities-list">
+
+    <div ng-show='(vm.activities | filter:vm.activitySearchText).length < 1'
+         class="alert alert-info text-center"
+         role="alert">
+         <p>
+           There are no activities yet. You can add your first activity by
+           clicking the Add Activity button below.
+         </p>
+    </div>
+
+    <div ng-hide='(vm.activities | filter:vm.activitySearchText).length < 1'>
+
+      <md-content class='search-results' flex layout-padding>
+
+        <md-list-item ng-click="vm.editActivity(activity)"
+                      ng-repeat="activity in vm.activities | filter:vm.activitySearchText">
+            <ng-md-icon icon="paw" size="24"></ng-md-icon>
+            <p>
+              {{ activity.description }}
+            </p>
+            <ng-md-icon icon="chevron_right" size="24"></ng-md-icon>
+          </md-list-item>
+        </md-list>
+      </md-content>
+
+    </div> <!-- end activity results -->
+  </div> <!-- end activities list -->
+
+</md-content>
+
+<!-- Add New Activity -->
+<button class="md-fab md-fab-bottom-right md-button md-default-theme"
+        ui-sref='k9.activities.create'
+        aria-label="Add"
+        tabindex="0">
+  <ng-md-icon icon="add" size="24"></ng-md-icon>
+  <md-tooltip>Add Activity</md-tooltip>
+</button>

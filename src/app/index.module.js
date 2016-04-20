@@ -37,6 +37,10 @@
       'k9.breed.pop.create',
       'k9.models.breeds',
       'k9.report',
+      'k9.activities',
+      'k9.activities.create',
+      'k9.activities.edit',
+      'k9.models.activities',
       'k9.settings'
     ]);
 
