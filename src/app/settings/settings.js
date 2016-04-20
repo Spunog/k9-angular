@@ -9,53 +9,23 @@
 
       //Public
       var vm = this;
-      vm.toggleLeft = NavModel.buildDelayedToggler('left');
-      vm.editSetting = editSetting;
-      vm.breeds = [];
+      vm.selectedTab  =   $state.current.data.selectedTab |= 0;
+      vm.toggleLeft   = NavModel.buildDelayedToggler('left');
 
       // On Load
       updateNav();
-      getBreeds();
 
       //Private
-
-      // Go to edit
-      function editSetting(setting) {
-        alert('going to edit...');
-        $state.go('k9.settings.breed.edit', {
-          settingID: setting.id
-        });
-      }
-
-      function getBreeds() {
-        vm.breeds = [{
-          id: 1,
-          name: 'Bulldog'
-        }, {
-          id: 2,
-          name: 'Beagle'
-        }, {
-          id: 3,
-          name: 'Pom'
-        }, {
-          id: 4,
-          name: 'Shitzu'
-        }, {
-          id: 5,
-          name: 'Yorkshire Terrier'
-        }, ];
-      }
 
       function updateNav() {
         //Update Navigation State
         NavModel.setCurrentItem({
           title: 'Settings',
-          sref: 'k9.setting'
+          sref: 'k9.settings'
         });
       }
 
     }) //end setting controller
-
 
   .config(function config($stateProvider, $httpProvider, $urlRouterProvider) {
 
@@ -75,11 +45,6 @@
           controller: 'NavigationController as vm',
           templateUrl: 'app/nav/nav.tmpl.html'
         }
-      },
-      controller: function($scope) {
-        $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-          $scope.currentTab = toState.data.selectedTab;
-        });
       }
     })
 
@@ -98,17 +63,14 @@
     })
 
     // Settings > Activity
-    .state('k9.settings.activity', {
-      url: '/activity',
+    .state('k9.settings.activities', {
+      url: '/activities',
       data: {
         'selectedTab': 1
       },
       views: {
-        'activity': {
-          controller: function(NavModel, $state, $mdDialog) {
-            var vm = this;
-            vm.name = 'activity';
-          },
+        'activities': {
+          controller: 'ActivityController as vm',
           templateUrl: 'app/settings/activity/settings-activity.tmpl.html'
         }
       }

@@ -1,1 +1,44 @@
-<h1>Activity</h1>
+<!-- Activities -->
+
+<!-- Main Content -->
+<md-content flex id="content">
+
+  <div class="activities-list">
+
+    <div ng-show='(vm.activities | filter:vm.activitySearchText).length < 1'
+         class="alert alert-info text-center"
+         role="alert">
+         <p>
+           There are no activities yet. You can add your first activity by
+           clicking the Add Activity button below.
+         </p>
+    </div>
+
+    <div ng-hide='(vm.activities | filter:vm.activitySearchText).length < 1'>
+
+      <md-content class='search-results' flex layout-padding>
+
+        <md-list-item ng-click="vm.editActivity(activity)"
+                      ng-repeat="activity in vm.activities | filter:vm.activitySearchText">
+            <ng-md-icon icon="paw" size="24"></ng-md-icon>
+            <p>
+              {{ activity.description }}
+            </p>
+            <ng-md-icon icon="chevron_right" size="24"></ng-md-icon>
+          </md-list-item>
+        </md-list>
+      </md-content>
+
+    </div> <!-- end activity results -->
+  </div> <!-- end activities list -->
+
+</md-content>
+
+<!-- Add New Activity -->
+<button class="md-fab md-fab-bottom-right md-button md-default-theme"
+        ui-sref='k9.activities.create'
+        aria-label="Add"
+        tabindex="0">
+  <ng-md-icon icon="add" size="24"></ng-md-icon>
+  <md-tooltip>Add Activity</md-tooltip>
+</button>

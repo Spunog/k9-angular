@@ -25,7 +25,7 @@
 
     // Private
     function returnToactivities(reload){
-      $state.go('k9.activities', {}, { reload: reload });
+      $state.go('k9.settings.activities', {}, { reload: reload });
     }
 
     function cancelCreating(){
@@ -36,7 +36,7 @@
       ActivitiesModel.createActivity(activity)
                   .then(function (activities) {
                     ActivitiesModel.addActivity(activities.data.activity);
-                    $state.go('k9.activities', {activityID: activities.data.activity.id}, { reload: true });
+                    $state.go('k9.settings.activities', {activityID: activities.data.activity.id}, { reload: true });
                   });
     }
 

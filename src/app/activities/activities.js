@@ -13,13 +13,13 @@
 
        //Public
        var vm = this;
-       vm.clickIcon     =   'keyboard_backspace';
-       vm.currentActivity    =   ActivitiesModel.getCurrentActivity();
-       vm.editActivity       =   editActivity;
-       vm.searchActive  =   false;
-       vm.toggleSearch  =   toggleSearch;
-       vm.activitySearchText = '';
-       vm.toggleLeft    =   NavModel.buildDelayedToggler('left');
+       vm.clickIcon           =   'keyboard_backspace';
+       vm.currentActivity     =   ActivitiesModel.getCurrentActivity();
+       vm.editActivity        =   editActivity;
+       vm.searchActive        =   false;
+       vm.toggleSearch        =   toggleSearch;
+       vm.activitySearchText  =   '';
+       vm.toggleLeft          =   NavModel.buildDelayedToggler('left');       
 
        animateBackIcon();
        getActivities();

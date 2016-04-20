@@ -35,7 +35,7 @@
 
       function returnToActivities(reload) {
         ActivitiesModel.resetCurrentActivity();
-        $state.go('k9.activities', {}, { reload: false });
+        $state.go('k9.settings.activities', {}, { reload: false });
       }
 
       function updateActivity() {

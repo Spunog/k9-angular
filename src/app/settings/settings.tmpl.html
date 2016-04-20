@@ -50,12 +50,12 @@
 
 <md-content ng-cloak>
 
-  <md-tabs md-selected="currentTab" md-dynamic-height>
+  <md-tabs md-selected="vm.selectedTab" md-dynamic-height>
       <md-tab label="Breeds" ui-sref="k9.settings.breeds">
           <div ui-view="breeds"></div>
       </md-tab>
-      <md-tab label="Activity" ui-sref="k9.settings.activity">
-          <div ui-view="activity"></div>
+      <md-tab label="Activities" ui-sref="k9.settings.activities">
+          <div ui-view="activities"></div>
       </md-tab>
   </md-tabs>
 
