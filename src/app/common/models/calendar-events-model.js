@@ -26,7 +26,9 @@
           description: '',
           note: '',
           start: '',
-          end: ''
+          end: '',
+          dog: {},
+          activity: {}
         };
       }
 

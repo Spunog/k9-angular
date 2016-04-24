@@ -10,30 +10,21 @@
     //Public
     var vm = this;
 
-    vm.simulateQuery = false;
-    vm.isDisabled    = false;
-    vm.pets        = loadAll();
-    vm.querySearch   = querySearch;
-    vm.selectedItemChange = selectedItemChange;
-    vm.searchTextChange   = searchTextChange;
+    vm.simulateQuery          = false;
+    vm.isDisabled             = false;
+    vm.pets                   = loadAll();
+    vm.querySearch            = querySearch;
     vm.newPet = newPet;
 
     function newPet(pet) {
       alert("Sorry! More information needed for " + pet.name + " first!");
     }
 
-
     function querySearch (query) {
       var results = query ? vm.pets.filter( createFilterFor(query) ) : vm.pets;
       return results;
     }
 
-    function searchTextChange(text) {
-      $log.info('Text changed to ' + text);
-    }
-    function selectedItemChange(item) {
-      $log.info('Item changed to ' + JSON.stringify(item));
-    }
     /**
      * Build `pets` list of key/value pairs
      */
@@ -53,8 +44,6 @@
       };
     }
 
-
-
     // Create Array of Booking Times
     vm.bookingTimes             =   CalendarEventsModel.getBookingTimes();
     vm.createAppointment        =   createAppointment;
@@ -69,6 +58,8 @@
         id: selectedDate.id,
         title: selectedDate.title || '',
         start: selectedDate.start.toDate(),
+        dog:  selectedDate.dog || {},
+        activity:  selectedDate.activity || {},
         startTime:  {
                       id    : selectedDate.start.format("HH:00:00"),
                       name  : selectedDate.start.format("HH:00")

@@ -123,7 +123,9 @@
                 end: event.end,
                 allDay: event.allDay,
                 stick: true,
-                color: '#C2185B'
+                color: '#C2185B',
+                dog: event.dog,
+                activity: event.activity
               };
 
               vm.calendarEvents.push(newEvent);
