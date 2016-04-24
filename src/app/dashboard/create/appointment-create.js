@@ -5,17 +5,29 @@
     'ui.router'
   ])
 
-  .controller('CreateAppointmentController', function(PetsModel, $log, $state, $stateParams,CalendarEventsModel, $mdDialog, selectedDate) {
+  .controller('CreateAppointmentController', function(ActivitiesModel,PetsModel, $log, $state, $stateParams,CalendarEventsModel, $mdDialog, selectedDate) {
 
     //Public
     var vm = this;
 
-    vm.simulateQuery          = false;
-    vm.isDisabled             = false;
-    vm.pets                   = loadAll();
-    vm.querySearch            = querySearch;
-    vm.newPet = newPet;
+    vm.simulateQuery    = false;
+    vm.isDisabled       = false;
+    vm.pets             = loadAll();
+    vm.querySearch      = querySearch;
+    vm.newPet           = newPet;
+    vm.activities       = [];
 
+    //OnLoad
+    getActivities();
+
+    //Private
+    function getActivities(){
+      ActivitiesModel.getActivities()
+               .then(function (activities) {
+                  vm.activities = activities;
+               });
+    }
+    
     function newPet(pet) {
       alert("Sorry! More information needed for " + pet.name + " first!");
     }

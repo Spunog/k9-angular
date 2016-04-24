@@ -82,7 +82,7 @@
         <!-- Work -->
         <md-input-container class="md-block" flex-gt-sm>
            <label>Job</label>
-           <md-select ng-model="vm.newAppointment.activity_id">
+           <md-select ng-model="vm.newAppointment.activity.id">
              <md-option ng-repeat="activity in vm.activities"
                         value="{{activity.id}}">
                {{activity.description}}
