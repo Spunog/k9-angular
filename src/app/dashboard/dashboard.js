@@ -42,7 +42,7 @@
         if(view.name==='month'){
           calendarEvent.start = calendarEvent.start
                                              .startOf('day')
-                                             .hours(moment().hours() + 1);
+                                             .hours(moment().hours());
         }
 
         $mdDialog.show({
@@ -62,7 +62,6 @@
       }
 
       function calendarEventClick( date, jsEvent, view){
-          vm.alertMessage = (date.title + ' was clicked ');
           $mdDialog.show({
             controller    : 'CreateAppointmentController as vm',
             templateUrl   : 'app/dashboard/create/appointment-create.tmpl.html',

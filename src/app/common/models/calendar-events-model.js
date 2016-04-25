@@ -105,9 +105,11 @@
           methodx: 'POST',
           url: URLS.APPOINTMENTS,
           appointment: {
-            title  : appointment.title,
-            start  : start.format(),
-            end    : start.format() //calendarAppointment.end
+            title         : appointment.title,
+            start         : start.format(),
+            end           : start.format(), //calendarAppointment.end,
+            dog_id        : appointment.dog.id,
+            activity_id   : appointment.activity.id
           }
         };
 
@@ -142,6 +144,7 @@
               matchedCalendarEvent.note         =   newAppointment.note;
               matchedCalendarEvent.start        =   newAppointment.start;
               matchedCalendarEvent.end          =   newAppointment.end;
+              matchedCalendarEvent.dog          =   newAppointment.dog;
             }else{
               //New Appointment add to events list
               calendarEvents.push(newAppointment);

@@ -68,7 +68,8 @@
             md-search-text="vm.searchText"
             md-items="item in vm.querySearch(vm.searchText)"
             md-item-text="item.name"
-            md-floating-label="Pet's name">
+            md-floating-label="Pet's name"
+            ng-required="true">
           <md-item-template>
             <span md-highlight-text="vm.searchText">{{item.name}}</span>
           </md-item-template>

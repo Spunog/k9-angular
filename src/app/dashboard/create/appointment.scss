@@ -11,6 +11,11 @@
 
 }
 
+md-autocomplete[md-floating-label] md-autocomplete-wrap {
+  height: inherit;
+  height: 70px;
+}
+
 form {
   md-datepicker {
     position: relative;

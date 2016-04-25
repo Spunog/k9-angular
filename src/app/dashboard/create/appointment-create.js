@@ -27,7 +27,7 @@
                   vm.activities = activities;
                });
     }
-    
+
     function newPet(pet) {
       alert("Sorry! More information needed for " + pet.name + " first!");
     }
@@ -66,11 +66,12 @@
 
     //Private
     function getNewAppointmentDefaults(){
+      var dog = (selectedDate.dog===null || !selectedDate.dog.id) ? '' : selectedDate.dog;
       return {
         id: selectedDate.id,
         title: selectedDate.title || '',
         start: selectedDate.start.toDate(),
-        dog:  selectedDate.dog || {},
+        dog:  dog,
         activity:  selectedDate.activity || {},
         startTime:  {
                       id    : selectedDate.start.format("HH:00:00"),
