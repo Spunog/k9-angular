@@ -38,11 +38,12 @@
         var calendarEvent = angular.copy(CalendarEventsModel.newCalendarEvent());
         calendarEvent.start = date;
 
-        // If using month view there is no valid month, update to use next hour
+        // If using month view there is no valid month,
+        // update to use next hour
         if(view.name==='month'){
           calendarEvent.start = calendarEvent.start
                                              .startOf('day')
-                                             .hours(moment().hours());
+                                             .hours(moment().hours() + 1);
         }
 
         $mdDialog.show({

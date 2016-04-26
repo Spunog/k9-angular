@@ -6,7 +6,7 @@
     'k9.models.clients'
   ])
 
-  .controller('ViewClientController', function ($state, $stateParams, ClientsModel,$mdDialog) {
+  .controller('ViewClientController', function (CalendarEventsModel,$state, $stateParams, ClientsModel,$mdDialog) {
 
       //Public
       var vm = this;
@@ -14,10 +14,19 @@
       vm.editClient   =   editClient;
       vm.createPet    =   createPet;
       vm.editPet      =   editPet;
+      vm.appointments =   [];
 
+      // Onload
       getClientById();
+      getAppointments();
 
       //Private
+      function getAppointments(){
+        CalendarEventsModel.getCalendarEvents()
+                           .then(function (calendarEvents) {
+                              vm.appointments = calendarEvents;
+                           });
+      }
 
       // Go to edit
       function editPet(pet){

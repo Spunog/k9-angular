@@ -97,8 +97,11 @@
 
         var appointment = angular.copy(newAppointment);
 
-        //Concat Start Date and Time
-        var start = concatDateAndTime(appointment.start,appointment.startTime.name);
+        //Concat Start Date and Time and return as moment object
+        var start = concatDateAndTime(
+                                        appointment.start,
+                                        appointment.startTime.name
+                                      );
 
         //New Record Vs Updating Record
         var updateParams = {
@@ -106,8 +109,8 @@
           url: URLS.APPOINTMENTS,
           appointment: {
             title         : appointment.title,
-            start         : start.format(),
-            end           : start.format(), //calendarAppointment.end,
+            start         : start.format('YYYY-MM-DD HH:mm'),
+            end           : start.format('YYYY-MM-DD HH:mm'), //calendarAppointment.end,
             dog_id        : appointment.dog.id,
             activity_id   : appointment.activity.id
           }

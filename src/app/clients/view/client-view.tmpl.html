@@ -135,40 +135,27 @@
         </md-tab>
 
         <!-- Appointments -->
-        <md-tab label="Appointments (1)">
+        <md-tab label="Appointments ({{ vm.appointments.length }})">
           <md-content>
-
               <section>
                 <md-subheader class="md-primary">Upcoming Appointments</md-subheader>
                 <md-list layout-padding>
-                  <md-list-item class="md-3-line">
+                  <md-list-item class="md-3-line"
+                                ng-repeat="appointment in vm.appointments">
+
                       <ng-md-icon icon="schedule" class="md-avatar" size="28"></ng-md-icon>
                       <div class="md-list-item-text">
-                        <h3>Feburary 8th 2016</h3>
-                        <h4>Fido @ 4pm</h4>
+                        <h3>{{appointment.title}}</h3>
+                        <h4>{{appointment.dog.name}} @ {{appointment.start}}</h4>
                         <p>
-                          Clip and Wash
+                          {{appointment.activity.description}}
                         </p>
                       </div>
+
                   </md-list-item>
                 </md-list>
               </section>
 
-              <section>
-                <md-subheader class="md-warn">Previous Appointments</md-subheader>
-                <md-list layout="column" layout-padding>
-                  <md-list-item class="md-3-line">
-                    <ng-md-icon icon="event" class="md-avatar" size="28"></ng-md-icon>
-                    <div class="md-list-item-text">
-                      <h3>Dec 20th 2015</h3>
-                      <h4>Fido @ 11am</h4>
-                      <p>
-                        Clip and Wash for Christmas
-                      </p>
-                    </div>
-                  </md-list-item>
-                </md-list>
-              </section>
             </md-content>
         </md-tab> <!--end appointments-->
 

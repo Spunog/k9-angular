@@ -39,10 +39,8 @@ Colors: Use the following - https://www.google.com/design/spec/style/color.html#
 
 /* Remove that awful yellow color and border from today in Schedule */
 .fc-unthemed .fc-today {
-  background-color: #62A8E0 !important;
-  color: #FFF;
+  background-color: #FFE !important;
   font-weight: bold;
-  border-radius: 0.3em 0 0.3em 0.3em;
 }
 
 /* Styling for each event from Schedule */
