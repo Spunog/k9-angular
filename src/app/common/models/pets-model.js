@@ -23,7 +23,12 @@
           pets;
 
       var currentPet = {
-        name: ''
+        name: '',
+        note:'',
+        breed: {
+          id:'',
+          name:''
+        }
       };
 
       function getCurrentPet(pet){
@@ -33,10 +38,20 @@
       function setCurrentPet(pet){
         currentPet.id = pet.id;
         currentPet.name = pet.name;
+        currentPet.note = pet.note;
+        currentPet.breed = {
+          id: pet.breed.id,
+          name: pet.breed.name
+        };
       }
 
       function resetCurrentPet(){
-        currentPet.name = '';
+        currentPet.name   = '';
+        currentPet.note   = '';
+        currentPet.breed  = {
+                              id:'',
+                              name:''
+                            };
       }
 
       function getPets(){
@@ -51,13 +66,16 @@
 
       function createPet(pet){
 
+        //Check for breed
+        if(pet.breed){
+            pet.breed_id = pet.breed.id; //Makes API call easier
+        }
+
         return $http({
           method  : 'POST',
           url     : appConfig.API.baseURL +'dogs',
           data    : {
-                      dog: {
-                        name  : pet.name
-                      }
+                      dog: pet
                     }
         });
 
@@ -67,13 +85,16 @@
         // Function creates a new dog that is linked
         // to a particular owner
 
+        //Check for breed
+        if(pet.breed){
+            pet.breed_id = pet.breed.id; //Makes API call easier
+        }
+
         return $http({
           method  : 'POST',
           url     : appConfig.API.baseURL + 'clients/' + ownerID + '/dogs',
           data    : {
-                      dog: {
-                        name  : pet.name
-                      }
+                      dog: pet
                     }
         });
 
@@ -93,13 +114,17 @@
       }
 
       function updatePet(pet){
+
+        //Check for breed
+        if(pet.breed){
+            pet.breed_id = pet.breed.id; //Makes API call easier
+        }
+
         return $http({
                         method  : 'PATCH', //patch over put for update - https://goo.gl/JRPN2o
                         url     : appConfig.API.baseURL + 'dogs/' + pet.id,
                         data    : {
-                                    dog: {
-                                      name  : pet.name
-                                    }
+                                    dog: pet
                                   }
 
                       }).then(function (response) {
@@ -108,6 +133,11 @@
                             return c.id == parseInt(pet.id, 10);
                         });
                         matchedPet.name = pet.name;
+                        matchedPet.note = pet.note;
+                        matchedPet.breed = {
+                          id: pet.breed.id,
+                          name: pet.breed.name
+                        };
                       });
       }
 

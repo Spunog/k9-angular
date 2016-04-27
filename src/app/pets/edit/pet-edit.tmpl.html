@@ -1,5 +1,4 @@
 <!-- Pet Edit -->
-
 <form role="form"
       name='update-pet-form'
       ng-submit='vm.updatePet(vm.editedPet)'>
@@ -46,6 +45,7 @@
 
     <!-- Name -->
     <div layout layout-xs="column">
+
       <md-input-container flex>
         <label>Name</label>
         <input ng-model='vm.editedPet.name'
@@ -57,6 +57,28 @@
             A name must be entered
           </div>
         </div>
+      </md-input-container>
+
+      <!-- Breed -->
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Breed</label>
+        <md-select ng-model="vm.editedPet.breed.id">
+          <md-option ng-repeat="breed in vm.breeds"
+                     value="{{breed.id}}">
+            {{breed.name}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+
+    </div>
+
+    <!-- Note -->
+    <div layout layout-xs="column">
+      <md-input-container flex>
+        <label>Note</label>
+        <textarea name="note"
+                  ng-model="vm.editedPet.note"
+                  md-maxlength="100"></textarea>
       </md-input-container>
     </div>
 

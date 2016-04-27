@@ -21,17 +21,38 @@
 
   })
 
-  .controller('EditPetController', function ($state, $stateParams, ClientsModel, PetsModel,$mdDialog) {
+  .controller('EditPetController', function (BreedsModel,$state, $stateParams, ClientsModel, PetsModel,$mdDialog) {
 
-      var vm = this;
+      var vm            =   this;
+      vm.breeds         =   [];
+      vm.clickIcon      =   'menu'; //Menu Icon Animation
+      vm.editedPet      =   PetsModel.getCurrentPet();
+      vm.cancelEditing  =   cancelEditing;
+      vm.updatePet      =   updatePet;
 
-      //Menu Icon Animation
-      vm.clickIcon = 'menu';
+      //Onload
+      getBreeds();
+
       setTimeout(function(){
          vm.clickIcon = 'keyboard_backspace';
       }, 1);
 
-      vm.editedPet = PetsModel.getCurrentPet();
+      PetsModel.getPetById($stateParams.petID)
+                  .then(function (pet) {
+                      if (pet) {
+                          PetsModel.setCurrentPet(pet);
+                      } else {
+                          returnToPets(true);
+                      }
+                  });
+
+      //Private
+      function getBreeds(){
+        BreedsModel.getBreeds()
+                   .then(function (breeds) {
+                      vm.breeds = breeds;
+                   });
+      }
 
       function returnToPets(reload) {
         PetsModel.resetCurrentPet();
@@ -41,9 +62,9 @@
       function updatePet() {
         vm.pet = angular.copy(vm.editedPet);
         PetsModel.updatePet(vm.editedPet)
-                    .then(function (pets) {
-                      returnToPets(true);
-                    });
+                 .then(function (pets) {
+                   returnToPets(true);
+                 });
       }
 
       vm.deletePet = function deletePet(pet){
@@ -70,18 +91,6 @@
       function cancelEditing() {
           returnToPets(false);
       }
-
-      PetsModel.getPetById($stateParams.petID)
-                  .then(function (pet) {
-                      if (pet) {
-                          PetsModel.setCurrentPet(pet);
-                      } else {
-                          returnToPets(true);
-                      }
-                  });
-
-      vm.cancelEditing = cancelEditing;
-      vm.updatePet = updatePet;
 
   }); // end edit pet ctrl
 

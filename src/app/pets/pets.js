@@ -18,7 +18,7 @@
        vm.editPet       =   editPet;
        vm.searchActive  =   false;
        vm.toggleSearch  =   toggleSearch;
-       vm.petSearchText = '';
+       vm.petSearchText =   '';
        vm.toggleLeft    =   NavModel.buildDelayedToggler('left');
 
        animateBackIcon();

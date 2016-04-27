@@ -90,6 +90,7 @@
       <md-content class='search-results' flex layout-padding>
 
         <md-list-item ng-click="vm.editPet(pet)"
+                      aria-label='View Pet {{ pet.name }}'
                       ng-repeat="pet in vm.pets | filter:vm.petSearchText">
             <ng-md-icon icon="paw" size="24"></ng-md-icon>
             <p>
