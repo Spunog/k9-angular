@@ -3,6 +3,7 @@
 
   angular
     .module('k9', [
+      'ngFileUpload',
       'ngAnimate',
       'ngCookies',
       'ngSanitize',

@@ -6,7 +6,42 @@
     'k9.models.clients'
   ])
 
-  .controller('EditClientController', function ($state, $stateParams, ClientsModel,$mdDialog) {
+  .controller('EditClientController', function (Upload,$scope,$state,$stateParams, ClientsModel,$mdDialog) {
+
+    console.log('about to try and upload file');
+    $scope.upload = function (file) {
+          Upload.upload({
+              url: 'http://www.k9.dev/api/v1/clients/2',
+              method: 'PUT',
+              data: {'client[picture]': file, 'client[first_name]': 'xxxxxxxxy'}
+          }).then(function (resp) {
+              console.log(resp,'resp');
+              console.log('Success uploaded. Response: ' + resp.data); //' + resp.config.data.file.name + '
+          }, function (resp) {
+              console.log('Error status: ' + resp.status);
+          }, function (evt) {
+              console.log(evt,'evt');
+              var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+              console.log('progress: ' + progressPercentage + '% '); //'+ evt.config.data.file.name'
+          });
+    };
+    console.log('about to try and upload file');
+
+      // $scope.upload = function () {
+      //
+      //   var test = Upload.upload({
+      //       url: 'http://www.k9.dev/api/v1/clients/2',
+      //       method: 'PUT',
+      //       fields: { 'client[first_name]': 'JJ' },
+      //       file: $scope.picture,
+      //       fileFormDataName: 'client[picture]'
+      //   });
+      //
+      //   console.log(test,'upload result');
+      //
+      //   console.log('done');
+      //
+      // };
 
       //Public
       var vm = this;
@@ -19,6 +54,20 @@
       getClientById();
 
       //Private
+
+      // $scope.uploadFile = function(files) {
+      //     var fd = new FormData();
+      //     //Take the first selected file
+      //     fd.append("file", files[0]);
+      //
+      //     console.log(files[0],'files');
+      //     console.log(fd,'fd');
+      //
+      //     vm.file = fd;
+      //
+      //     console.log('in the upload function!!!!!!!');
+      //
+      // };
 
       function viewClient(client){
         $state.go('k9.clients.view', { clientID:client.id} );

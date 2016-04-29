@@ -43,6 +43,25 @@
   <!-- Main Content -->
   <md-content flex class='md-padding'>
 
+    <div layout layout-xs="row">
+
+        <md-button
+             ngf-select
+             ng-model="picture"
+             name="picture"
+             ngf-pattern="'image/*'"
+             ngf-accept="'image/*'"
+             ngf-max-size="20MB"
+             ngf-min-height="100"
+             ngf-resize="{height: 150}">Upload Image</md-button>
+
+      <md-button ng-click='upload(picture)'>Upload Photo</md-button>
+
+      <img ngf-thumbnail="picture"
+           height='150'>
+
+    </div>
+
       <!-- First Name and Last Name -->
       <div layout layout-xs="column">
         <md-input-container flex>
