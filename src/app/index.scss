@@ -207,6 +207,30 @@ span.name {
   width: 36px;
 }
 
+
+.upload-image-placeholder{
+  background:#EEE;
+  width:90%;
+  min-height:140px;
+  border:dashed #CCC;
+  text-align: center;
+  overflow: auto;
+
+  img{
+    margin-top:1em;
+    margin-bottom: 1em;
+  }
+
+  md-icon{
+    margin: 20px 0 1em;
+  }
+
+}
+
+
+
+
+
 /**
  *  Do not remove the comment below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically

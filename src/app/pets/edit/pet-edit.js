@@ -33,9 +33,10 @@
       //Onload
       getBreeds();
 
-      setTimeout(function(){
-         vm.clickIcon = 'keyboard_backspace';
-      }, 1);
+      // setTimeout(function(){
+      //    vm.clickIcon = 'keyboard_backspace';
+      // }, 1); //removed as on some devices takes too long to animate
+      vm.clickIcon = 'keyboard_backspace';
 
       PetsModel.getPetById($stateParams.petID)
                   .then(function (pet) {

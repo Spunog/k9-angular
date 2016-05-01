@@ -3,11 +3,13 @@
 
     angular.module("k9.models.clients",[])
 
-    .service('ClientsModel', function(appConfig, $http, $q){
+    .service('ClientsModel', function(Upload,appConfig, $http, $q){
 
       //Public
       var vm = this, clients;
-      var URLS = {INDEX : appConfig.API.baseURL + 'clients'};
+      var URLS = {
+                    INDEX : appConfig.API.baseURL + 'clients'
+                  };
 
       vm.getCurrentClient     =   getCurrentClient;
       vm.setCurrentClient     =   setCurrentClient;
@@ -20,16 +22,33 @@
       vm.deleteClient         =   deleteClient;
       vm.addDogLocally        =   addDogLocally;
       vm.removeDogLocally     =   removeDogLocally;
+      vm.updateImage          =   updateImage;
 
       //Private
       var currentClient = {
+        id:0,
         first_name: '',
         last_name: '',
         phone: '',
         email: '',
         address:'',
-        dogs: []
+        dogs: [],
+        picture_thumb_cropped: ''
       };
+
+      function updateImage(file){
+        // only ever need PUT method as will only allow images to be
+        // attached to existing Clients
+        currentClient.picture_thumb_cropped = '/app/assets/img/placeholder_client_processing.png';
+        return Upload.upload({
+            url: URLS.INDEX + '/' + currentClient.id,
+            method: 'PUT',
+            data: {'client[picture]': file}
+            // Other data can be passed if required... data: {'client[picture]':
+            // file, 'client[first_name]': 'xxxxxxxxy'}
+        });
+
+      }
 
       function addDogLocally(dog){
         currentClient.dogs.push(dog);
@@ -53,6 +72,16 @@
         currentClient.email       = client.email;
         currentClient.dogs        = client.dogs;
         currentClient.address     = client.address;
+
+        if(client.picture_thumb_cropped.length > 0 ||
+          client.picture_thumb_cropped == 'undefined'){
+          // Show image stored on client record
+          currentClient.picture_thumb_cropped = client.picture_thumb_cropped;
+        }else{
+          // No image recorded against Client show placeholder
+          currentClient.picture_thumb_cropped = '/app/assets/img/placeholder_client.png';
+        }
+
       }
 
       function resetCurrentClient(){
@@ -63,6 +92,7 @@
         currentClient.email       = '';
         currentClient.address     = '';
         currentClient.dogs        = [];
+        currentClient.picture_thumb_cropped='';
       }
 
       function getClients(){

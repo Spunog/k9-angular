@@ -43,27 +43,37 @@
   <!-- Main Content -->
   <md-content flex class='md-padding'>
 
-    <div layout layout-xs="row">
-
-        <md-button
-             ngf-select
-             ng-model="picture"
-             name="picture"
-             ngf-pattern="'image/*'"
-             ngf-accept="'image/*'"
-             ngf-max-size="20MB"
-             ngf-min-height="100"
-             ngf-resize="{height: 150}">Upload Image</md-button>
-
-      <md-button ng-click='upload(picture)'>Upload Photo</md-button>
-
-      <img ngf-thumbnail="picture"
-           height='150'>
-
-    </div>
-
       <!-- First Name and Last Name -->
       <div layout layout-xs="column">
+
+        <md-input-container flex>
+          <div class="upload-image-placeholder">
+
+            <div class="">
+              <img ngf-thumbnail="vm.editedClient.picture"
+                   height='100'>
+
+               <img ng-src="{{ vm.editedClient.picture_thumb_cropped }}"
+                    class="md-card-image"
+                    alt="Profile Image"
+                    height='80'
+                    ng-hide='vm.editedClient.picture.name.length > 0'
+                    layout-padding>
+            </div>
+
+            <div class="">
+              <md-button ngf-select
+                         ng-model="vm.editedClient.picture"
+                         name="picture"
+                         ngf-pattern="'image/*'"
+                         ngf-accept="'image/*'"
+                         ngf-max-size="20MB"
+                         ngf-min-height="100">Change Image</md-button>
+            </div>
+
+          </div>
+        </md-input-container>
+
         <md-input-container flex>
           <label>First name</label>
           <input ng-model='vm.editedClient.first_name'
@@ -76,6 +86,7 @@
             </div>
           </div>
         </md-input-container>
+
         <md-input-container flex>
           <label>Last name</label>
           <input ng-model='vm.editedClient.last_name'
@@ -111,6 +122,8 @@
                     md-maxlength="100"></textarea>
         </md-input-container>
       </div>
+
+      <md-button ng-click='vm.uploadx(vm.editedClient.picture)'>Upload Photo</md-button>
 
   </md-content>
 </form>
