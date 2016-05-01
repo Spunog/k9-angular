@@ -92,7 +92,19 @@
         <md-list-item ng-click="vm.editPet(pet)"
                       aria-label='View Pet {{ pet.name }}'
                       ng-repeat="pet in vm.pets | filter:vm.petSearchText">
-            <ng-md-icon icon="paw" size="24"></ng-md-icon>
+
+
+            <ng-md-icon ng-hide='pet.photos.length > 0'
+                        icon="paw"
+                        size="24"></ng-md-icon>
+
+            <img ng-src="{{ pet.photos[pet.photos.length - 1].thumbnail_menu }}"
+                 class="md-card-image"
+                 alt="{{ photo.title }}"
+                 aria-label="{{ photo.title }}"
+                 ng-show='pet.photos.length > 0'
+                 layout-padding>
+
             <p>
               {{ pet.name }}
             </p>

@@ -48,21 +48,17 @@
 <!-- Main Content -->
 <md-content flex id="content">
 
-<md-content ng-cloak>
+  <md-content ng-cloak>
 
-  <md-tabs md-selected="vm.selectedTab" md-dynamic-height>
-      <md-tab label="Breeds" ui-sref="k9.settings.breeds">
-          <div ui-view="breeds"></div>
-      </md-tab>
-      <md-tab label="Activities" ui-sref="k9.settings.activities">
-          <div ui-view="activities"></div>
-      </md-tab>
-  </md-tabs>
+    <md-tabs md-selected="vm.selectedTab" md-dynamic-height>
+        <md-tab label="Breeds" ui-sref="k9.settings.breeds">
+            <div ui-view="breeds"></div>
+        </md-tab>
+        <md-tab label="Activities" ui-sref="k9.settings.activities">
+            <div ui-view="activities"></div>
+        </md-tab>
+    </md-tabs>
 
-
- <!--end tabs-->
-
-</md-content> <!--end tabs content-->
-
+  </md-content> <!--end tabs content-->
 
 </md-content>

@@ -86,7 +86,18 @@
       <md-content class='search-results' flex layout-padding>
         <md-list-item ng-click="vm.viewClient(client)"
                       ng-repeat="client in vm.clients | filter:vm.clientSearchText">
-            <ng-md-icon icon="face" size="24"></ng-md-icon>
+
+          <ng-md-icon ng-hide='client.thumbnail_menu.length > 0'
+                      icon="face"
+                      size="30"></ng-md-icon>
+
+          <img ng-src="{{ client.thumbnail_menu }}"
+               class="md-card-image"
+               alt="{{ photo.title }}"
+               aria-label="{{ photo.title }}"
+               ng-show='client.thumbnail_menu.length > 0'
+               layout-padding>
+
             <p>
               {{ client.first_name }} {{ client.last_name }}
               <br>

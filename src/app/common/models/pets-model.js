@@ -28,7 +28,8 @@
         breed: {
           id:'',
           name:''
-        }
+        },
+        photos:[]
       };
 
       function getCurrentPet(pet){
@@ -40,14 +41,17 @@
         currentPet.name = pet.name;
         currentPet.note = pet.note;
         currentPet.breed = {
-          id: pet.breed.id,
-          name: pet.breed.name
+          id: (pet.breed !== null) ? pet.breed.id : 0,
+          name: (pet.breed !== null) ? pet.breed.name : ''
         };
+        currentPet.photos = pet.photos;
+        console.log('model pet', currentPet);
       }
 
       function resetCurrentPet(){
         currentPet.name   = '';
         currentPet.note   = '';
+        currentPet.photos = [];
         currentPet.breed  = {
                               id:'',
                               name:''
@@ -138,6 +142,7 @@
                           id: pet.breed.id,
                           name: pet.breed.name
                         };
+                        matchedPet.photos = pet.photos;
                       });
       }
 

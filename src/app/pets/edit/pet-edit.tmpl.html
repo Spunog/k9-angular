@@ -1,86 +1,131 @@
 <!-- Pet Edit -->
-<form role="form"
-      name='update-pet-form'
-      ng-submit='vm.updatePet(vm.editedPet)'>
+<!-- Toolbar -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button ui-sref='k9.pets' class="md-icon-button" aria-label="Go Back">
+      <md-tooltip md-direction="bottom">Go back</md-tooltip>
+      <ng-md-icon ng-click='vm.clickIconMorph()'
+                  icon="{{vm.clickIcon}}"
+                  options='{ "easing": "quad-in", "duration": 500 }'
+                  size="24"></ng-md-icon>
+    </md-button>
+    <h2>
+      <span>Edit Pet</span>
+    </h2>
+    <span flex></span>
+    <md-button type='button' class="md-icon-button"
+               aria-label="Delete Pet"
+               ng-click='vm.deletePet(vm.editedPet)'>
+      <md-tooltip md-direction="bottom">
+        Delete Pet
+      </md-tooltip>
+      <ng-md-icon icon="delete" size="24"></ng-md-icon>
+    </md-button>
 
-  <!-- Toolbar -->
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <md-button ui-sref='k9.pets' class="md-icon-button" aria-label="Go Back">
-        <md-tooltip md-direction="bottom">Go back</md-tooltip>
-        <ng-md-icon ng-click='vm.clickIconMorph()'
-                    icon="{{vm.clickIcon}}"
-                    options='{ "easing": "quad-in", "duration": 500 }'
-                    size="24"></ng-md-icon>
-      </md-button>
-      <h2>
-        <span>Edit Pet</span>
-      </h2>
-      <span flex></span>
-      <md-button type='button'
-                 class="md-icon-button"
-                 aria-label="Delete Pet"
-                 ng-click='vm.deletePet(vm.editedPet)'>
-        <md-tooltip md-direction="bottom">
-          Delete Pet
-        </md-tooltip>
-        <ng-md-icon icon="delete" size="24"></ng-md-icon>
-      </md-button>
+    <!-- Save -->
+    <md-button type='submit' class="md-icon-button" aria-label="Save Pet">
+      <md-tooltip md-direction="bottom">
+        Save Pet
+      </md-tooltip>
+      <ng-md-icon icon="done" size="24"></ng-md-icon>
+    </md-button>
 
-      <!-- Save -->
-      <md-button type='submit'
-                 class="md-icon-button"
-                 aria-label="Save Pet">
-        <md-tooltip md-direction="bottom">
-          Save Pet
-        </md-tooltip>
-        <ng-md-icon icon="done" size="24"></ng-md-icon>
-      </md-button>
+  </div>
+</md-toolbar>
 
-    </div>
-  </md-toolbar>
+<md-content ng-cloak>
 
-  <!-- Main Content -->
-  <md-content flex class='md-padding'>
+  <md-tabs md-dynamic-height>
+    <!-- Main Form -->
+    <md-tab label="Main">
 
-    <!-- Name -->
-    <div layout layout-xs="column">
+      <md-content flex class='md-padding'>
 
-      <md-input-container flex>
-        <label>Name</label>
-        <input ng-model='vm.editedPet.name'
-               ng-required="true"
-               rm-focus>
-        <div ng-show="update-pet-form.name.$dirty"
-             ng-messages="update-pet-form.name.$error">
-          <div ng-message="required">
-            A name must be entered
+        <form role="form"
+              name='update-pet-form'
+              ng-submit='vm.updatePet(vm.editedPet)'>
+
+          <div layout layout-xs="column">
+
+            <md-input-container flex>
+              <label>Name</label>
+              <input ng-model='vm.editedPet.name' ng-required="true" rm-focus>
+              <div ng-show="update-pet-form.name.$dirty"
+                   ng-messages="update-pet-form.name.$error">
+                <div ng-message="required">
+                  A name must be entered
+                </div>
+              </div>
+            </md-input-container>
+
+            <!-- Breed -->
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Breed</label>
+              <md-select ng-model="vm.editedPet.breed.id">
+                <md-option ng-repeat="breed in vm.breeds" value="{{breed.id}}">
+                  {{breed.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+
           </div>
-        </div>
-      </md-input-container>
 
-      <!-- Breed -->
-      <md-input-container class="md-block" flex-gt-sm>
-        <label>Breed</label>
-        <md-select ng-model="vm.editedPet.breed.id">
-          <md-option ng-repeat="breed in vm.breeds"
-                     value="{{breed.id}}">
-            {{breed.name}}
-          </md-option>
-        </md-select>
-      </md-input-container>
+          <!-- Note -->
+          <div layout layout-xs="column">
+            <md-input-container flex>
+              <label>Note</label>
+              <textarea name="note"
+                        ng-model="vm.editedPet.note"
+                        md-maxlength="100"></textarea>
+            </md-input-container>
+          </div>
+        </form>
+      </md-content>
+    </md-tab>
 
-    </div>
+    <!-- Photos -->
+    <md-tab label="Photos ({{ vm.editedPet.photos.length }})">
 
-    <!-- Note -->
-    <div layout layout-xs="column">
-      <md-input-container flex>
-        <label>Note</label>
-        <textarea name="note"
-                  ng-model="vm.editedPet.note"
-                  md-maxlength="100"></textarea>
-      </md-input-container>
-    </div>
+      <md-content flex class='md-padding'>
 
-  </md-content>
-</form>
+        <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3"
+                      md-cols-gt-md="6" md-row-height-gt-md="1:1"
+                      md-row-height="4:3" md-gutter="8px"
+                      md-gutter-gt-sm="4px">
+
+        <md-grid-tile ng-repeat="photo in vm.editedPet.photos"
+                      md-rowspan="1" md-colspan="1" md-colspan-sm="1"
+                      md-colspan-xs="1">
+
+          <img ng-src="{{ photo.thumbnail_medium }}"
+               class="md-card-image"
+               alt="{{ photo.title }}"
+               aria-label="{{ photo.title }}"
+               layout-padding>
+
+          <md-grid-tile-footer>
+            <h3>{{ photo.title }}</h3>
+          </md-grid-tile-footer>
+
+          </md-grid-tile>
+
+        </md-grid-list>
+
+        {{ vm.editedClient.picture }}
+        <b>{{ vm.editedClient.picture.name }}</b>
+        <md-button ngf-select
+                   ng-model="vm.editedClient.picture"
+                   name="picture"
+                   ngf-pattern="'image/*'"
+                   ngf-accept="'image/*'"
+                   ngf-max-size="20MB"
+                   ngf-min-height="100">Add Photo</md-button>
+
+        <md-button ng-show='vm.editedClient.picture'
+                   ng-click='vm.uploadPetImage(vm.editedClient.picture)'>Start Upload</md-button>
+
+      </md-content>
+    </md-tab>
+  </md-tabs>
+
+</md-content> <!--end tabs content-->
