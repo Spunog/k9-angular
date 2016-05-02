@@ -18,13 +18,13 @@
 
       // Onload
       getClientById();
-      getAppointments();
+      getAppointments($stateParams.clientID);
 
       //Private
-      function getAppointments(){
-        CalendarEventsModel.getCalendarEvents()
-                           .then(function (calendarEvents) {
-                              vm.appointments = calendarEvents;
+      function getAppointments(clientID){
+        CalendarEventsModel.getCalendarEventsForClient(clientID)
+                           .then(function (response) {
+                              vm.appointments = response.data.appointments;
                            });
       }
 

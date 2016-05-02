@@ -17,6 +17,7 @@
       vm.updateAppointment  =   updateAppointment;
       vm.deleteAppointment  =   deleteAppointment;
       vm.getCalendarEvents  =   getCalendarEvents;
+      vm.getCalendarEventsForClient = getCalendarEventsForClient;
 
       //Private
       function newCalendarEvent(){
@@ -70,6 +71,11 @@
 
       function getCalendarEvents(){
         return (calendarEvents) ? $q.when(calendarEvents) : $http.get(URLS.APPOINTMENTS).then(cacheCalendarEvents);
+      }
+
+      function getCalendarEventsForClient(client_id){
+        var clientAppointmetnsURL = URLS.APPOINTMENTS + '?client_id=' + client_id;
+        return $http.get(clientAppointmetnsURL);
       }
 
       function extract(result){
