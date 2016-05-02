@@ -126,11 +126,11 @@
 
       </md-content>
 
-      <md-content ng-show='vm.selectedPhoto !== null' flex class='md-padding'>
+      <md-content flex class='md-padding'>
 
         <!--Edit Photo Details Form-->
-        <md-whiteframe>
-          <md-content ng-show='true' layout-padding>
+        <md-whiteframe ng-show='vm.selectedPhoto !== null'>
+          <md-content layout-padding>
 
             <form name="editPhotoDetailsForm">
 
@@ -166,11 +166,10 @@
           </md-content><!--end edit existing photo-->
         </md-whiteframe>
 
+        <!--Upload New Photo Form-->
         <md-content ng-hide='vm.uploadingImage' layout-padding>
           <md-button ng-click="vm.toggleUploadForm(true)">Add New Photo</md-button>
         </md-content>
-
-        <!--Upload New Photo Form-->
         <md-content ng-show='vm.uploadingImage' layout-padding>
 
           <form name="editPetAddPhotoForm">

@@ -170,37 +170,53 @@
         </md-tab> <!--end appointments-->
 
         <!-- Photos -->
-        <md-tab label="Photos (1)">
-          <md-content class="md-padding">
-            <md-card>
-               <md-card-title>
-                 <md-card-title-text>
-                   <span class="md-headline">Fido</span>
-                   <span class="md-subhead">Groomed and ready for Christmas</span>
-                 </md-card-title-text>
-               </md-card-title>
-               <md-card-content layout="row" layout-align="space-between">
-                 <div class="md-media-xl card-media">
-                   <img src="//i.imgur.com/GUWVnui.jpg" alt="" />
-                 </div>
-                 <md-card-actions layout="column">
-                   <md-button class="md-icon-button" aria-label="Favorite">
-                     <ng-md-icon icon="favorite" size="28"></ng-md-icon>
-                     <md-tooltip>Add Favourite Images</md-tooltip>
-                   </md-button>
-                   <md-button class="md-icon-button" aria-label="Settings">
-                     <ng-md-icon icon="menu" size="28"></ng-md-icon>
-                     <md-tooltip>View Photo Options</md-tooltip>
-                   </md-button>
-                   <md-button class="md-icon-button" aria-label="Share">
-                     <ng-md-icon icon="share" size="28"></ng-md-icon>
-                     <md-tooltip>Share Photo</md-tooltip>
-                   </md-button>
-                 </md-card-actions>
-               </md-card-content>
-             </md-card>
-          </md-content>
-        </md-tab>
+        <md-tab label="Photos">
+
+          <div ng-repeat="dog in vm.client.dogs" class='md-padding'>
+
+            <h4>
+              <a ui-sref="k9.pets.edit({petID: dog.id})">{{dog.name}}</a>
+            </h4>
+
+            <md-content flex>
+
+              <md-grid-list
+                md-cols="1"
+                md-cols-sm="2"
+                md-cols-md="3"
+                md-cols-gt-md="6"
+                md-row-height-gt-md="1:1"
+                md-row-height="4:3"
+                md-gutter="8px"
+                md-gutter-gt-sm="4px">
+
+                <md-grid-tile
+                  ng-repeat="photo in dog.photos"
+                  md-rowspan="1"
+                  md-colspan="1"
+                  md-colspan-sm="1"
+                  md-colspan-xs="1">
+
+                  <img
+                    ng-src="{{ photo.thumbnail_medium }}"
+                    ng-click='vm.selectPhoto(photo)'
+                    class="md-card-image"
+                    alt="{{ photo.title }}"
+                    aria-label="{{ photo.title }}"
+                    layout-padding>
+
+                  <md-grid-tile-footer>
+                    <h3>{{ photo.title }}</h3>
+                  </md-grid-tile-footer>
+
+                </md-grid-tile>
+
+              </md-grid-list>
+
+            </md-content>
+          </div>
+
+        </md-tab><!--end photo tab-->
 
       </md-tabs> <!--end tabs-->
 

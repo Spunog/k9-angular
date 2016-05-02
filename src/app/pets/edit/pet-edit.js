@@ -6,21 +6,6 @@
     'k9.models.pets'
   ])
 
-  .config(function ($stateProvider,$httpProvider,$urlRouterProvider) {
-
-    //State Providers
-    $stateProvider.state('k9.pets.edit',{
-      url: '/pet/:petID/edit',
-      views: {
-                'main@' : {
-                            controller: 'EditPetController as vm',
-                            templateUrl: 'app/pets/edit/pet-edit.tmpl.html'
-                          }
-             }
-    });
-
-  })
-
   .controller('EditPetController', function (PhotosModel,appConfig,Upload,BreedsModel,$state, $stateParams, ClientsModel, PetsModel,$mdDialog) {
 
       var vm                =   this;
@@ -169,6 +154,21 @@
           returnToPets(false);
       }
 
-  }); // end edit pet ctrl
+  }) // end edit pet ctrl
+
+  .config(function ($stateProvider,$httpProvider,$urlRouterProvider) {
+
+    //State Providers
+    $stateProvider.state('k9.pets.edit',{
+      url: '/pet/:petID/edit',
+      views: {
+                'main@' : {
+                            controller: 'EditPetController as vm',
+                            templateUrl: 'app/pets/edit/pet-edit.tmpl.html'
+                          }
+             }
+    });
+
+  });
 
 }()); // end use strict
