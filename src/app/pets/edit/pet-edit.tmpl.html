@@ -4,18 +4,21 @@
   <div class="md-toolbar-tools">
     <md-button ui-sref='k9.pets' class="md-icon-button" aria-label="Go Back">
       <md-tooltip md-direction="bottom">Go back</md-tooltip>
-      <ng-md-icon ng-click='vm.clickIconMorph()'
-                  icon="{{vm.clickIcon}}"
-                  options='{ "easing": "quad-in", "duration": 500 }'
-                  size="24"></ng-md-icon>
+      <ng-md-icon
+        ng-click='vm.clickIconMorph()'
+        icon="{{vm.clickIcon}}"
+        options='{ "easing": "quad-in", "duration": 500 }'
+        size="24"></ng-md-icon>
     </md-button>
     <h2>
       <span>Edit Pet</span>
     </h2>
     <span flex></span>
-    <md-button type='button' class="md-icon-button"
-               aria-label="Delete Pet"
-               ng-click='vm.deletePet(vm.editedPet)'>
+    <md-button
+      type='button'
+      class="md-icon-button"
+      aria-label="Delete Pet"
+      ng-click='vm.deletePet(vm.editedPet)'>
       <md-tooltip md-direction="bottom">
         Delete Pet
       </md-tooltip>
@@ -33,7 +36,7 @@
   </div>
 </md-toolbar>
 
-<md-content ng-cloak>
+<md-content class='pet-edit' ng-cloak>
 
   <md-tabs md-dynamic-height>
     <!-- Main Form -->
@@ -41,17 +44,16 @@
 
       <md-content flex class='md-padding'>
 
-        <form role="form"
-              name='update-pet-form'
-              ng-submit='vm.updatePet(vm.editedPet)'>
+        <form role="form" name='update-pet-form' ng-submit='vm.updatePet(vm.editedPet)'>
 
           <div layout layout-xs="column">
 
             <md-input-container flex>
               <label>Name</label>
               <input ng-model='vm.editedPet.name' ng-required="true" rm-focus>
-              <div ng-show="update-pet-form.name.$dirty"
-                   ng-messages="update-pet-form.name.$error">
+              <div
+                ng-show="update-pet-form.name.$dirty"
+                ng-messages="update-pet-form.name.$error">
                 <div ng-message="required">
                   A name must be entered
                 </div>
@@ -74,9 +76,7 @@
           <div layout layout-xs="column">
             <md-input-container flex>
               <label>Note</label>
-              <textarea name="note"
-                        ng-model="vm.editedPet.note"
-                        md-maxlength="100"></textarea>
+              <textarea name="note" ng-model="vm.editedPet.note" md-maxlength="100"></textarea>
             </md-input-container>
           </div>
         </form>
@@ -88,44 +88,170 @@
 
       <md-content flex class='md-padding'>
 
-        <md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="3"
-                      md-cols-gt-md="6" md-row-height-gt-md="1:1"
-                      md-row-height="4:3" md-gutter="8px"
-                      md-gutter-gt-sm="4px">
+        <md-grid-list
+          md-cols="1"
+          md-cols-sm="2"
+          md-cols-md="3"
+          md-cols-gt-md="6"
+          md-row-height-gt-md="1:1"
+          md-row-height="4:3"
+          md-gutter="8px"
+          md-gutter-gt-sm="4px">
 
-        <md-grid-tile ng-repeat="photo in vm.editedPet.photos"
-                      md-rowspan="1" md-colspan="1" md-colspan-sm="1"
-                      md-colspan-xs="1">
+          <md-grid-tile
+            ng-repeat="photo in vm.editedPet.photos"
+            md-rowspan="1"
+            md-colspan="1"
+            md-colspan-sm="1"
+            md-colspan-xs="1">
 
-          <img ng-src="{{ photo.thumbnail_medium }}"
-               class="md-card-image"
-               alt="{{ photo.title }}"
-               aria-label="{{ photo.title }}"
-               layout-padding>
+            <md-button class='remove-photo md-fab md-mini'
+                  ng-click='vm.removePetImage(photo)'>X</md-button>
 
-          <md-grid-tile-footer>
-            <h3>{{ photo.title }}</h3>
-          </md-grid-tile-footer>
+            <img
+              ng-src="{{ photo.thumbnail_medium }}"
+              ng-click='vm.selectPhoto(photo)'
+              class="md-card-image"
+              alt="{{ photo.title }}"
+              aria-label="{{ photo.title }}"
+              layout-padding>
+
+            <md-grid-tile-footer>
+              <h3>{{ photo.title }}</h3>
+            </md-grid-tile-footer>
 
           </md-grid-tile>
 
         </md-grid-list>
 
-        {{ vm.editedClient.picture }}
-        <b>{{ vm.editedClient.picture.name }}</b>
-        <md-button ngf-select
-                   ng-model="vm.editedClient.picture"
-                   name="picture"
-                   ngf-pattern="'image/*'"
-                   ngf-accept="'image/*'"
-                   ngf-max-size="20MB"
-                   ngf-min-height="100">Add Photo</md-button>
+      </md-content>
 
-        <md-button ng-show='vm.editedClient.picture'
-                   ng-click='vm.uploadPetImage(vm.editedClient.picture)'>Start Upload</md-button>
+      <md-content ng-show='vm.selectedPhoto !== null' flex class='md-padding'>
+
+        <!--Edit Photo Details Form-->
+        <md-whiteframe>
+          <md-content ng-show='true' layout-padding>
+
+            <form name="editPhotoDetailsForm">
+
+              <h2>Edit Photo Details</h2>
+
+              <div layout='row'>
+
+                  <!-- Title -->
+                  <md-input-container flex>
+                    <label>Title</label>
+                    <input ng-model='vm.selectedPhoto.title'
+                           ng-required="true">
+                    <div
+                      ng-show="add-photo-form.name.$dirty"
+                      ng-messages="add-photo-form.name.$error">
+                      <div ng-message="required">
+                        A title must be entered
+                      </div>
+                    </div>
+                  </md-input-container>
+
+                  <div flex>
+                    <md-button ng-click='vm.selectPhoto(null)'>Cancel</md-button>
+                    <md-button ng-disabled="!editPhotoDetailsForm.$valid"
+                               ng-click="vm.updatePhotoDetails(vm.selectedPhoto)"
+                               class="md-raised md-primary">Update Photo Details</md-button>
+                  </div>
+
+              </div> <!--end column layout for form inputs-->
+
+            </form>
+
+          </md-content><!--end edit existing photo-->
+        </md-whiteframe>
+
+        <md-content ng-hide='vm.uploadingImage' layout-padding>
+          <md-button ng-click="vm.toggleUploadForm(true)">Add New Photo</md-button>
+        </md-content>
+
+        <!--Upload New Photo Form-->
+        <md-content ng-show='vm.uploadingImage' layout-padding>
+
+          <form name="editPetAddPhotoForm">
+
+            <h2>Add New Photo</h2>
+
+            <!--Upload to browser status-->
+            <md-progress-linear md-mode="determinate"
+                                ng-show='{{ vm.newphoto.file.progress >= 0 }}'
+                                value="{{vm.newphoto.file.progress}}"></md-progress-linear>
+
+            <div layout='column'>
+
+                <!-- Photo Selection -->
+                <md-input-container flex>
+                  <md-button
+                    class="md-raised"
+                    type="file"
+                    ngf-select=""
+                    ng-model="vm.newphoto.file"
+                    name="file"
+                    ngf-accept="'image/*'"
+                    ngf-change="alert('whats up')"
+                    required="">Select Photo</md-button>
+                </md-input-container>
+
+                <!-- Title -->
+                <md-input-container flex>
+                  <label>Title</label>
+                  <input ng-model='vm.newphoto.title'
+                         ng-required="true">
+                  <div
+                    ng-show="add-photo-form.name.$dirty"
+                    ng-messages="add-photo-form.name.$error">
+                    <div ng-message="required">
+                      A title must be entered
+                    </div>
+                  </div>
+                </md-input-container>
+
+                <!-- Enter Date -->
+                <div layout='row'>
+                  <md-datepicker
+                    ng-model="vm.newphoto.dateTaken"
+                    ></md-datepicker>
+                </div>
+
+                <!-- Photo -->
+                <div layout='row'>
+
+                  <md-input-container flex>
+                    <a href='#' ng-click='vm.toggleUploadForm(false)'>Cancel</a>
+                    <md-button ng-disabled="!editPetAddPhotoForm.$valid || vm.isUploading"
+                               ng-click="vm.uploadPetImage(vm.newphoto)"
+                               class="md-raised md-primary">{{ vm.uploadButtonText }}</md-button>
+                  </md-input-container>
+
+                  <div flex>
+                      <md-progress-circular ng-show='vm.isUploading'
+                                            md-mode="indeterminate"></md-progress-circular>
+                  </div>
+
+                  <div flex>
+                    <img ngf-src="vm.newphoto.file"
+                         class="thumb">
+                    <span ng-show="vm.newphoto.file.result">Upload Successful</span>
+                  </div>
+
+                </div>
+            </div> <!--end column layout for form inputs-->
+
+        </form>
+
+        </md-content>
 
       </md-content>
+      <!--add/edit photo form-->
+
     </md-tab>
+    <!--end photo tab-->
   </md-tabs>
 
-</md-content> <!--end tabs content-->
+</md-content>
+<!--end tabs content-->

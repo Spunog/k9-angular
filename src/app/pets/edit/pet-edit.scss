@@ -1,0 +1,23 @@
+// Pet Edit Only Styles
+.pet-edit {
+  .thumb {
+    max-width: 60%;
+    padding: 0;
+    margin: 0;
+    float: right;
+    position: relative;
+    top: -70px;
+    right: 50px;
+  }
+
+  .remove-photo{
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    background-color: #eee;
+    width: 30px !important;
+    height: 15px !important;
+    opacity: .4;
+  }
+
+}
