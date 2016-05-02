@@ -2,7 +2,7 @@
 (function() {
   'use strict';
 
-  var development = true;
+  var development = false;
   var baseURL = development ? 'http://www.k9.dev/api/v1/' : 'https://k9g.herokuapp.com/api/v1/';
 
   var test = 'something';

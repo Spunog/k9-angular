@@ -9,12 +9,19 @@ After cloning:
 * gulp - process scss and js
 * gulp serve - will start webserver
 
+## Deploy Guide + Notes
+* Run Gulp Build - this creates a generated version in the dist folder. This includes creating CSS files from SCSS files. Injecting JS and CSS references in the index.html folder in adidion to compressing files.
+* Note there is an existing bug in that angular-layout css file is not included in the extract so index.html needs to be updated with a new ref to this e.g. styles/angular-material.layouts.min.css.
+* Once the dist folder is complete simply drag and drop into Netlify or any other static hosting service.
+
 ## Some Features + Technologies Used
 * AngularJS v1 (JS Framework MVVM) - https://angularjs.org/
 * Angular UI Router (provides stateful routing) - https://github.com/angular-ui/ui-router
+* Netlify.com used for front end hosting
+* NG File Upload - angular directive to help upload files to brower https://github.com/danialfarid/ng-file-upload
 
-### Build Tools
-* Bootstrap for Angular - https://angular-ui.github.io/bootstrap/
+### Build Tools + Frameworks
+* Angular Material - https://material.angularjs.org
 * GulpJS (Build System/Task Runner) - http://gulpjs.com/
 * Bower (Package Manager) - http://bower.io/
 * Yeoman (Scaffolding tool) - http://yeoman.io/
