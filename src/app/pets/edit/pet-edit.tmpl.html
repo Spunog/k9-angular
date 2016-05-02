@@ -26,7 +26,9 @@
     </md-button>
 
     <!-- Save -->
-    <md-button type='submit' class="md-icon-button" aria-label="Save Pet">
+    <md-button type='button'
+               ng-click='vm.updatePet(vm.editedPet)'
+               class="md-icon-button" aria-label="Save Pet">
       <md-tooltip md-direction="bottom">
         Save Pet
       </md-tooltip>
