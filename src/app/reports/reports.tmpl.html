@@ -46,13 +46,38 @@
 </md-toolbar>
 
 <!-- Main Content -->
-<md-content flex id="content">
+<md-content flex id="content" class='report-list'>
 
 <md-card>
   <md-card-content>
-    <p>
-       Not currently available
-    </p>
+    <form>
+      <p>Choose Report:</p>
+
+      <div layout='row'>
+        <div flex>
+          <md-radio-group ng-model="vm.report.reportType">
+            <md-radio-button value="Dog" class="md-primary">Dog</md-radio-button>
+            <md-radio-button value="Client" class="md-primary">Clients</md-radio-button>
+            <md-radio-button value="Appointment" class="md-primary">Appointments</md-radio-button>
+          </md-radio-group>
+        </div>
+        <div flex>
+          <div class="icon-holder">
+            <span class='report-heading'>{{ vm.iconReportTitle(vm.report.reportType) }}</span>
+            <img src='app/assets/img/report_icon.png'>
+          </div>
+        </div>
+      </div>
+
+      <div layout='row'>
+        <md-button class="md-raised md-primary"
+                   ng-disabled='vm.isCreatingReport'
+                   ng-click='vm.showReport(vm.report.reportType)'>{{ vm.createReportBtnLabel }}</md-button>
+
+        <md-progress-circular ng-show='vm.isCreatingReport'
+                              md-mode="indeterminate"></md-progress-circular>
+      </div>
+    </form>
   </md-card-content>
 </md-card>
 

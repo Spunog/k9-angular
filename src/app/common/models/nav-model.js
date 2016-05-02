@@ -56,8 +56,8 @@
       menuItem('Clients','k9.clients','face'),
       menuItem('Pets','k9.pets','paw'),
       menuItem('Reports','k9.report','my_library_books'), //assessment
-      menuItem('Social Media','k9.social','facebook-box'),
       menuItem('Settings','k9.settings.breeds','settings')
+      // menuItem('Social Media','k9.social','facebook-box')
     ];
 
     function getMenuItem(title,sref){
