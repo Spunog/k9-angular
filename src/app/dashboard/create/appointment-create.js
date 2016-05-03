@@ -16,11 +16,22 @@
     vm.querySearch      = querySearch;
     vm.newPet           = newPet;
     vm.activities       = [];
+    vm.activityChanged  = activityChanged;
 
     //OnLoad
     getActivities();
 
     //Private
+
+    function activityChanged(activityID){
+      var activityPromise = ActivitiesModel.getActivityById(activityID);
+
+      activityPromise.then(function(activity) {
+        vm.newAppointment.charge = parseFloat(activity.default_charge);
+      });
+
+    }
+
     function getActivities(){
       ActivitiesModel.getActivities()
                .then(function (activities) {
@@ -72,6 +83,7 @@
         title: selectedDate.title || '',
         start: selectedDate.start.toDate(),
         dog:  dog,
+        charge: selectedDate.charge,
         activity:  selectedDate.activity || {},
         startTime:  {
                       id    : selectedDate.start.format("HH:00:00"),

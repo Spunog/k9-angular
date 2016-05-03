@@ -6,21 +6,6 @@
     'k9.models.activities'
   ])
 
-  .config(function ($stateProvider,$httpProvider,$urlRouterProvider) {
-
-    //State Providers
-    $stateProvider.state('k9.activities.edit',{
-      url: '/activity/:activityID/edit',
-      views: {
-                'main@' : {
-                            controller: 'EditActivityController as vm',
-                            templateUrl: 'app/activities/edit/activity-edit.tmpl.html'
-                          }
-             }
-    });
-
-  })
-
   .controller('EditActivityController', function ($state, $stateParams, ClientsModel, ActivitiesModel,$mdDialog) {
 
       var vm = this;
@@ -83,6 +68,21 @@
       vm.cancelEditing = cancelEditing;
       vm.updateActivity = updateActivity;
 
-  }); // end edit activity ctrl
+  }) // end edit activity ctrl
+
+  .config(function ($stateProvider,$httpProvider,$urlRouterProvider) {
+
+    //State Providers
+    $stateProvider.state('k9.activities.edit',{
+      url: '/activity/:activityID/edit',
+      views: {
+                'main@' : {
+                            controller: 'EditActivityController as vm',
+                            templateUrl: 'app/activities/edit/activity-edit.tmpl.html'
+                          }
+             }
+    });
+
+  });
 
 }()); // end use strict

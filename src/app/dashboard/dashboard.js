@@ -63,6 +63,7 @@
       }
 
       function calendarEventClick( date, jsEvent, view){
+        console.log(date,'test');
           $mdDialog.show({
             controller    : 'CreateAppointmentController as vm',
             templateUrl   : 'app/dashboard/create/appointment-create.tmpl.html',
@@ -125,7 +126,8 @@
                 stick: true,
                 color: '#C2185B',
                 dog: event.dog,
-                activity: event.activity
+                activity: event.activity,
+                charge: parseFloat(event.charge)
               };
 
               vm.calendarEvents.push(newEvent);

@@ -1,21 +1,20 @@
 <!-- Client Create -->
-<md-dialog class='appointmentDialog' aria-label="Create Appointment"  ng-cloak>
+<md-dialog class='appointmentDialog' aria-label="Create Appointment" ng-cloak>
 
-
-  <form role="form"
-        name='add-appointment-form'
-        ng-submit='vm.createAppointment(vm.newAppointment)'>
+  <form
+    role="form"
+    name='add-appointment-form'
+    ng-submit='vm.createAppointment(vm.newAppointment)'>
 
     <md-toolbar>
       <div class="md-toolbar-tools">
 
         <!---Close--->
-        <md-button class="md-icon-button"
-                   ng-click="vm.createAppointmentCancel()">
-           <ng-md-icon icon="close" size="24"></ng-md-icon>
-           <md-tooltip md-direction="bottom">
-             Cancel and Close
-           </md-tooltip>
+        <md-button class="md-icon-button" ng-click="vm.createAppointmentCancel()">
+          <ng-md-icon icon="close" size="24"></ng-md-icon>
+          <md-tooltip md-direction="bottom">
+            Cancel and Close
+          </md-tooltip>
         </md-button>
 
         <!-- Title -->
@@ -23,11 +22,12 @@
         <span flex></span>
 
         <!--- Delete--->
-        <md-button type='button'
-                   class="md-icon-button"
-                   aria-label="Delete Client"
-                   ng-show='vm.newAppointment.id && vm.newAppointment.id > 0'
-                   ng-click='vm.deleteAppointment(vm.newAppointment)'>
+        <md-button
+          type='button'
+          class="md-icon-button"
+          aria-label="Delete Client"
+          ng-show='vm.newAppointment.id && vm.newAppointment.id > 0'
+          ng-click='vm.deleteAppointment(vm.newAppointment)'>
           <md-tooltip md-direction="bottom">
             Delete Appointment
           </md-tooltip>
@@ -35,13 +35,11 @@
         </md-button>
 
         <!---Save--->
-        <md-button type='submit'
-                   class="md-icon-button"
-                   aria-label="Save">
-                   <ng-md-icon icon="done" size="24"></ng-md-icon>
-           <md-tooltip md-direction="bottom">
-             Save
-           </md-tooltip>
+        <md-button type='submit' class="md-icon-button" aria-label="Save">
+          <ng-md-icon icon="done" size="24"></ng-md-icon>
+          <md-tooltip md-direction="bottom">
+            Save
+          </md-tooltip>
         </md-button>
 
       </div>
@@ -53,63 +51,83 @@
         <!-- Title -->
         <md-input-container class='md-block'>
           <label>Title</label>
-          <input ng-model='vm.newAppointment.title'
-                 ng-required="true"
-                 rm-focus>
+          <input ng-model='vm.newAppointment.title' ng-required="true" rm-focus>
         </md-input-container>
 
         <!-- Dog -->
-        <md-autocomplete required
-            md-input-name="autocompleteField"
-            md-input-minlength="2"
-            md-input-maxlength="18"
-            md-no-cache="vm.noCache"
-            md-selected-item="vm.newAppointment.dog"
-            md-search-text="vm.searchText"
-            md-items="item in vm.querySearch(vm.searchText)"
-            md-item-text="item.name"
-            md-floating-label="Pet's name"
-            ng-required="true">
+        <md-autocomplete
+          required
+          md-input-name="autocompleteField"
+          md-input-minlength="2"
+          md-input-maxlength="18"
+          md-no-cache="vm.noCache"
+          md-selected-item="vm.newAppointment.dog"
+          md-search-text="vm.searchText"
+          md-items="item in vm.querySearch(vm.searchText)"
+          md-item-text="item.name"
+          md-floating-label="Pet's name"
+          ng-required="true">
           <md-item-template>
             <span md-highlight-text="vm.searchText">{{item.name}}</span>
           </md-item-template>
-          <div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
-            <div ng-message="required">You <b>must</b> enter a pet.</div>
+          <div
+            ng-messages="searchForm.autocompleteField.$error"
+            ng-if="searchForm.autocompleteField.$touched">
+            <div ng-message="required">You
+              <b>must</b>
+              enter a pet.</div>
             <div ng-message="minlength">Your entry is not long enough.</div>
             <div ng-message="maxlength">Your entry is too long.</div>
           </div>
         </md-autocomplete>
 
-        <!-- Work -->
-        <md-input-container class="md-block" flex-gt-sm>
-           <label>Job</label>
-           <md-select ng-model="vm.newAppointment.activity.id">
-             <md-option ng-repeat="activity in vm.activities"
-                        value="{{activity.id}}">
-               {{activity.description}}
-             </md-option>
-           </md-select>
-         </md-input-container>
+        <div flex layout='row'>
+          <!-- Job -->
+          <md-input-container class="md-block" flex>
+            <label>Job</label>
+            <md-select md-on-close='vm.activityChanged(vm.newAppointment.activity.id)'
+                       ng-model="vm.newAppointment.activity.id">
+              <md-option ng-repeat="activity in vm.activities" value="{{activity.id}}">
+                {{activity.description}}
+              </md-option>
+            </md-select>
+          </md-input-container>
 
-        <!--Date-->
-        <md-datepicker ng-model="vm.newAppointment.start"
-                       ng-required="true"
-                       md-placeholder="Date"
-                       flex></md-datepicker>
+          <!-- Charge -->
+          <md-input-container class="md-block" flex>
+            <label>Charge</label>
+            <input ng-model="vm.newAppointment.charge"
+                   type="number"
+                   step="5">
+          </md-input-container>
+        </div>
 
-         <md-input-container flex>
-           <label>Time</label>
+        <div flex layout='rows'>
 
-           <md-select ng-model="vm.newAppointment.startTime"
-                      ng-model-options="{trackBy: '$value.id'}"
-                      ng-required="true"
-                      aria-label="Appointment Start Time">
-             <md-option ng-value='time' ng-repeat="time in vm.bookingTimes">
-               {{ time.name }}
-             </md-option>
-           </md-select>
-         </md-input-container>
+          <!-- Date -->
+          <div flex>
+            <md-datepicker
+              ng-model="vm.newAppointment.start"
+              ng-required="true"
+              md-placeholder="Date"></md-datepicker>
+          </div>
 
+          <!-- Time -->
+          <md-input-container flex>
+            <label>Time</label>
+
+            <md-select
+              ng-model="vm.newAppointment.startTime"
+              ng-model-options="{trackBy: '$value.id'}"
+              ng-required="true"
+              aria-label="Appointment Start Time">
+              <md-option ng-value='time' ng-repeat="time in vm.bookingTimes">
+                {{ time.name }}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+        </div>
 
       </div>
 

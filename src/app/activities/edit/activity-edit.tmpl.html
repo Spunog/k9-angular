@@ -45,7 +45,7 @@
   <md-content flex class='md-padding'>
 
     <!-- Description -->
-    <div layout layout-xs="column">
+    <div layout="column">
       <md-input-container flex>
         <label>Description</label>
         <input ng-model='vm.editedActivity.description'
@@ -58,7 +58,32 @@
           </div>
         </div>
       </md-input-container>
+
+      <!-- Default Charge -->
+      <md-input-container flex>
+        <label>Default Charge</label>
+        <input ng-model='vm.editedActivity.default_charge'
+               type="number"
+               ng-required="true">
+        <div ng-show="update-activity-form.description.$dirty"
+             ng-messages="update-activity-form.description.$error">
+          <div ng-message="required">
+            A default charge must be entered
+          </div>
+        </div>
+      </md-input-container>
     </div>
+
+    <md-input-container flex>
+      <!-- Active -->
+      <md-checkbox
+           ng-model="vm.editedActivity.active"
+           aria-label="Active"
+           ng-true-value="true"
+           ng-false-value="false"
+           flex>
+         Active
+    </md-input-container>
 
   </md-content>
 </form>

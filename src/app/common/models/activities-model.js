@@ -6,14 +6,13 @@
     .service('ActivitiesModel', function(appConfig, $http, $q){
 
       //Public
-      var vm                =   this;
+      var vm                     =   this;
       vm.getCurrentActivity      =   getCurrentActivity;
       vm.setCurrentActivity      =   setCurrentActivity;
       vm.resetCurrentActivity    =   resetCurrentActivity;
-      vm.getActivities            =   getActivities;
+      vm.getActivities           =   getActivities;
       vm.addActivity             =   addActivity;
       vm.createActivity          =   createActivity;
-      vm.createActivityWithOwner =   createActivityWithOwner;
       vm.getActivityById         =   getActivityById;
       vm.updateActivity          =   updateActivity;
       vm.deleteActivity          =   deleteActivity;
@@ -33,6 +32,8 @@
       function setCurrentActivity(activity){
         currentActivity.id = activity.id;
         currentActivity.description = activity.description;
+        currentActivity.default_charge = parseFloat(activity.default_charge);
+        currentActivity.active = activity.active;
       }
 
       function resetCurrentActivity(){
@@ -56,23 +57,9 @@
           url     : appConfig.API.baseURL +'activities',
           data    : {
                       activity: {
-                        description  : activity.description
-                      }
-                    }
-        });
-
-      }
-
-      function createActivityWithOwner(activity,ownerID){
-        // Function creates a new activity that is linked
-        // to a particular owner
-
-        return $http({
-          method  : 'POST',
-          url     : appConfig.API.baseURL + 'clients/' + ownerID + '/activities',
-          data    : {
-                      activity: {
-                        description  : activity.description
+                        description     : activity.description,
+                        default_charge  : parseFloat(activity.default_charge),
+                        active          : activity.active
                       }
                     }
         });
@@ -98,7 +85,9 @@
                         url     : appConfig.API.baseURL + 'activities/' + activity.id,
                         data    : {
                                     activity: {
-                                      description  : activity.description
+                                      description     : activity.description,
+                                      default_charge  : parseFloat(activity.default_charge),
+                                      active          : activity.active
                                     }
                                   }
 
@@ -107,7 +96,9 @@
                         var matchedActivity = _.find(activities, function (c) {
                             return c.id == parseInt(activity.id, 10);
                         });
-                        matchedActivity.description = activity.description;
+                        matchedActivity.description     =   activity.description;
+                        matchedActivity.default_charge  =   parseFloat(activity.default_charge);
+                        matchedActivity.active          =   activity.active;
                       });
       }
 

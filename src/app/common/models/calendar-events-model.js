@@ -29,7 +29,8 @@
           start: '',
           end: '',
           dog: {},
-          activity: {}
+          activity: {},
+          charge:0
         };
       }
 
@@ -118,7 +119,8 @@
             start         : start.format('YYYY-MM-DD HH:mm'),
             end           : start.format('YYYY-MM-DD HH:mm'), //calendarAppointment.end,
             dog_id        : appointment.dog.id,
-            activity_id   : appointment.activity.id
+            activity_id   : appointment.activity.id,
+            charge        : parseFloat(appointment.charge)
           }
         };
 
@@ -154,6 +156,7 @@
               matchedCalendarEvent.start        =   newAppointment.start;
               matchedCalendarEvent.end          =   newAppointment.end;
               matchedCalendarEvent.dog          =   newAppointment.dog;
+              matchedCalendarEvent.charge       =   parseFloat(newAppointment.charge);
             }else{
               //New Appointment add to events list
               calendarEvents.push(newAppointment);
