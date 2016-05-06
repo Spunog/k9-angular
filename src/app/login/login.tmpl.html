@@ -14,7 +14,7 @@
 </md-toolbar>
 
 <!-- Based on https://code.tutsplus.com/courses/hands-on-angular -->
-<md-content flex class='k9-login'>
+<md-content  flex class='k9-login main-content'>
 
   <div class='loginForm' layout="column" ng-cloak>
 
@@ -76,7 +76,9 @@
 
           <md-card-actions layout="row" layout-align="center center">
             <md-button ng-disabled="loginForm.$invalid || vm.isSigningIn()"
-                       ng-click='vm.login(user)'>{{ vm.getSubmitMessage() }}</md-button>
+                       ng-click='vm.login(user)'
+                       class="md-raised">{{ vm.getSubmitMessage() }}</md-button>
+            <md-button ui-sref='k9.register'>Create New Account</md-button>
           </md-card-actions>
 
         </form>

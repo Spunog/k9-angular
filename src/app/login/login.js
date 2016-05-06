@@ -93,7 +93,10 @@
                               controller: 'LoginController as vm',
                               templateUrl: 'app/login/login.tmpl.html'
                             }
-               }
+               },
+         data : {
+                    cssClassnames : 'page-login'
+                }
 
       });
 

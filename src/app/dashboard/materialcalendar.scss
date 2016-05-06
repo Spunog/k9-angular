@@ -30,8 +30,8 @@ Colors: Use the following - https://www.google.com/design/spec/style/color.html#
 
         events.push({
             title: 'This is a Material Design event!',
-            start: 'someStartDate',
-            end: 'someEndDate',
+            start_at: 'someStartDate',
+            end_at: 'someEndDate',
             color: '#C2185B'
         });
 

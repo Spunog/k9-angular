@@ -16,6 +16,7 @@
       'toastr',
       'k9.navigation',
       'k9.login',
+      'k9.register',
       'ui.calendar',
       'k9.models.calendar_events',
       'k9.dashboard',

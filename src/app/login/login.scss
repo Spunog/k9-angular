@@ -1,4 +1,5 @@
 .k9-login{
+
   .loginForm{
 
     .inputdemoErrors .inputErrorsApp {
@@ -13,5 +14,17 @@
       margin-bottom: 1.5em;
     }
 
+  }
+}
+
+.page-login{
+  .main-navigation{
+    display:none !important;
+  }
+
+  .main-content{
+    max-width: 600px;
+    margin-left:auto;
+    margin-right:auto;
   }
 }

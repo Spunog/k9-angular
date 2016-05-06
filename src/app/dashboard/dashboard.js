@@ -63,7 +63,6 @@
       }
 
       function calendarEventClick( date, jsEvent, view){
-        console.log(date,'test');
           $mdDialog.show({
             controller    : 'CreateAppointmentController as vm',
             templateUrl   : 'app/dashboard/create/appointment-create.tmpl.html',

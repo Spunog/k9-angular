@@ -20,10 +20,11 @@
       if(!auth.isLoggedIn()){
 
         var onLoginPage = toState.name === "k9.login";
+        var onRegisterPage = toState.name === "k9.register";
 
-        if(!onLoginPage){
+        if(!onLoginPage && !onRegisterPage){
           event.preventDefault(); // stop current execution
-          $state.go('k9.login');     // go to login
+          $state.go('k9.login');  // go to login
         }
 
       }else{

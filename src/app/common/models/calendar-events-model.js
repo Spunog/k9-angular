@@ -80,7 +80,24 @@
       }
 
       function extract(result){
-        return result.data.appointments;
+        // end is a reserved word in ruby and mssql etc
+        // so start and end on API side are refered to as start_at
+        // and end_at
+
+        var appointments = result.data.appointments;
+
+        for (var i = 0; i < appointments.length; i++) {
+
+          // Copy properties into new keys
+          appointments[i].start = appointments[i].start_at;
+          appointments[i].end = appointments[i].end_at;
+
+          // Remove old keys
+          delete appointments[i].start_at;
+          delete appointments[i].end_at;
+        }
+
+        return appointments;
       }
 
       function cacheCalendarEvents(result){
@@ -116,8 +133,8 @@
           url: URLS.APPOINTMENTS,
           appointment: {
             title         : appointment.title,
-            start         : start.format('YYYY-MM-DD HH:mm'),
-            end           : start.format('YYYY-MM-DD HH:mm'), //calendarAppointment.end,
+            start_at      : start.format('YYYY-MM-DD HH:mm'),
+            end_at        : start.format('YYYY-MM-DD HH:mm'), //calendarAppointment.end,
             dog_id        : appointment.dog.id,
             activity_id   : appointment.activity.id,
             charge        : parseFloat(appointment.charge)
@@ -153,12 +170,20 @@
               matchedCalendarEvent.title        =   newAppointment.title;
               matchedCalendarEvent.description  =   newAppointment.description;
               matchedCalendarEvent.note         =   newAppointment.note;
-              matchedCalendarEvent.start        =   newAppointment.start;
-              matchedCalendarEvent.end          =   newAppointment.end;
+              matchedCalendarEvent.start        =   newAppointment.start_at;
+              matchedCalendarEvent.end          =   newAppointment.end_at;
               matchedCalendarEvent.dog          =   newAppointment.dog;
               matchedCalendarEvent.charge       =   parseFloat(newAppointment.charge);
             }else{
-              //New Appointment add to events list
+              // New Appointxment add to events list
+              // Copy properties into new keys
+              newAppointment.start = newAppointment.start_at;
+              newAppointment.end = newAppointment.end_at;
+
+              // Remove old keys
+              delete newAppointment.start_at;
+              delete newAppointment.end_at;
+
               calendarEvents.push(newAppointment);
             }
 
