@@ -9,8 +9,7 @@
 
     //Public
     var vm = this;
-
-    vm.simulateQuery    = false;
+    
     vm.isDisabled       = false;
     vm.pets             = loadAll();
     vm.querySearch      = querySearch;
