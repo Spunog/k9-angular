@@ -15,6 +15,7 @@
       var URLS = { INDEX : appConfig.API.baseURL + 'photos'},
           photos;
 
+      // Returns one set of photo details for a given ID
       function getByID(photoID){
         return $http({
           method  : 'GET',
@@ -22,6 +23,7 @@
         });
       }
 
+      // Saves a photo - Includes adding new photos or updating existing ones
       function save(photo){
 
         var saveMethod, saveURL;
@@ -44,6 +46,7 @@
         });
       }
 
+      // Function deletes a photo based on ID
       function deletePhoto(photo){
         return $http({
           method  : 'DELETE',
