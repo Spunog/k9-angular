@@ -1,0 +1,13 @@
+<!-- Blank Option -->
+<div class="blank_list_thumb"
+      ng-hide='client.thumbnail_menu.length > 0'>
+  <span>{{ client.initials }}</span>
+</div>
+
+<!-- Photo Option -->
+<img ng-src="{{ client.thumbnail_menu }}"
+     class="md-card-image "
+     alt="{{ photo.title }}"
+     aria-label="{{ photo.title }}"
+     ng-show='client.thumbnail_menu.length > 0'
+     layout-padding>

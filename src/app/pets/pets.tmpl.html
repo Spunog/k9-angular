@@ -94,9 +94,11 @@
                       ng-repeat="pet in vm.pets | filter:vm.petSearchText">
 
 
-            <ng-md-icon ng-hide='pet.photos.length > 0'
-                        icon="paw"
-                        size="24"></ng-md-icon>
+            <!-- Blank Option -->
+            <div class="blank_list_thumb"
+                  ng-hide='pet.photos.length > 0'>
+              <span>{{ pet.name.charAt(0) }}</span>
+            </div>
 
             <img ng-src="{{ pet.photos[pet.photos.length - 1].thumbnail_menu }}"
                  class="md-card-image"

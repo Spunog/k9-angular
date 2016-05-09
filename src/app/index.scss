@@ -227,7 +227,34 @@ span.name {
 
 }
 
+.blank_list_thumb {
+  float: left;
+  position: relative;
 
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+
+  background-color: #a8d1f1;
+  text-align: center;
+
+  /*box-shadow: 0 0 0 3px #2196f3, 0 0 0 4px #2196f3, 0 2px 5px 4px rgba(0,0,0,.2); */
+  width:65px;
+  height:65px;
+  display:block;
+  margin-right:0.5em;
+
+}
+
+.blank_list_thumb span{
+  font-size: 1.5em;
+  font-weight: bold;
+  vertical-align:middle;
+  color:#FFFFFF;
+  position: relative;
+  top:20%;
+  left:2%
+}
 
 
 

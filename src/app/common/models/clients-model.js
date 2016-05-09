@@ -23,13 +23,22 @@
       vm.addDogLocally          =   addDogLocally;
       vm.removeDogLocally       =   removeDogLocally;
       vm.updateImage            =   updateImage;
-      vm.setCurrentClientImages = setCurrentClientImages;
+      vm.setCurrentClientImages =   setCurrentClientImages;
+      vm.getDefaultImages       =   getDefaultImages;
 
       //Private
+      var imageSrcRoot = 'https://res.cloudinary.com/groomk9/image/upload/';
+      var imageSrc = {
+        menu_default: 'c_thumb,h_60,r_max,w_60/v1462814809/paw_missing_bigxou.png',
+        thumb_processing: '/app/assets/img/placeholder_client_processing.png',
+        thumb_default: '/app/assets/img/placeholder_client.png'
+      };
+
       var currentClient = {
         id:0,
         first_name: '',
         last_name: '',
+        initials:'',
         phone: '',
         email: '',
         address:'',
@@ -37,10 +46,14 @@
         picture_thumb_cropped: ''
       };
 
+      function getDefaultImages(){
+        return imageSrc;
+      }
+
       function setCurrentClientImages(images){
 
         // Image to show while main image is uploaded
-        var processingCropped = '/app/assets/img/placeholder_client_processing.png';
+        var processingCropped = imageSrc.thumb_processing;
         var croppedImage = (images.cropped  && images.cropped.length > 0) ?
                                             images.cropped : processingCropped;
 
@@ -91,6 +104,7 @@
         currentClient.id          = client.id;
         currentClient.first_name  = client.first_name;
         currentClient.last_name   = client.last_name;
+        currentClient.initials    = client.initials;
         currentClient.phone       = client.phone;
         currentClient.email       = client.email;
         currentClient.dogs        = client.dogs;
@@ -102,20 +116,13 @@
           currentClient.picture_thumb_cropped = client.picture_thumb_cropped;
         }else{
           // No image recorded against Client show placeholder
-          currentClient.picture_thumb_cropped = '/app/assets/img/placeholder_client.png';
+          currentClient.picture_thumb_cropped = imageSrc.thumb_default;
         }
 
       }
 
       function resetCurrentClient(){
-        currentClient.id          = 0;
-        currentClient.first_name  = '';
-        currentClient.last_name   = '';
-        currentClient.phone       = '';
-        currentClient.email       = '';
-        currentClient.address     = '';
-        currentClient.dogs        = [];
-        currentClient.picture_thumb_cropped='';
+        currentClient = null;
       }
 
       function getClients(){
@@ -137,6 +144,7 @@
                       client: {
                         first_name  : client.firstname,
                         last_name   : client.lastname,
+                        initials    : client.initials,
                         phone       : client.phone,
                         email       : client.email,
                         address     : client.address
@@ -167,6 +175,7 @@
                                     client: {
                                       first_name  : client.first_name,
                                       last_name   : client.last_name,
+                                      initials    : client.initials,
                                       phone       : client.phone,
                                       email       : client.email,
                                       address     : client.address
@@ -180,6 +189,7 @@
                         });
                         matchedClient.first_name = client.first_name;
                         matchedClient.last_name  = client.last_name;
+                        matchedClient.initials   = client.initials;
                         matchedClient.phone      = client.phone;
                         matchedClient.email      = client.email;
                         matchedClient.address    = client.address;
