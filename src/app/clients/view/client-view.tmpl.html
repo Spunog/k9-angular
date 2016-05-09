@@ -171,7 +171,14 @@
         </md-tab> <!--end appointments-->
 
         <!-- Photos -->
-        <md-tab label="Photos">
+        <md-tab label="Photos ({{ vm.client.dogs.length }})">
+
+          <!-- No Images Warning -->
+          <div ng-show='vm.client.dogs.length < 1'>
+            <md-content class='layout-padding'>
+               No pet images are currently available
+            </md-content>
+          </div>
 
           <div ng-repeat="dog in vm.client.dogs" class='md-padding'>
 
