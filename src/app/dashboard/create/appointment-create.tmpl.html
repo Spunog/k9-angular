@@ -81,7 +81,8 @@
           </div>
         </md-autocomplete>
 
-        <div flex layout='row'>
+        <div layout="row" layout-sm="column">
+
           <!-- Job -->
           <md-input-container class="md-block" flex>
             <label>Job</label>
@@ -100,10 +101,10 @@
                    type="number"
                    step="5">
           </md-input-container>
+
         </div>
 
-        <div flex layout='rows'>
-
+        <div layout="row" layout-sm="column">
           <!-- Date -->
           <div flex>
             <md-datepicker
@@ -113,20 +114,22 @@
           </div>
 
           <!-- Time -->
-          <md-input-container flex>
-            <label>Time</label>
+          <div flex>
+            <md-input-container>
+              <label>Time</label>
 
-            <md-select
-              ng-model="vm.newAppointment.startTime"
-              ng-model-options="{trackBy: '$value.id'}"
-              ng-required="true"
-              aria-label="Appointment Start Time">
-              <md-option ng-value='time' ng-repeat="time in vm.bookingTimes">
-                {{ time.name }}
-              </md-option>
-            </md-select>
-          </md-input-container>
+              <md-select
+                ng-model="vm.newAppointment.startTime"
+                ng-model-options="{trackBy: '$value.id'}"
+                ng-required="true"
+                aria-label="Appointment Start Time">
+                <md-option ng-value='time' ng-repeat="time in vm.bookingTimes">
+                  {{ time.name }}
+                </md-option>
+              </md-select>
+            </md-input-container>
 
+          </div>
         </div>
 
       </div>
