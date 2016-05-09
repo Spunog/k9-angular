@@ -1,6 +1,5 @@
 <!-- Client Create -->
-<md-dialog class='appointmentDialog' aria-label="Create Appointment" ng-cloak>
-
+<md-dialog flex="50" class='appointmentDialog' aria-label="Create Appointment" ng-cloak>
   <form
     role="form"
     name='add-appointment-form'
@@ -18,7 +17,9 @@
         </md-button>
 
         <!-- Title -->
-        <h2>Create Appointment</h2>
+        <h2>
+          Create<span hide-xs> Appointment</span>
+        </h2>
         <span flex></span>
 
         <!--- Delete--->
@@ -104,7 +105,7 @@
 
         </div>
 
-        <div layout="row" layout-sm="column">
+        <div layout="column" layout-gt-xs="row">
           <!-- Date -->
           <div flex>
             <md-datepicker
