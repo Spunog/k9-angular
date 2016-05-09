@@ -46,6 +46,7 @@
         ClientsModel.updateClient(vm.editedClient)
                     .then(function (clients) {
             //After updating main client details (excluding picture) return to main details
+            ClientsModel.setCurrentClientImages('','');
             vm.viewClient(vm.editedClient);
 
             // Now upload image and refresh thumbnail when done
@@ -55,7 +56,12 @@
             ClientsModel.updateImage(vm.editedClient.picture)
                 .then(function (resp) {
                     // Set newly updated image to model
-                    vm.editedClient.picture_thumb_cropped = resp.data.client.picture_thumb_cropped;
+                    var croppedImageSrc = resp.data.client.picture_thumb_cropped;
+                    var menuImageSrc    = resp.data.client.thumbnail_menu;
+                    ClientsModel.setCurrentClientImages({
+                      cropped : croppedImageSrc,
+                      menu    : menuImageSrc
+                    });
                 }, function (resp) {
                     console.log('Error uploading client image. Status: ' + resp.status);
                 }, function (evt) {

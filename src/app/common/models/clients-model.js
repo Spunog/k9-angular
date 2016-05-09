@@ -11,18 +11,19 @@
                     INDEX : appConfig.API.baseURL + 'clients'
                   };
 
-      vm.getCurrentClient     =   getCurrentClient;
-      vm.setCurrentClient     =   setCurrentClient;
-      vm.resetCurrentClient   =   resetCurrentClient;
-      vm.getClients           =   getClients;
-      vm.addClient            =   addClient;
-      vm.createClient         =   createClient;
-      vm.getClientById        =   getClientById;
-      vm.updateClient         =   updateClient;
-      vm.deleteClient         =   deleteClient;
-      vm.addDogLocally        =   addDogLocally;
-      vm.removeDogLocally     =   removeDogLocally;
-      vm.updateImage          =   updateImage;
+      vm.getCurrentClient       =   getCurrentClient;
+      vm.setCurrentClient       =   setCurrentClient;
+      vm.resetCurrentClient     =   resetCurrentClient;
+      vm.getClients             =   getClients;
+      vm.addClient              =   addClient;
+      vm.createClient           =   createClient;
+      vm.getClientById          =   getClientById;
+      vm.updateClient           =   updateClient;
+      vm.deleteClient           =   deleteClient;
+      vm.addDogLocally          =   addDogLocally;
+      vm.removeDogLocally       =   removeDogLocally;
+      vm.updateImage            =   updateImage;
+      vm.setCurrentClientImages = setCurrentClientImages;
 
       //Private
       var currentClient = {
@@ -36,10 +37,32 @@
         picture_thumb_cropped: ''
       };
 
+      function setCurrentClientImages(images){
+
+        // Image to show while main image is uploaded
+        var processingCropped = '/app/assets/img/placeholder_client_processing.png';
+        var croppedImage = (images.cropped  && images.cropped.length > 0) ?
+                                            images.cropped : processingCropped;
+
+        // Update Client in List
+        var matchedClient = _.find(clients, function (c) {
+            return c.id == parseInt(currentClient.id, 10);
+        });
+
+        // Update Object In List
+        // (this should be reviewed, 2 diff ref to same model, 1 on edit, 1 on list)
+        currentClient.picture_thumb_cropped = croppedImage;
+        currentClient.thumbnail_menu = images.menu;
+
+        matchedClient.picture_thumb_cropped = croppedImage;
+        matchedClient.thumbnail_menu = images.menu;
+
+      }
+
       function updateImage(file){
         // only ever need PUT method as will only allow images to be
         // attached to existing Clients
-        currentClient.picture_thumb_cropped = '/app/assets/img/placeholder_client_processing.png';
+
         return Upload.upload({
             url: URLS.INDEX + '/' + currentClient.id,
             method: 'PUT',
