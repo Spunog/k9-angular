@@ -148,13 +148,16 @@
         }
 
         //Call backend API and update/create
+        console.log('about to update');
         return $http({
           method  : updateParams.methodx,
           url     : updateParams.url,
           data    : {
-                      appointment: updateParams.appointment
+                      appointment: updateParams.appointment,
+                      sendEmailConfirmation : appointment.sendEmailConfirmation
                     }
         }).then(function (response) {
+          console.log('updating...');
 
           var newAppointment = response.data.appointment;
 
