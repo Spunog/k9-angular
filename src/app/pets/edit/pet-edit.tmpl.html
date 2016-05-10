@@ -2,7 +2,7 @@
 <!-- Toolbar -->
 <md-toolbar>
   <div class="md-toolbar-tools">
-    <md-button ui-sref='k9.pets' class="md-icon-button" aria-label="Go Back">
+    <md-button ng-click='vm.goBack();' class="md-icon-button" aria-label="Go Back">
       <md-tooltip md-direction="bottom">Go back</md-tooltip>
       <ng-md-icon
         ng-click='vm.clickIconMorph()'
@@ -63,7 +63,7 @@
             </md-input-container>
 
             <!-- Breed -->
-            <md-input-container class="md-block" flex-gt-sm>
+            <md-input-container flex>
               <label>Breed</label>
               <md-select ng-model="vm.editedPet.breed.id">
                 <md-option ng-repeat="breed in vm.breeds" value="{{breed.id}}">

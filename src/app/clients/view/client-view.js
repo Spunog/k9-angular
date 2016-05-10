@@ -51,6 +51,7 @@
                     .then(function (client) {
                         if (client) {
                             ClientsModel.setCurrentClient(client);
+                            ClientsModel.refreshClientPets(client.id);
                         } else {
                             returnToClients(true);
                         }

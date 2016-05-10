@@ -25,6 +25,7 @@
       vm.updateImage            =   updateImage;
       vm.setCurrentClientImages =   setCurrentClientImages;
       vm.getDefaultImages       =   getDefaultImages;
+      vm.refreshClientPets      =   refreshClientPets;
 
       //Private
       var imageSrcRoot = 'https://res.cloudinary.com/groomk9/image/upload/';
@@ -48,6 +49,17 @@
 
       function getDefaultImages(){
         return imageSrc;
+      }
+
+      function refreshClientPets(clientID){
+        $http({
+          method  : 'GET',
+          url     : URLS.INDEX + '/' + clientID
+        })
+        .then(function (response) {
+          var client = response.data.client;
+          currentClient.dogs = client.dogs;
+        });
       }
 
       function setCurrentClientImages(images){

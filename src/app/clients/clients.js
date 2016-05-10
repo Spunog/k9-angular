@@ -21,7 +21,6 @@
        vm.clientSearchText  =   '';
        vm.toggleLeft        =   NavModel.buildDelayedToggler('left');
 
-
        getClients();
        updateNav();
 

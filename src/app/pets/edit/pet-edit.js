@@ -6,7 +6,7 @@
     'k9.models.pets'
   ])
 
-  .controller('EditPetController', function (PhotosModel,appConfig,Upload,BreedsModel,$state, $stateParams, ClientsModel, PetsModel,$mdDialog) {
+  .controller('EditPetController', function ($window,PhotosModel,appConfig,Upload,BreedsModel,$state, $stateParams, ClientsModel, PetsModel,$mdDialog) {
 
       var vm                =   this;
       vm.breeds             =   [];
@@ -16,6 +16,7 @@
       vm.updatePet          =   updatePet;
       vm.selectedPhoto      =   null;
       vm.selectPhoto        =   selectPhoto;
+      vm.goBack             =   goBack;
 
       // Uploading
       vm.uploadingImage     =   false;
@@ -38,7 +39,6 @@
       PetsModel.getPetById($stateParams.petID)
                   .then(function (pet) {
                       if (pet) {
-                        console.log('edit pet',pet);
                           PetsModel.setCurrentPet(pet);
                       } else {
                           returnToPets(true);
@@ -46,6 +46,10 @@
                   });
 
       // Private
+
+      function goBack(){
+         $window.history.back();
+      }
 
       function updatePhotoDetails(photo){
         PhotosModel.save(photo)
@@ -125,7 +129,8 @@
         vm.pet = angular.copy(vm.editedPet);
         PetsModel.updatePet(vm.editedPet)
                  .then(function (pets) {
-                   returnToPets(true);
+                   PetsModel.resetCurrentPet();
+                   goBack();
                  });
       }
 
