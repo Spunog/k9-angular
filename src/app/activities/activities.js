@@ -19,13 +19,20 @@
        vm.searchActive        =   false;
        vm.toggleSearch        =   toggleSearch;
        vm.activitySearchText  =   '';
-       vm.toggleLeft          =   NavModel.buildDelayedToggler('left');       
+       vm.toggleLeft          =   NavModel.buildDelayedToggler('left');
+       vm.isLoading       =   isLoading;
 
        animateBackIcon();
        getActivities();
        updateNav();
 
        //Private
+       var loading = true;
+
+       function isLoading(){
+         return loading;
+       }
+
        function toggleSearch(searchOn){
          vm.searchActive = searchOn;
          if(!searchOn){
@@ -49,9 +56,11 @@
 
        // Index
        function getActivities(){
+         loading = true;
          ActivitiesModel.getActivities()
                   .then(function (activities) {
                      vm.activities = activities;
+                     loading = false;
                   });
        }
 

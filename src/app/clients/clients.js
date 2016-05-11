@@ -20,11 +20,18 @@
        vm.toggleSearch      =   toggleSearch;
        vm.clientSearchText  =   '';
        vm.toggleLeft        =   NavModel.buildDelayedToggler('left');
+       vm.isLoading         =   isLoading;
 
        getClients();
        updateNav();
 
        //Private
+       var loading = true;
+
+       function isLoading(){
+         return loading;
+       }
+
        function toggleSearch(searchOn){
          vm.searchActive = searchOn;
          if(!searchOn){
@@ -43,10 +50,12 @@
 
        // Index
        function getClients(){
+         loading = true;
 
          ClientsModel.getClients()
                      .then(function (clients) {
                        vm.clients = clients;
+                       loading = false;
                      });
        }
 

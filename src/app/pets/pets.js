@@ -20,12 +20,19 @@
        vm.toggleSearch  =   toggleSearch;
        vm.petSearchText =   '';
        vm.toggleLeft    =   NavModel.buildDelayedToggler('left');
+       vm.isLoading     =   isLoading;
 
        animateBackIcon();
        getPets();
        updateNav();
 
        //Private
+       var loading = true;
+
+       function isLoading(){
+         return loading;
+       }
+
        function toggleSearch(searchOn){
          vm.searchActive = searchOn;
          if(!searchOn){
@@ -49,9 +56,11 @@
 
        // Index
        function getPets(){
+         loading = true;
          PetsModel.getPets()
                   .then(function (pets) {
                      vm.pets = pets;
+                     loading = false;
                   });
        }
 

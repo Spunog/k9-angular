@@ -13,19 +13,27 @@
 
        //Public
        var vm = this;
-       vm.clickIcon     =   'keyboard_backspace';
+       vm.clickIcon       =   'keyboard_backspace';
        vm.currentBreed    =   BreedsModel.getCurrentBreed();
        vm.editBreed       =   editBreed;
-       vm.searchActive  =   false;
-       vm.toggleSearch  =   toggleSearch;
-       vm.breedSearchText = '';
-       vm.toggleLeft    =   NavModel.buildDelayedToggler('left');
+       vm.searchActive    =   false;
+       vm.toggleSearch    =   toggleSearch;
+       vm.breedSearchText =   '';
+       vm.toggleLeft      =   NavModel.buildDelayedToggler('left');
+       vm.isLoading       =   isLoading;
 
+      //  On Load
        animateBackIcon();
        getBreeds();
        updateNav();
 
        //Private
+       var loading = true;
+
+       function isLoading(){
+         return loading;
+       }
+
        function toggleSearch(searchOn){
          vm.searchActive = searchOn;
          if(!searchOn){
@@ -49,9 +57,11 @@
 
        // Index
        function getBreeds(){
+         loading = true;
          BreedsModel.getBreeds()
                   .then(function (breeds) {
                      vm.breeds = breeds;
+                     loading = false;
                   });
        }
 
