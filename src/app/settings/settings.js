@@ -8,15 +8,14 @@
   .controller("SettingController", function SettingCtrl(NavModel, $state, $mdDialog) {
 
       //Public
-      var vm = this;
+      var vm          =   this;
       vm.selectedTab  =   $state.current.data.selectedTab |= 0;
-      vm.toggleLeft   = NavModel.buildDelayedToggler('left');
+      vm.toggleLeft   =   NavModel.buildDelayedToggler('left');
 
       // On Load
       updateNav();
 
       //Private
-
       function updateNav() {
         //Update Navigation State
         NavModel.setCurrentItem({
@@ -32,7 +31,7 @@
     //State Providers
     $stateProvider
 
-      // Settings > Abstract Root Level
+    // Settings > Abstract Root Level
       .state('k9.settings', {
       abstract: true,
       url: '/settings',
@@ -50,16 +49,16 @@
 
     // Settings > Breeds
     .state('k9.settings.breeds', {
-        url: '/breeds',
-        data: {
-          'selectedTab': 0
-        },
-        views: {
-          'breeds': {
-            controller: 'BreedController as vm',
-            templateUrl: 'app/settings/breeds/settings-breeds.tmpl.html'
-          }
+      url: '/breeds',
+      data: {
+        'selectedTab': 0
+      },
+      views: {
+        'breeds': {
+          controller: 'BreedController as vm',
+          templateUrl: 'app/settings/breeds/settings-breeds.tmpl.html'
         }
+      }
     })
 
     // Settings > Activity
