@@ -45,7 +45,6 @@
           name: (pet.breed !== null) ? pet.breed.name : ''
         };
         currentPet.photos = pet.photos;
-        console.log('model pet', currentPet);
       }
 
       function resetCurrentPet(){

@@ -17,7 +17,6 @@
     function createPet(pet){
 
       if(!client){
-        console.log('adding pet');
         //Create pet
         PetsModel.createPet(pet)
                  .then(function (pets) {
@@ -25,7 +24,6 @@
                    $mdDialog.hide();
                  });
       }else{
-        console.log('adding pet with owner');
         //Create pet and associate to owner
         PetsModel.createPetWithOwner(pet,client.id)
                  .then(function (pets) {

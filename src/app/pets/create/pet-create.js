@@ -5,24 +5,17 @@
     'ui.router',
     'k9.models.pets'
   ])
-  .config(function ($stateProvider) {
-
-    //State Providers
-    $stateProvider.state('k9.pets.create',{
-      url: '/pet/create',
-      views: {
-                'main@' : {
-                            controller: 'CreatePetController as vm',
-                            templateUrl: 'app/pets/create/pet-create.tmpl.html'
-                          }
-             }
-    });
-
-  })
 
   .controller('CreatePetController', function($state, $stateParams, PetsModel) {
-    var vm = this;
-    vm.isSaving             =   isSaving;
+
+    // Public
+    var vm        = this;
+    vm.isSaving   = isSaving;
+    vm.cancel     = cancelCreating;
+    vm.createPet  = createPet;
+
+    // On Load
+    resetForm();
 
     //Private
     var saving = false;
@@ -55,13 +48,21 @@
       };
     }
 
-    // Public
-    vm.cancel = cancelCreating;
-    vm.createPet = createPet;
+  }) // end create pet ctrl
 
-    // On Load
-    resetForm();
+  .config(function ($stateProvider) {
 
-  }); // end create pet ctrl
+    //State Providers
+    $stateProvider.state('k9.pets.create',{
+      url: '/pet/create',
+      views: {
+                'main@' : {
+                            controller: 'CreatePetController as vm',
+                            templateUrl: 'app/pets/create/pet-create.tmpl.html'
+                          }
+             }
+    });
+
+  }); // end ui-router
 
 }()); // end use strict

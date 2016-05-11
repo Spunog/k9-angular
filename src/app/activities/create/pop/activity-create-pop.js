@@ -17,7 +17,6 @@
     function createBreed(breed){
 
       if(!client){
-        console.log('adding breed');
         //Create breed
         BreedsModel.createBreed(breed)
                  .then(function (breeds) {
@@ -25,7 +24,6 @@
                    $mdDialog.hide();
                  });
       }else{
-        console.log('adding breed with owner');
         //Create breed and associate to owner
         BreedsModel.createBreedWithOwner(breed,client.id)
                  .then(function (breeds) {

@@ -24,7 +24,6 @@
 
       function register(user){
         isRegistering = true;
-        console.log('registering now...');
 
         $http({
           method  : 'POST',
