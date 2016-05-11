@@ -9,17 +9,24 @@
   .controller('EditClientController', function (Upload,$scope,$state,$stateParams, ClientsModel,$mdDialog) {
 
       //Public
-      var vm = this;
-      vm.editedClient   =   ClientsModel.getCurrentClient();
-      vm.deleteClient   =   deleteClient;
-      vm.cancelEditing  =   cancelEditing;
-      vm.updateClient   =   updateClient;
-      vm.viewClient     =   viewClient;
-      vm.editedClient.picture = {};
+      var vm                  =   this;
+      vm.editedClient         =   ClientsModel.getCurrentClient();
+      vm.deleteClient         =   deleteClient;
+      vm.cancelEditing        =   cancelEditing;
+      vm.updateClient         =   updateClient;
+      vm.viewClient           =   viewClient;
+      vm.editedClient.picture =   {};
+      vm.isSaving             =   isSaving;
 
       getClientById();
 
       //Private
+      var saving = false;
+
+      function isSaving(){
+        return saving;
+      }
+
       function viewClient(client){
         $state.go('k9.clients.view', { clientID:client.id} );
       }
@@ -42,32 +49,39 @@
       }
 
       function updateClient() {
+        saving = true;
         var client = angular.copy(vm.editedClient);
         ClientsModel.updateClient(vm.editedClient)
                     .then(function (clients) {
-            //After updating main client details (excluding picture) return to main details
-            ClientsModel.setCurrentClientImages('','');
+
+            // Main Details have been saved. Return user to client edit
+            saving = false;
             vm.viewClient(vm.editedClient);
 
-            // Now upload image and refresh thumbnail when done
-            // Done like this as image upload is slower and using 3rd party
-            // no point making the end user wait for it to be complete
+            //After updating main client details (excluding picture) return to main details
+            if(vm.editedClient.picture.name){
+              
+              ClientsModel.setCurrentClientImages('','');
+              // Now upload image and refresh thumbnail when done
+              // Done like this as image upload is slower and using 3rd party
+              // no point making the end user wait for it to be complete
 
-            ClientsModel.updateImage(vm.editedClient.picture)
-                .then(function (resp) {
-                    // Set newly updated image to model
-                    var croppedImageSrc = resp.data.client.picture_thumb_cropped;
-                    var menuImageSrc    = resp.data.client.thumbnail_menu;
-                    ClientsModel.setCurrentClientImages({
-                      cropped : croppedImageSrc,
-                      menu    : menuImageSrc
-                    });
-                }, function (resp) {
-                    console.log('Error uploading client image. Status: ' + resp.status);
-                }, function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('Upload Progress: ' + progressPercentage + '% ');
-            });
+              ClientsModel.updateImage(vm.editedClient.picture)
+                  .then(function (resp) {
+                      // Set newly updated image to model
+                      var croppedImageSrc = resp.data.client.picture_thumb_cropped;
+                      var menuImageSrc    = resp.data.client.thumbnail_menu;
+                      ClientsModel.setCurrentClientImages({
+                        cropped : croppedImageSrc,
+                        menu    : menuImageSrc
+                      });
+                  }, function (resp) {
+                      console.log('Error uploading client image. Status: ' + resp.status);
+                  }, function (evt) {
+                      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                      console.log('Upload Progress: ' + progressPercentage + '% ');
+              });
+            }
 
           }); //end client model update
       }
