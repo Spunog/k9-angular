@@ -26,8 +26,6 @@
 
     function createClient(client){
 
-      console.log('client before posting...',client);
-
       ClientsModel.createClient(client)
                   .then(function (clients) {
                       ClientsModel.addClient(clients.data.client);

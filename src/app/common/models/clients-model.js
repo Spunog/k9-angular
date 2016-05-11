@@ -134,7 +134,15 @@
       }
 
       function resetCurrentClient(){
-        currentClient = null;
+        currentClient.id = 0;
+        currentClient.first_name = '';
+        currentClient.last_name = '';
+        currentClient.initial = '';
+        currentClient.phone = '';
+        currentClient.email = '';
+        currentClient.addres = '';
+        currentClient.dogs = [];
+        currentClient.picture_thumb_cropped = '';
       }
 
       function getClients(){
