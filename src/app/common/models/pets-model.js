@@ -134,16 +134,24 @@
                       }).then(function (response) {
                         // Update pet in local array
                         var pet = response.data.dog;
+
                         var matchedPet = _.find(pets, function (c) {
                             return c.id == parseInt(pet.id, 10);
                         });
+
                         matchedPet.name = pet.name;
                         matchedPet.note = pet.note;
-                        matchedPet.breed = {
-                          id: pet.breed.id,
-                          name: pet.breed.name
-                        };
                         matchedPet.photos = pet.photos;
+
+                        // Breed
+                        if(pet.breed !== null){
+                          matchedPet.breed = {
+                            id: pet.breed.id,
+                            name: pet.breed.name
+                          };
+                        }else{
+                          matchedPet.breed = null;
+                        }
 
                       });
       }
