@@ -22,11 +22,23 @@
       vm.calendar.eventRender    =   calendarEventRender;
       vm.refreshCalendar         =   calendarRefresh;
       vm.toggleLeft              =   NavModel.buildDelayedToggler('left');
+      vm.isSaving                =   isSaving;
+      vm.isLoading               =   isLoading;
 
       vm.refreshCalendar();
       updateNav();
 
       //Private
+      var saving  = false;
+      var loading = true;
+
+      function isSaving(){
+        return saving;
+      }
+
+      function isLoading(){
+        return loading;
+      }
 
       /*
         Calendar - http://fullcalendar.io/
@@ -102,6 +114,7 @@
       }
 
       function calendarRefresh(){
+        loading = true;
         CalendarEventsModel.getCalendarEvents()
           .then(function (calendarEvents) {
 
@@ -132,6 +145,9 @@
               vm.calendarEvents.push(newEvent);
 
             });
+
+            // Loading Complete
+            loading = false;
 
           });
       }
@@ -164,7 +180,10 @@
            resolve: {
              // Page Title
              $title: function() { return 'Dashboard'; }
-           }
+           },
+           data : {
+                      cssClassnames : 'page-dashboard'
+                  }
       });
 
     });

@@ -11,26 +11,26 @@
                     APPOINTMENTS : appConfig.API.baseURL + 'appointments'
                   };
 
-      vm.newCalendarEvent   =   newCalendarEvent;
-      vm.getBookingTimes    =   getBookingTimes;
-      vm.createAppointment  =   createAppointment;
-      vm.updateAppointment  =   updateAppointment;
-      vm.deleteAppointment  =   deleteAppointment;
-      vm.getCalendarEvents  =   getCalendarEvents;
-      vm.getCalendarEventsForClient = getCalendarEventsForClient;
+      vm.newCalendarEvent           =   newCalendarEvent;
+      vm.getBookingTimes            =   getBookingTimes;
+      vm.createAppointment          =   createAppointment;
+      vm.updateAppointment          =   updateAppointment;
+      vm.deleteAppointment          =   deleteAppointment;
+      vm.getCalendarEvents          =   getCalendarEvents;
+      vm.getCalendarEventsForClient =   getCalendarEventsForClient;
 
       //Private
       function newCalendarEvent(){
         return {
-          id: '',
-          title: '',
-          description: '',
-          note: '',
-          start: '',
-          end: '',
-          dog: {},
-          activity: {},
-          charge:0
+          id:           '',
+          title:        '',
+          description:  '',
+          note:         '',
+          start:        '',
+          end:          '',
+          dog:          {},
+          activity:     {},
+          charge:       0
         };
       }
 
@@ -128,6 +128,8 @@
                                       );
 
         //New Record Vs Updating Record
+        var dogID = (appointment.dog !== null &&
+                          appointment.dog.hasOwnProperty('id')) ? appointment.dog.id : '';
         var updateParams = {
           methodx: 'POST',
           url: URLS.APPOINTMENTS,
@@ -135,7 +137,7 @@
             title         : appointment.title,
             start_at      : start.format('YYYY-MM-DD HH:mm'),
             end_at        : start.format('YYYY-MM-DD HH:mm'), //calendarAppointment.end,
-            dog_id        : appointment.dog.id,
+            dog_id        : dogID,
             activity_id   : appointment.activity.id,
             charge        : parseFloat(appointment.charge)
           }
@@ -148,7 +150,6 @@
         }
 
         //Call backend API and update/create
-        console.log('about to update');
         return $http({
           method  : updateParams.methodx,
           url     : updateParams.url,
@@ -157,8 +158,6 @@
                       sendEmailConfirmation : appointment.sendEmailConfirmation
                     }
         }).then(function (response) {
-          console.log('updating...');
-
           var newAppointment = response.data.appointment;
 
           // If user loads add page directly without

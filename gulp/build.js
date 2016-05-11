@@ -99,7 +99,7 @@ gulp.task('netlify', function() {
 
 // Angular Layout
 gulp.task('angular_layout', function() {
-   gulp.src('bower_components/angular-material/angular-material.layouts.min.css')
+   gulp.src('bower_components/angular-material/layouts/angular-material.layouts.min.css')
    .pipe(gulp.dest('dist/styles'));
 });
 

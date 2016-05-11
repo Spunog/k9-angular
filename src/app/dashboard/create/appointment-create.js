@@ -9,18 +9,31 @@
 
     //Public
     var vm = this;
-    
-    vm.isDisabled       = false;
-    vm.pets             = loadAll();
-    vm.querySearch      = querySearch;
-    vm.newPet           = newPet;
-    vm.activities       = [];
-    vm.activityChanged  = activityChanged;
+
+    vm.isDisabled               =   false;
+    vm.pets                     =   loadAll();
+    vm.querySearch              =   querySearch;
+    vm.newPet                   =   newPet;
+    vm.activities               =   [];
+    vm.activityChanged          =   activityChanged;
+    vm.isSaving                 =   isSaving;
+
+    // Create Array of Booking Times
+    vm.bookingTimes             =   CalendarEventsModel.getBookingTimes();
+    vm.createAppointment        =   createAppointment;
+    vm.deleteAppointment        =   deleteAppointment;
+    vm.createAppointmentCancel  =   createAppointmentCancel;
+    vm.newAppointment           =   getNewAppointmentDefaults();
 
     //OnLoad
     getActivities();
 
     //Private
+    var saving = false;
+
+    function isSaving(){
+      return saving;
+    }
 
     function activityChanged(activityID){
       var activityPromise = ActivitiesModel.getActivityById(activityID);
@@ -47,32 +60,21 @@
       return results;
     }
 
-    /**
-     * Build `pets` list of key/value pairs
-     */
+    // Build `pets` list of key/value pairs
     function loadAll() {
       return PetsModel.getPets().then(function(response) {
           vm.pets = response;
           return response;
       });
     }
-    /**
-     * Create filter function for a query string
-     */
+
+    // Create filter function for a query string
     function createFilterFor(query) {
       var lowercaseQuery = angular.lowercase(query);
       return function filterFn(pet) {
         return (pet.name.toLowerCase().indexOf(lowercaseQuery) === 0);
       };
     }
-
-    // Create Array of Booking Times
-    vm.bookingTimes             =   CalendarEventsModel.getBookingTimes();
-    vm.createAppointment        =   createAppointment;
-    vm.deleteAppointment        =   deleteAppointment;
-    vm.createAppointmentCancel  =   createAppointmentCancel;
-
-    vm.newAppointment = getNewAppointmentDefaults();
 
     //Private
     function getNewAppointmentDefaults(){
@@ -103,16 +105,27 @@
 
     function createAppointment(appointment){
 
+      // Set Saving state to true
+      saving = true;
+
       if(appointment.id && appointment.id > 0){
         CalendarEventsModel.updateAppointment(appointment)
                            .then(function (response) {
                               $mdDialog.hide(appointment);
-                           });
+                              saving = false;
+                           }, function errorCallback(response) {
+                                saving = false;
+                                alert('Unable to save at this time...');
+                            });
       }else{
         CalendarEventsModel.createAppointment(appointment)
                            .then(function (response) {
                               $mdDialog.hide(appointment);
-                           });
+                              saving = false;
+                           }, function errorCallback(response) {
+                              saving = false;
+                              alert('Unable to save at this time...');
+                          });
       }
 
     }

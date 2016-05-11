@@ -18,7 +18,9 @@
 
         <!-- Title -->
         <h2>
-          Create<span hide-xs> Appointment</span>
+          <span ng-hide='vm.newAppointment.id'>Create</span>
+          <span ng-show='vm.newAppointment.id'>Edit</span>
+          <span hide-xs> Appointment</span>
         </h2>
         <span flex></span>
 
@@ -35,8 +37,15 @@
           <ng-md-icon icon="delete" size="24"></ng-md-icon>
         </md-button>
 
+        <!-- Save Indicator -->
+        <md-progress-circular  md-mode="indeterminate"
+                               class="md-accent"
+                               ng-show='vm.isSaving()'></md-progress-circular>
+
         <!---Save--->
-        <md-button type='submit' class="md-icon-button" aria-label="Save">
+        <md-button type='submit' class="md-icon-button"
+                                 aria-label="Save"
+                                 ng-hide='vm.isSaving()'>
           <ng-md-icon icon="done" size="24"></ng-md-icon>
           <md-tooltip md-direction="bottom">
             Save
@@ -138,7 +147,7 @@
                        aria-label="Send Email Confirmation">
               Send E-mail Confirmation
           </md-checkbox>
-          
+
         </div>
 
       </div>

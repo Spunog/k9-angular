@@ -19,6 +19,14 @@
   </div>
 </md-toolbar>
 
+<!-- Load/Save Indicator -->
+<div class="progress-linear-holder">
+  <md-progress-linear md-mode="indeterminate"
+                      ng-show="vm.isLoading() || isSaving()"
+                      class="md-accent"
+                      ></md-progress-linear>
+</div>
+
 <!-- Main Content -->
 <md-content flex layout-padding>
 
@@ -26,5 +34,8 @@
   <div>
       <div ui-calendar="vm.calendar"  ng-model="vm.eventSources">
   </div>
+
+  <div class='calendar-status'
+       ng-show='vm.isLoading()'>Retrieving Latest Appointments . . . </div>
 
 </md-content>
