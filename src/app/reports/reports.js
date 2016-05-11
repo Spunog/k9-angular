@@ -18,7 +18,7 @@
         // State
         vm.isCreatingReport = false;
         vm.report = {
-          reportType: 'Dog'
+          reportType: 'Appointment'
         };
 
         // Onload
