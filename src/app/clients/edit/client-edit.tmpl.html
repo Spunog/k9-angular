@@ -122,12 +122,21 @@
       <!-- Address -->
       <div layout layout-xs="column">
         <md-input-container flex>
-          <label>address</label>
+          <label>Address</label>
           <textarea name="address"
                     ng-model="vm.editedClient.address"
-                    md-maxlength="100"></textarea>
+                    md-maxlength="100"
+                    places-auto-complete
+                    size=80
+                    placeholder="Type address..."
+                    component-restrictions="{country:'ie'}"></textarea>
         </md-input-container>
+
       </div>
 
   </md-content>
 </form>
+
+<div class="">
+
+</div>

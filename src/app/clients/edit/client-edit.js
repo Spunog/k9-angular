@@ -18,6 +18,7 @@
       vm.editedClient.picture =   {};
       vm.isSaving             =   isSaving;
 
+      // On Load
       getClientById();
 
       //Private
@@ -60,7 +61,7 @@
 
             //After updating main client details (excluding picture) return to main details
             if(vm.editedClient.picture.name){
-              
+
               ClientsModel.setCurrentClientImages('','');
               // Now upload image and refresh thumbnail when done
               // Done like this as image upload is slower and using 3rd party
