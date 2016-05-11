@@ -9,13 +9,21 @@
   .controller('CreateClientController', function($state, $stateParams, ClientsModel) {
 
     //Public
-    var vm = this;
-    vm.cancel = cancelCreating;
-    vm.createClient = createClient;
+    var vm            = this;
+    vm.cancel         = cancelCreating;
+    vm.createClient   = createClient;
+    vm.isSaving       = isSaving;
 
+    // On Load
     resetForm();
 
-    // Private
+    //Private
+    var saving = false;
+
+    function isSaving(){
+      return saving;
+    }
+
     function returnToClients(reload){
       $state.go('k9.clients', {}, { reload: reload });
     }
@@ -25,10 +33,11 @@
     }
 
     function createClient(client){
-
+      saving = true;
       ClientsModel.createClient(client)
                   .then(function (clients) {
                       ClientsModel.addClient(clients.data.client);
+                      saving = false;
                       $state.go(
                                   'k9.clients.view',
                                   {clientID: clients.data.client.id},

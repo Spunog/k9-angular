@@ -15,16 +15,22 @@
       </h2>
       <span flex></span>
 
+      <!-- Save Indicator -->
+      <md-progress-circular  md-mode="indeterminate"
+                             class="md-accent"
+                             ng-show='vm.isSaving()'></md-progress-circular>
+
       <!-- Save -->
       <md-button type='submit'
                  class="md-icon-button"
-                 aria-label="Save Pet">
+                 aria-label="Save Pet"
+                 ng-hide='vm.isSaving()'>
         <md-tooltip md-direction="bottom">
           Save Pet
         </md-tooltip>
         <ng-md-icon icon="done" size="24"></ng-md-icon>
       </md-button>
-      
+
     </div>
   </md-toolbar>
 

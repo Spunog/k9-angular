@@ -21,10 +21,16 @@
       </h2>
       <span flex></span>
 
+      <!-- Save Indicator -->
+      <md-progress-circular  md-mode="indeterminate"
+                             class="md-accent"
+                             ng-show='vm.isSaving()'></md-progress-circular>
+
       <!-- Save -->
       <md-button type='submit'
                  class="md-icon-button"
-                 aria-label="Save Client">
+                 aria-label="Save Client"
+                 ng-hide='vm.isSaving()'>
         <md-tooltip md-direction="bottom">
           Save Client
         </md-tooltip>

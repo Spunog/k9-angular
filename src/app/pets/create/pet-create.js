@@ -22,8 +22,15 @@
 
   .controller('CreatePetController', function($state, $stateParams, PetsModel) {
     var vm = this;
+    vm.isSaving             =   isSaving;
 
-    // Private
+    //Private
+    var saving = false;
+
+    function isSaving(){
+      return saving;
+    }
+
     function returnTopets(reload){
       $state.go('k9.pets', {}, { reload: reload });
     }
@@ -33,9 +40,11 @@
     }
 
     function createPet(pet){
+      saving = true;
       PetsModel.createPet(pet)
                   .then(function (pets) {
                     PetsModel.addPet(pets.data.dog);
+                    saving = false;
                     $state.go('k9.pets', {petID: pets.data.dog.id}, { reload: true });
                   });
     }
