@@ -1,57 +1,78 @@
 <!-- Pet Create -->
-<form role="form"
-      name='add-pet-form'
-      ng-submit='vm.createPet(newPet)'>
 
-  <!-- Toolbar -->
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <md-button ui-sref='k9.pets' class="md-icon-button" aria-label="Go Back">
-        <md-tooltip md-direction="bottom">Go back</md-tooltip>
-        <ng-md-icon icon="keyboard_backspace" size="24"></ng-md-icon>
-      </md-button>
-      <h2>
-        <span>New Pet</span>
-      </h2>
-      <span flex></span>
+<!-- Toolbar -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button ui-sref='k9.pets' class="md-icon-button" aria-label="Go Back">
+      <md-tooltip md-direction="bottom">Go back</md-tooltip>
+      <ng-md-icon icon="keyboard_backspace" size="24"></ng-md-icon>
+    </md-button>
+    <h2>
+      <span>New Pet</span>
+    </h2>
+    <span flex></span>
 
-      <!-- Save Indicator -->
-      <md-progress-circular  md-mode="indeterminate"
-                             class="md-accent"
-                             ng-show='vm.isSaving()'></md-progress-circular>
+    <!-- Save Indicator -->
+    <md-progress-circular  md-mode="indeterminate"
+                           class="md-accent"
+                           ng-show='vm.isSaving()'></md-progress-circular>
 
-      <!-- Save -->
-      <md-button type='submit'
-                 class="md-icon-button"
-                 aria-label="Save Pet"
-                 ng-hide='vm.isSaving()'>
-        <md-tooltip md-direction="bottom">
-          Save Pet
-        </md-tooltip>
-        <ng-md-icon icon="done" size="24"></ng-md-icon>
-      </md-button>
+    <!-- Save -->
+    <md-button type='button'
+               class="md-icon-button"
+               aria-label="Save Pet"
+               ng-click='vm.createPet(newPet)'
+               ng-hide='vm.isSaving()'>
+      <md-tooltip md-direction="bottom">
+        Save Pet
+      </md-tooltip>
+      <ng-md-icon icon="done" size="24"></ng-md-icon>
+    </md-button>
+
+  </div>
+</md-toolbar>
+
+<!-- Main Content -->
+<md-content class='pet-create md-padding'
+            flex>
+
+  <form role="form"
+        name='add-pet-form'
+        ng-submit='vm.createPet(newPet)'>
+
+    <div layout layout-xs="column">
+
+      <md-input-container flex>
+        <label>Name</label>
+        <input ng-model='newPet.name' ng-required="true" rm-focus>
+        <div
+          ng-show="update-pet-form.name.$dirty"
+          ng-messages="update-pet-form.name.$error">
+          <div ng-message="required">
+            A name must be entered
+          </div>
+        </div>
+      </md-input-container>
+
+      <!-- Breed -->
+      <md-input-container flex>
+        <label>Breed</label>
+        <md-select ng-model="newPet.breed.id">
+          <md-option ng-repeat="breed in vm.breeds" value="{{breed.id}}">
+            {{breed.name}}
+          </md-option>
+        </md-select>
+      </md-input-container>
 
     </div>
-  </md-toolbar>
 
-  <!-- Main Content -->
-  <md-content flex class='md-padding'>
+    <!-- Note -->
+    <div layout layout-xs="column">
+      <md-input-container flex>
+        <label>Note</label>
+        <textarea name="note" ng-model="newPet.note" md-maxlength="100"></textarea>
+      </md-input-container>
+    </div>
 
-      <!-- First Name and Last Name -->
-      <div layout layout-xs="column">
-        <md-input-container flex>
-          <label>Name</label>
-          <input ng-model='newPet.name'
-                 ng-required="true"
-                 rm-focus>
-          <div ng-show="add-pet-form.name.$dirty"
-               ng-messages="add-pet-form.name.$error">
-            <div ng-message="required">
-              A name must be entered
-            </div>
-          </div>
-        </md-input-container>
-      </div>
-
-  </md-content>
-</form>
+  </form>
+</md-content>

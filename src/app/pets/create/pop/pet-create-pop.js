@@ -5,22 +5,46 @@
     'ui.router'
   ])
 
-  .controller('CreatePetPopController', function(client,ClientsModel,PetsModel, $log, $state, $stateParams, $mdDialog) {
+  .controller('CreatePetPopController', function(BreedsModel,client,
+                                                  ClientsModel,PetsModel,
+                                                  $log, $state, $stateParams,
+                                                  $mdDialog) {
 
     //Public
-    var vm = this;
+    var vm              =   this;
     vm.pet              =   PetsModel.getCurrentPet() ;
     vm.createPetCancel  =   createPetCancel;
     vm.createPet        =   createPet;
+    vm.breeds           =   [];
+    vm.isSaving         =   isSaving;
+
+    // On Load
+    getBreeds();
 
     //Private
+    var saving = false;
+
+    function isSaving(){
+      return saving;
+    }
+
+    function getBreeds(){
+      BreedsModel.getBreeds()
+                 .then(function (breeds) {
+                    vm.breeds = breeds;
+                 });
+    }
+
     function createPet(pet){
+
+      saving = true;
 
       if(!client){
         //Create pet
         PetsModel.createPet(pet)
                  .then(function (pets) {
                    PetsModel.addPet(pets.data.dog);
+                   saving = false;
                    $mdDialog.hide();
                  });
       }else{
@@ -29,6 +53,7 @@
                  .then(function (pets) {
                    PetsModel.addPet(pets.data.dog);
                    ClientsModel.addDogLocally(pets.data.dog);
+                   saving = false;
                    $mdDialog.hide();
                  });
       }

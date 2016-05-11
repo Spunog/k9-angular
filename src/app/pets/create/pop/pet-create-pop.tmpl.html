@@ -21,10 +21,16 @@
         <h2>Create Pet</h2>
         <span flex></span>
 
+        <!-- Save Indicator -->
+        <md-progress-circular  md-mode="indeterminate"
+                               class="md-accent"
+                               ng-show='vm.isSaving()'></md-progress-circular>
+
         <!---Save--->
         <md-button type='submit'
                    class="md-icon-button"
-                   aria-label="Save">
+                   aria-label="Save"
+                   ng-hide='vm.isSaving()'>
                    <ng-md-icon icon="done" size="24"></ng-md-icon>
            <md-tooltip md-direction="bottom">
              Save
@@ -34,17 +40,40 @@
       </div>
     </md-toolbar>
 
-    <md-dialog-content>
-      <div class="md-dialog-content">
+    <md-dialog-content class='md-padding'>
 
-        <!-- Name -->
-        <md-input-container class='md-block'>
+      <div layout layout-xs="column">
+
+        <md-input-container flex>
           <label>Name</label>
-          <input ng-model='vm.newPet.name'
-                 ng-required="true"
-                 rm-focus>
+          <input ng-model='vm.newPet.name' ng-required="true" rm-focus>
+          <div
+            ng-show="update-pet-form.name.$dirty"
+            ng-messages="update-pet-form.name.$error">
+            <div ng-message="required">
+              A name must be entered
+            </div>
+          </div>
         </md-input-container>
 
+        <!-- Breed -->
+        <md-input-container flex>
+          <label>Breed</label>
+          <md-select ng-model="vm.newPet.breed.id">
+            <md-option ng-repeat="breed in vm.breeds" value="{{breed.id}}">
+              {{breed.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+      </div>
+
+      <!-- Note -->
+      <div layout layout-xs="column">
+        <md-input-container flex>
+          <label>Note</label>
+          <textarea name="note" ng-model="vm.newPet.note" md-maxlength="100"></textarea>
+        </md-input-container>
       </div>
 
     </md-dialog-content>

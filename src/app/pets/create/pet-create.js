@@ -6,22 +6,32 @@
     'k9.models.pets'
   ])
 
-  .controller('CreatePetController', function($state, $stateParams, PetsModel) {
+  .controller('CreatePetController', function(BreedsModel,$state, $stateParams,
+                                              PetsModel) {
 
     // Public
     var vm        = this;
     vm.isSaving   = isSaving;
     vm.cancel     = cancelCreating;
     vm.createPet  = createPet;
+    vm.breeds     = [];
 
     // On Load
     resetForm();
+    getBreeds();
 
     //Private
     var saving = false;
 
     function isSaving(){
       return saving;
+    }
+
+    function getBreeds(){
+      BreedsModel.getBreeds()
+                 .then(function (breeds) {
+                    vm.breeds = breeds;
+                 });
     }
 
     function returnTopets(reload){
