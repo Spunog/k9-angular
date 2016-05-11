@@ -149,7 +149,7 @@
           PetsModel.deletePet(pet)
                       .then(function () {
                         ClientsModel.removeDogLocally(pet);
-                        returnToPets(true);
+                        goBack();
                       });
         });
 
