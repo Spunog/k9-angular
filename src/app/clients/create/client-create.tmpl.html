@@ -88,7 +88,11 @@
           <label>address</label>
           <textarea name="address"
                     ng-model="newClient.address"
-                    md-maxlength="100"></textarea>
+                    md-maxlength="100"
+                    places-auto-complete
+                    size=80
+                    placeholder="Type address..."
+                    component-restrictions="{country:'ie'}"></textarea>
         </md-input-container>
       </div>
 
