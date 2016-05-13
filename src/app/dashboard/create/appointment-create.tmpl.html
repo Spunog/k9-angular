@@ -142,15 +142,36 @@
           </div>
         </div>
 
-        <div>
-          <md-checkbox ng-model="vm.newAppointment.sendEmailConfirmation"
+        <div class="">
+          <md-checkbox flex ng-model="vm.newAppointment.sendEmailConfirmation"
                        aria-label="Send Email Confirmation">
               Send E-mail Confirmation
           </md-checkbox>
-
         </div>
 
-      </div>
+        <div layout="row"
+             layout-xs="column"
+             ng-show='vm.newAppointment.id'>
+
+          <div flex>
+            <md-button layout-fill flex ng-click='vm.printReceipt()'
+                       flex aria-label="Print Receipt">
+                Print Receipt
+            </md-button>
+          </div>
+
+          <div flex>
+            <md-button layout-fill flex
+                       ng-click='vm.sendSMSReminder(vm.newAppointment.id)'
+                       flex aria-label="Send SMS Pick-up Reminder"
+                       ng-disabled='vm.smsSendingDisabled()'>
+                {{ vm.getSMSButtonText() }}
+            </md-button>
+          </div>
+
+        </div> <!--End Two Button Layout-->
+
+      </div><!--End md dialog class div-->
 
     </md-dialog-content>
 

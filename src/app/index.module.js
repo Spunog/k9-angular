@@ -44,6 +44,7 @@
       'k9.activities.edit',
       'k9.models.activities',
       'k9.models.photos',
+      'k9.models.messages',
       'k9.settings',
       'ngMap'
     ]);

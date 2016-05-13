@@ -5,7 +5,9 @@
     'ui.router'
   ])
 
-  .controller('CreateAppointmentController', function(ActivitiesModel,PetsModel, $log, $state, $stateParams,CalendarEventsModel, $mdDialog, selectedDate) {
+  .controller('CreateAppointmentController', function(
+      MessagesModel, ActivitiesModel,PetsModel, $log, $state,
+      $stateParams,CalendarEventsModel, $mdDialog, selectedDate) {
 
     //Public
     var vm = this;
@@ -24,15 +26,58 @@
     vm.deleteAppointment        =   deleteAppointment;
     vm.createAppointmentCancel  =   createAppointmentCancel;
     vm.newAppointment           =   getNewAppointmentDefaults();
+    vm.printReceipt             =   printReceipt;
+    vm.sendSMSReminder          =   sendSMSReminder;
+    vm.isSMSSending             =   isSMSSending;
+    vm.isSMSSent                =   isSMSSent;
+    vm.smsSendingDisabled       =   smsSendingDisabled;
+    vm.getSMSButtonText         =   getSMSButtonText;
 
     //OnLoad
     getActivities();
 
     //Private
     var saving = false;
+    var SMSSending = false;
+    var SMSSent = false;
+
+    function getSMSButtonText(){
+      var label = 'Send SMS Reminder';
+      if(SMSSent){
+        label = 'Reminder Sent';
+      }else if (SMSSending){
+        label = 'Sending. Please wait...';
+      }
+      return label;
+    }
+
+    function smsSendingDisabled(){
+      return (SMSSending || SMSSent);
+    }
 
     function isSaving(){
       return saving;
+    }
+
+    function isSMSSending(){
+      return SMSSending;
+    }
+
+    function isSMSSent(){
+      return SMSSent;
+    }
+
+    function printReceipt(){
+      alert('printing receipt');
+    }
+
+    function sendSMSReminder(appointment_id){
+      SMSSending = true;
+      MessagesModel.sendReminderSMS(appointment_id)
+                   .then(function(activity) {
+                      SMSSending = false;
+                      SMSSent = true;
+                    });
     }
 
     function activityChanged(activityID){
