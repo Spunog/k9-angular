@@ -6,7 +6,7 @@
   ])
 
   .controller('CreateAppointmentController', function(
-      MessagesModel, ActivitiesModel,PetsModel, $log, $state,
+      appConfig, $http, MessagesModel, ActivitiesModel,PetsModel, $log, $state,
       $stateParams,CalendarEventsModel, $mdDialog, selectedDate) {
 
     //Public
@@ -28,7 +28,6 @@
     vm.newAppointment           =   getNewAppointmentDefaults();
     vm.printReceipt             =   printReceipt;
     vm.sendSMSReminder          =   sendSMSReminder;
-    vm.isSMSSending             =   isSMSSending;
     vm.isSMSSent                =   isSMSSent;
     vm.smsSendingDisabled       =   smsSendingDisabled;
     vm.getSMSButtonText         =   getSMSButtonText;
@@ -38,44 +37,63 @@
 
     //Private
     var saving = false;
-    var SMSSending = false;
     var SMSSent = false;
 
     function getSMSButtonText(){
       var label = 'Send SMS Reminder';
       if(SMSSent){
         label = 'Reminder Sent';
-      }else if (SMSSending){
+      }else if (saving){
         label = 'Sending. Please wait...';
       }
       return label;
     }
 
     function smsSendingDisabled(){
-      return (SMSSending || SMSSent);
+      return (saving || SMSSent);
     }
 
     function isSaving(){
       return saving;
     }
 
-    function isSMSSending(){
-      return SMSSending;
-    }
-
     function isSMSSent(){
       return SMSSent;
     }
 
-    function printReceipt(){
-      alert('printing receipt');
+    function printReceipt(appointment){
+
+      saving = true;
+
+      //Report URL
+      // /api/v1/appointments/:appointment_id/receipt
+      var reportURL = appConfig.API.baseURL +
+                      'appointments/' +
+                      appointment.id +
+                      '/receipt' +'.pdf';
+
+      // Get file as blob and display
+      // Based on http://stackoverflow.com/a/25808659
+      // Cannot just open in new tab as need to pass
+      // authentication headers and this is not possible by opening new tab
+      $http.get(reportURL, {
+          responseType: 'arraybuffer'
+        })
+        .success(function(data) {
+          var file = new Blob([data], {
+            type: 'application/pdf'
+          });
+          var fileURL = URL.createObjectURL(file);
+          window.open(fileURL);
+          saving = false;  //revert state
+        });
     }
 
     function sendSMSReminder(appointment_id){
-      SMSSending = true;
+      saving = true;
       MessagesModel.sendReminderSMS(appointment_id)
                    .then(function(activity) {
-                      SMSSending = false;
+                      saving = false;
                       SMSSent = true;
                     });
     }

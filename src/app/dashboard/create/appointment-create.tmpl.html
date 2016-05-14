@@ -154,7 +154,9 @@
              ng-show='vm.newAppointment.id'>
 
           <div flex>
-            <md-button layout-fill flex ng-click='vm.printReceipt()'
+            <md-button layout-fill flex
+                       ng-click='vm.printReceipt(vm.newAppointment)'
+                       ng-disabled='vm.isSaving()'
                        flex aria-label="Print Receipt">
                 Print Receipt
             </md-button>
