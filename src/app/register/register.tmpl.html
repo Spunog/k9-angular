@@ -14,77 +14,97 @@
 </md-toolbar>
 
 <!-- Based on https://code.tutsplus.com/courses/hands-on-angular -->
-<md-content class='main-content'>
 
-  <md-card>
 
-    <h2>Registration Form</h2>
 
-    <form ng-submit="vm.register(user)"
-          novalidate
-          name="registerForm">
 
-      <!-- E-mail -->
-      <md-input-container class="md-block">
-        <!-- Use floating placeholder instead of label -->
-        <ng-md-icon icon="email" size="20"></ng-md-icon>
 
-        <input ng-model="user.email"
-               type="email"
-               name='email'
-               placeholder="Email"
-               ng-required="true"
-               rm-focus>
-        <div ng-show="registerForm.email.$dirty"
-             ng-messages="registerForm.email.$error">
-          <div ng-message="required">
-            An e-mail address must be entered
+<!-- Based on https://code.tutsplus.com/courses/hands-on-angular -->
+<md-content flex class='k9-login main-content'>
+
+  <div class='loginForm' layout="column" ng-cloak>
+
+    <md-content layout-padding>
+
+      <md-card>
+
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Registration Form</span>
+          </md-card-title-text>
+        </md-card-title>
+
+        <form ng-submit="vm.register(user)"
+              novalidate
+              name="registerForm">
+
+          <!-- E-mail -->
+          <md-input-container md-no-float class="md-block">
+            <label>E-mail</label>
+            <md-icon
+              md-svg-src="app/assets/img/icons/ic_email_24px.svg"
+              style="display:inline-block;"></md-icon>
+
+            <input
+              ng-model="user.email"
+              type="email"
+              name='email'
+              ng-required="true"
+              rm-focus>
+            <div ng-show="loginForm.email.$dirty" ng-messages="loginForm.email.$error">
+              <div ng-message="required">
+                An e-mail address must be entered
+              </div>
+              <div ng-message="email">
+                E-mail address is not valid
+              </div>
+              <div ng-message-exp="vm.wrongCredentials">
+                WRONG DETAILS!
+              </div>
+            </div>
+          </md-input-container>
+
+          <!-- Password -->
+          <md-input-container md-no-float class="md-block">
+            <label>Password</label>
+            <md-icon
+              md-svg-src="app/assets/img/icons/ic_lock_24px.svg"
+              style="display:inline-block;"></md-icon>
+            <input type="password" name="password" ng-model="user.password" required/>
+
+            <div
+              ng-show="loginForm.password.$dirty"
+              ng-messages="loginForm.password.$error">
+              <div ng-message="required">
+                Password is required
+              </div>
+            </div>
+
+          </md-input-container>
+
+          <!-- Sign In -->
+          <div ng-show="vm.wrongCredentials">
+            The email and password you entered don't match.
           </div>
-          <div ng-message="email">
-            E-mail address is not valid
+
+          <md-card-actions layout="column" layout-align="center center">
+            <md-button ng-disabled="registerForm.$invalid || vm.isRegistering()"
+                       ng-click='vm.register(user)'
+                       class="md-raised md-primary">{{ vm.getRegisterMessage() }}</md-button>
+          </md-card-actions>
+
+          <!-- General Error Message + Help -->
+          <div class="">
+            {{vm.errorMessage}}
           </div>
-          <div ng-message-exp="vm.wrongCredentials">
-            WRONG DETAILS!
+
+          <div class="alt-action">
+            <a flex ui-sref='k9.login'>Existing User?</a>
           </div>
-        </div>
-      </md-input-container>
 
-      <!-- Password -->
-      <md-input-container class="md-block">
-        <ng-md-icon icon="lock" size="20"></ng-md-icon>
-        <input type="password"
-               name="password"
-               placeholder="Password"
-               ng-model="user.password"
-               required />
+        </form>
+      </md-card>
 
-       <div ng-show="registerForm.password.$dirty"
-            ng-messages="registerForm.password.$error">
-         <div ng-message="required">
-           Password is required
-         </div>
-       </div>
-
-      </md-input-container>
-
-      <div ng-show="vm.wrongCredentials">
-        The email and password you entered don't match.
-      </div>
-
-      <!-- General Error Message + Help -->
-      <div class="">
-        {{vm.errorMessage}}
-      </div>
-
-      <!-- Register -->
-      <md-card-actions layout="row" layout-align="center center">
-        <md-button ng-disabled="registerForm.$invalid || vm.isRegistering()"
-                   ng-click='vm.register(user)'
-                   class="md-raised md-primary">{{ vm.getRegisterMessage() }}</md-button>
-        <md-button ui-sref='k9.login'>Sign In To Existing Account</md-button>
-      </md-card-actions>
-
-    </form>
-  </md-card>
-
+    </md-content>
+  </div>
 </md-content>

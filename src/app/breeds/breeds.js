@@ -50,7 +50,7 @@
        function updateNav(){
          //Update Navigation State
          NavModel.setCurrentItem({
-             title: 'Breeds',
+             title: 'Settings',
              sref: 'k9.breeds'
          });
        }

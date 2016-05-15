@@ -49,7 +49,7 @@
        function updateNav(){
          //Update Navigation State
          NavModel.setCurrentItem({
-             title: 'Activities',
+             title: 'Settings',
              sref: 'k9.activities'
          });
        }

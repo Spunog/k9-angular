@@ -1,0 +1,96 @@
+<!-- Profiles -->
+
+<!-- Toolbar -->
+<md-toolbar ng-show='!vm.searchActive'>
+  <div class="md-toolbar-tools">
+    <md-button ng-click="vm.toggleLeft()"
+               hide-gt-md
+               class="md-icon-button"
+               aria-label="Menu">
+      <ng-md-icon ng-click='vm.clickIconMorph()'
+                  icon="{{ vm.clickIcon }}"
+                  options='{ "easing": "quad-out", "duration": 500 }'
+                  size="24"></ng-md-icon>
+    </md-button>
+
+    <h2>
+      <span>Profiles</span>
+    </h2>
+
+    <span flex></span>
+
+    <!-- Save Indicator -->
+    <md-progress-circular  md-mode="indeterminate"
+                           class="md-accent"
+                           ng-show='vm.isSaving()'></md-progress-circular>
+
+    <!-- Save -->
+    <md-button type='submit'
+               class="md-icon-button"
+               aria-label="Save Profile"
+               ng-hide='vm.isSaving()'
+               ng-click='vm.updateProfile(vm.profile)'>
+      <md-tooltip md-direction="bottom">
+        Save Profile
+      </md-tooltip>
+      <ng-md-icon icon="done" size="24"></ng-md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+
+<!-- Full Page Loader -->
+<k9-full-page-loader ng-show='vm.isLoading()'></k9-full-page-loader>
+
+<!-- Main Content -->
+<md-card id='profile-card'>
+  <form ng-submit='vm.updateProfile(vm.profile)' class='md-padding'>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{ vm.profile.name }}</span>
+        <span class="md-subhead">My Details</span>
+      </md-card-title-text>
+    </md-card-title>
+
+    <md-input-container class="md-icon-float md-block">
+      <label>Name</label>
+      <md-icon md-svg-src="app/assets/img/icons/ic_assignment_ind_24px.svg" class="name"></md-icon>
+      <input ng-model="vm.profile.name" type="text">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+      <label>Phone</label>
+      <md-icon md-svg-src="app/assets/img/icons/ic_phone_24px.svg"></md-icon>
+      <input ng-model="vm.profile.phone" type="tel">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+      <label>Mobile</label>
+      <md-icon md-svg-src="app/assets/img/icons/ic_smartphone_24px.svg"></md-icon>
+      <input ng-model="vm.profile.mobile" type="tel">
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <label>Email</label>
+      <md-icon md-svg-src="app/assets/img/icons/ic_email_24px.svg" class="email"></md-icon>
+      <input ng-model="vm.profile.email" type="email">
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <label>Website</label>
+      <md-icon md-svg-src="app/assets/img/icons/ic_home_24px.svg" class="email"></md-icon>
+      <input ng-model="vm.profile.website" type='url'>
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+      <label>Address</label>
+      <md-icon md-svg-src="app/assets/img/icons/ic_place_24px.svg" style="display:inline-block;"></md-icon>
+      <input ng-model="vm.profile.address" type="text">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+      <label>Tax Number</label>
+      <md-icon md-svg-src="app/assets/img/icons/ic_receipt_24px.svg" style="display:inline-block;"></md-icon>
+      <input ng-model="vm.profile.tax_number" type="text">
+    </md-input-container>
+  </form>
+</md-card>

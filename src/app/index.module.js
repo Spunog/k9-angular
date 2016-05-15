@@ -38,6 +38,8 @@
       'k9.breeds.edit',
       'k9.breed.pop.create',
       'k9.models.breeds',
+      'k9.profile',
+      'k9.models.profiles',
       'k9.report',
       'k9.activities',
       'k9.activities.create',

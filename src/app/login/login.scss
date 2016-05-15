@@ -1,5 +1,24 @@
 .k9-login{
 
+  .alt-action{
+    background: #FAFAFA;
+    padding: 1em 0.5em 1em 1em;
+    text-align: right;
+    border-radius: 20px 0 0 0;
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+    border: solid 2px #DDD;
+
+    a{
+      text-decoration: none;
+      color: #909090
+    }
+    a:hover{
+      color: #2196F3
+    }
+  }
+
   .loginForm{
 
     .inputdemoErrors .inputErrorsApp {
@@ -12,6 +31,12 @@
 
     md-input-container{
       margin-bottom: 1.5em;
+    }
+
+    @media (max-width: 320px) {
+      md-card-actions{
+        margin-bottom: 2em;
+      }
     }
 
   }

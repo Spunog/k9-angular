@@ -1,0 +1,14 @@
+.pets-list{
+  .top-search{
+    padding: 1em 0 1em;
+  }
+  .top-search input{
+    min-width: 400px;
+    width: 50%;
+  }
+
+  .search-results{
+    overflow: auto;
+  }
+
+}
