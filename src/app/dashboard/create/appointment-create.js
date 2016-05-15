@@ -168,6 +168,8 @@
 
     function createAppointment(appointment){
 
+      console.log(createAppointment,'new appointmetn obj');
+
       // Set Saving state to true
       saving = true;
 

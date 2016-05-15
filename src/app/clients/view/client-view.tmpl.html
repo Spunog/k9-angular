@@ -157,7 +157,11 @@
                       <ng-md-icon icon="schedule" class="md-avatar" size="28"></ng-md-icon>
                       <div class="md-list-item-text">
                         <h3>{{appointment.title}}</h3>
-                        <h4>{{appointment.dog.name}} @ {{appointment.start}}</h4>
+                        <h4>
+                          {{appointment.dog.name}} -
+                          {{ appointment.start_at |  date : 'MMM d' }}, 
+                          {{ appointment.start_at |  date : 'hh:mm' }}
+                        </h4>
                         <p>
                           {{appointment.activity.description}}
                         </p>
@@ -166,6 +170,16 @@
                   </md-list-item>
                 </md-list>
               </section>
+
+              <!-- Add New Pet -->
+              <button class="md-button md-default-theme"
+                      aria-label="Add"
+                      tabindex="0"
+                      ng-click='vm.addAppointment(this)'>
+                <ng-md-icon icon="add" size="24"></ng-md-icon>
+                <md-tooltip>Add Pet</md-tooltip>
+                Add Appointment
+              </button>
 
             </md-content>
         </md-tab> <!--end appointments-->

@@ -9,12 +9,13 @@
   .controller('ViewClientController', function (CalendarEventsModel,$state, $stateParams, ClientsModel,$mdDialog) {
 
       //Public
-      var vm = this;
-      vm.client       =   ClientsModel.getCurrentClient();
-      vm.editClient   =   editClient;
-      vm.createPet    =   createPet;
-      vm.editPet      =   editPet;
-      vm.appointments =   [];
+      var vm            =   this;
+      vm.client         =   ClientsModel.getCurrentClient();
+      vm.editClient     =   editClient;
+      vm.createPet      =   createPet;
+      vm.editPet        =   editPet;
+      vm.appointments   =   [];
+      vm.addAppointment =   addAppointment;
 
       // Onload
       getClientById();
@@ -26,6 +27,29 @@
                            .then(function (response) {
                               vm.appointments = response.data.appointments;
                            });
+      }
+
+      function addAppointment(){
+        var calendarEvent = angular.copy(CalendarEventsModel.newCalendarEvent());
+
+        // If using month view there is no valid month,
+        // update to use next hour
+        calendarEvent.start = moment().startOf('day')
+                                      .hours(moment().hours() + 1);
+
+        $mdDialog.show({
+          controller    : 'CreateAppointmentController as vm',
+          templateUrl   : 'app/dashboard/create/appointment-create.tmpl.html',
+          parent        :  angular.element(document.body),
+          // targetEvent   : jsEvent,
+          clickOutsideToClose:true,
+          locals: { selectedDate: calendarEvent }
+        })
+        .then(function(appointment) {
+          getAppointments($stateParams.clientID);
+        }, function() {
+          // Cancelled
+        });
       }
 
       // Go to edit

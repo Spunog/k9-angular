@@ -130,6 +130,9 @@
         //New Record Vs Updating Record
         var dogID = (appointment.dog !== null &&
                           appointment.dog.hasOwnProperty('id')) ? appointment.dog.id : '';
+
+        console.log(appointment,'in the model before save...');
+                          
         var updateParams = {
           methodx: 'POST',
           url: URLS.APPOINTMENTS,
