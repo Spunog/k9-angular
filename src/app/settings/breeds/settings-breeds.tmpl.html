@@ -19,7 +19,7 @@
 
     <div ng-hide='(vm.breeds | filter:vm.breedSearchText).length < 1'>
 
-      <md-content class='search-results' flex layout-padding>
+      <md-content flex layout-padding>
 
         <md-list-item ng-click="vm.editBreed(breed)"
                       ng-repeat="breed in vm.breeds | filter:vm.breedSearchText">

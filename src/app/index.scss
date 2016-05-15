@@ -266,6 +266,17 @@ span.name {
   text-align: center;
 }
 
+.view-port-list{
+  overflow: auto;
+  height: 88vh;
+}
+
+md-tabs{
+  .md-button.md-fab.md-fab-bottom-right{
+    bottom: 59px !important;
+  }
+}
+
 /**
  *  Do not remove the comment below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
