@@ -1,6 +1,6 @@
 # K9 - Angular Frontend Client
 Dog Grooming Management App
-Front end using AngularJS and Bootstrap for K9 Restful API app - https://github.com/Spunog/k9
+Front end using AngularJS and Bootstrap for K9 RESTFul API service.
 
 ## Setup + Running
 After cloning:
@@ -10,7 +10,7 @@ After cloning:
 * gulp serve - will start webserver
 
 ## Deploy Guide + Notes
-* Run Gulp Build - this creates a generated version in the dist folder. This includes creating CSS files from SCSS files. Injecting JS and CSS references in the index.html folder in adidion to compressing files.
+* Run Gulp Build - this creates a generated version in the dist folder. This includes creating CSS files from SCSS files. Injecting JS and CSS references in the index.html folder in addition to compressing files.
 * Note there is an existing bug in that angular-layout css file is not included in the extract so index.html needs to be updated with a new ref to this e.g. styles/angular-material.layouts.min.css.
 * Once the dist folder is complete simply drag and drop into Netlify or any other static hosting service.
 
@@ -18,7 +18,7 @@ After cloning:
 * AngularJS v1 (JS Framework MVVM) - https://angularjs.org/
 * Angular UI Router (provides stateful routing) - https://github.com/angular-ui/ui-router
 * Netlify.com used for front end hosting
-* NG File Upload - angular directive to help upload files to brower https://github.com/danialfarid/ng-file-upload
+* NG File Upload - angular directive to help upload files to browser https://github.com/danialfarid/ng-file-upload
 
 ### Build Tools + Frameworks
 * Angular Material - https://material.angularjs.org
